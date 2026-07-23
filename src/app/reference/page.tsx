@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import SectionHeading from "@/components/SectionHeading";
 import ReferenceExplorer from "@/components/docs/ReferenceExplorer";
 import { getReferencePages } from "@/lib/reference";
+import { GearIcon } from "@/components/icons";
 
 const referenceDescription =
   "Generated Go package reference for GOLC contributors — straight from the source's doc comments.";
@@ -63,7 +64,10 @@ export default function ReferencePage() {
 
       <section className="mx-auto max-w-[1160px] px-6 py-16 sm:px-12 sm:py-24">
         <div className="rounded-xl border border-line bg-panel p-8 text-center">
-          <h2 className="text-xl font-bold text-ink">
+          <div className="mx-auto inline-flex h-10 w-10 items-center justify-center rounded-lg bg-page text-ink">
+            <GearIcon size={20} />
+          </div>
+          <h2 className="mt-4 text-xl font-bold text-ink">
             Building GOLC itself?
           </h2>
           <p className="mx-auto mt-2 max-w-md text-sm text-text2">

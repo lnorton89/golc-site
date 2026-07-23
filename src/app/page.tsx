@@ -15,6 +15,8 @@ import {
   DocIcon,
   GitHubIcon,
   ArrowRightIcon,
+  TerminalIcon,
+  FolderIcon,
 } from "@/components/icons";
 
 const SPECTRUM = [
@@ -350,51 +352,77 @@ export default function Home() {
       <section className="mx-auto max-w-[1160px] px-6 py-16 sm:px-12 sm:py-24">
         <SectionHeading index="05" title="Open-source and local-first" />
         <div className="grid gap-6 sm:grid-cols-3">
-          <div className="rounded-xl border border-line bg-panel p-6">
-            <h3 className="text-lg font-semibold text-ink">GPL-3.0 licensed</h3>
-            <p className="mt-2 text-sm leading-6 text-text2">
-              The full source is public and free to study, modify, and
-              redistribute under the terms of the{" "}
-              <a
-                href="https://github.com/lnorton89/golc/blob/master/LICENSE"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-link hover:underline"
+          {[
+            {
+              title: "GPL-3.0 licensed",
+              Icon: DocIcon,
+              color: SPECTRUM[3],
+              body: (
+                <>
+                  The full source is public and free to study, modify, and
+                  redistribute under the terms of the{" "}
+                  <a
+                    href="https://github.com/lnorton89/golc/blob/master/LICENSE"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-link hover:underline"
+                  >
+                    GNU GPL v3.0
+                  </a>
+                  .
+                </>
+              ),
+            },
+            {
+              title: "Runs on your machine",
+              Icon: TerminalIcon,
+              color: SPECTRUM[4],
+              body: "No cloud dependency for show authoring or playback, no account, no dongle. AI and remote API access are opt-in and explicitly bounded.",
+            },
+            {
+              title: "Nothing hidden",
+              Icon: FolderIcon,
+              color: SPECTRUM[1],
+              body: (
+                <>
+                  Every behavior is written down. The{" "}
+                  <Link href="/architecture" className="text-link hover:underline">
+                    architecture
+                  </Link>{" "}
+                  and{" "}
+                  <Link href="/roadmap" className="text-link hover:underline">
+                    roadmap
+                  </Link>{" "}
+                  are as public as the code.
+                </>
+              ),
+            },
+          ].map((c) => (
+            <div
+              key={c.title}
+              className="card-hover rounded-xl border border-line bg-panel p-6"
+              style={{ borderTopColor: c.color, borderTopWidth: 2 }}
+            >
+              <div
+                className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-lg"
+                style={{ background: `color-mix(in srgb, ${c.color} 16%, transparent)`, color: c.color }}
               >
-                GNU GPL v3.0
-              </a>
-              .
-            </p>
-          </div>
-          <div className="rounded-xl border border-line bg-panel p-6">
-            <h3 className="text-lg font-semibold text-ink">Runs on your machine</h3>
-            <p className="mt-2 text-sm leading-6 text-text2">
-              No cloud dependency for show authoring or playback, no account,
-              no dongle. AI and remote API access are opt-in and explicitly
-              bounded.
-            </p>
-          </div>
-          <div className="rounded-xl border border-line bg-panel p-6">
-            <h3 className="text-lg font-semibold text-ink">Nothing hidden</h3>
-            <p className="mt-2 text-sm leading-6 text-text2">
-              Every behavior is written down. The{" "}
-              <Link href="/architecture" className="text-link hover:underline">
-                architecture
-              </Link>{" "}
-              and{" "}
-              <Link href="/roadmap" className="text-link hover:underline">
-                roadmap
-              </Link>{" "}
-              are as public as the code.
-            </p>
-          </div>
+                <c.Icon size={20} />
+              </div>
+              <h3 className="text-lg font-semibold text-ink">{c.title}</h3>
+              <p className="mt-2 text-sm leading-6 text-text2">{c.body}</p>
+            </div>
+          ))}
         </div>
       </section>
 
       {/* CTA */}
       <section className="mx-auto max-w-[1160px] px-6 py-16 sm:px-12 sm:py-28">
         <div className="cta-pattern relative overflow-hidden rounded-xl border border-line px-8 py-14 text-center">
-          <h2 className="relative text-[32px] font-bold tracking-[-0.02em] text-ink">
+          <div className="relative mx-auto inline-flex h-10 w-10 items-center justify-center rounded-lg bg-page text-ink">
+            <DocIcon size={20} />
+          </div>
+          <h2 className="relative mt-4 text-[32px] font-bold tracking-[-0.02em] text-ink">
             See the workflow in the docs.
           </h2>
           <p className="relative mx-auto mt-3 max-w-xl text-text2">
