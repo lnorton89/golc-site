@@ -406,8 +406,8 @@ export default function Home() {
             Follow the build.
           </h2>
           <p className="relative mx-auto mt-3 max-w-xl text-text2">
-            GOLC is being built in ten dependency-ordered phases, in the open.
-            Track progress, read the docs, or watch the repo.
+            GOLC is being built in eleven dependency-ordered phases, in the
+            open. Track progress, read the docs, or watch the repo.
           </p>
           <div className="relative mt-8 flex flex-wrap justify-center gap-4">
             <a

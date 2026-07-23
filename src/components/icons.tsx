@@ -145,6 +145,15 @@ export function FolderIcon(props: IconProps) {
   );
 }
 
+export function DatabaseIcon(props: IconProps) {
+  return (
+    <Base {...props}>
+      <path d="M4 6c0-1.1 3.6-2 8-2s8 .9 8 2-3.6 2-8 2-8-.9-8-2z" />
+      <path d="M4 6v12c0 1.1 3.6 2 8 2s8-.9 8-2V6M4 12c0 1.1 3.6 2 8 2s8-.9 8-2" />
+    </Base>
+  );
+}
+
 export function PackageIcon(props: IconProps) {
   return (
     <Base {...props}>

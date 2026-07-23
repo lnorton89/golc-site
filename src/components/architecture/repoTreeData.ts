@@ -35,7 +35,7 @@ export const REPO_TREE: TreeNode[] = [
       { name: "projectconfig/", doc: "Pure configuration library. Never imports command, to avoid a cycle." },
       { name: "scene/", doc: "Scene/Layer domain — tempo-aware looks." },
       { name: "security/", doc: "Central redaction and canary-scan (Redact, SafeDiagnostic)." },
-      { name: "show/", doc: "ShowState substrate — SQLite-backed store, backup, migrate, recovery. Current phase." },
+      { name: "show/", doc: "ShowState substrate — SQLite-backed store, backup, migrate, recovery." },
       { name: "strictjson/", doc: "Duplicate-safe strict JSON guard — no repeated member names, exactly one value." },
       { name: "substitution/", doc: "Fixture substitution, reusing pool's impact-plan machinery against a live show." },
       {

@@ -1,8 +1,21 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronRightIcon } from "@/components/icons";
-import type { Phase, PhaseStatus } from "./phaseData";
+import {
+  ChevronRightIcon,
+  GearIcon,
+  FixtureIcon,
+  CueIcon,
+  BeamIcon,
+  DatabaseIcon,
+  FadersIcon,
+  ApiIcon,
+  ScriptIcon,
+  BlackoutIcon,
+  TerminalIcon,
+  TimelineIcon,
+} from "@/components/icons";
+import type { Phase, PhaseIcon, PhaseStatus } from "./phaseData";
 
 const STATUS_LABEL: Record<PhaseStatus, string> = {
   done: "Shipped",
@@ -16,8 +29,23 @@ const STATUS_COLOR: Record<PhaseStatus, string> = {
   planned: "var(--status-offline)",
 };
 
+const PHASE_ICON: Record<PhaseIcon, (props: { size?: number }) => React.ReactElement> = {
+  gear: GearIcon,
+  fixture: FixtureIcon,
+  cue: CueIcon,
+  beam: BeamIcon,
+  database: DatabaseIcon,
+  faders: FadersIcon,
+  api: ApiIcon,
+  script: ScriptIcon,
+  blackout: BlackoutIcon,
+  terminal: TerminalIcon,
+  telemetry: TimelineIcon,
+};
+
 function PhaseItem({ phase }: { phase: Phase }) {
   const [open, setOpen] = useState(false);
+  const Icon = PHASE_ICON[phase.icon];
 
   return (
     <li className="card-hover rounded-xl border border-line bg-panel">
@@ -28,6 +56,9 @@ function PhaseItem({ phase }: { phase: Phase }) {
       >
         <span className="font-mono text-sm text-muted">
           {String(phase.n).padStart(2, "0")}
+        </span>
+        <span className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-page text-ink">
+          <Icon size={16} />
         </span>
         <div className="flex-1">
           <div className="flex flex-wrap items-center gap-3">
@@ -75,22 +106,32 @@ function PhaseItem({ phase }: { phase: Phase }) {
             </div>
           </div>
 
-          <div>
-            <p className="font-mono text-[10px] uppercase tracking-wider text-muted">
-              Requirements
-            </p>
-            <div className="mt-2 flex flex-wrap gap-1.5">
-              {phase.requirements.map((r) => (
-                <span
-                  key={r}
-                  className="rounded-full border border-line bg-page px-2 py-0.5 font-mono text-[10px] text-text2"
-                >
-                  {r}
-                </span>
-              ))}
+          {phase.requirements.length > 0 && (
+            <div>
+              <p className="font-mono text-[10px] uppercase tracking-wider text-muted">
+                Requirements
+              </p>
+              <div className="mt-2 flex flex-wrap gap-1.5">
+                {phase.requirements.map((r) => (
+                  <span
+                    key={r}
+                    className="rounded-full border border-line bg-page px-2 py-0.5 font-mono text-[10px] text-text2"
+                  >
+                    {r}
+                  </span>
+                ))}
+              </div>
             </div>
-          </div>
+          )}
 
+          {phase.successCriteria.length === 0 && (
+            <p className="text-sm text-muted">
+              Requirements and success criteria aren&apos;t broken down yet —
+              this phase hasn&apos;t been planned.
+            </p>
+          )}
+
+          {phase.successCriteria.length > 0 && (
           <div>
             <p className="font-mono text-[10px] uppercase tracking-wider text-muted">
               Success criteria
@@ -106,6 +147,7 @@ function PhaseItem({ phase }: { phase: Phase }) {
               ))}
             </ol>
           </div>
+          )}
         </div>
       )}
     </li>

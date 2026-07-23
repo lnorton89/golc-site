@@ -104,8 +104,9 @@ export default function ArchitecturePage() {
             Architecture.
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-8 text-text2">
-            GOLC is built in ten dependency-ordered phases, and the package
-            graph shows it: every domain package is a leaf until{" "}
+            Six domains, layered bottom-up: foundation, traceability, and
+            fixtures & pools sit underneath show authoring and playback &
+            output, and every one of them is a leaf until{" "}
             <code className="rounded bg-page px-1.5 py-0.5 font-mono text-[0.9em] text-ink">
               internal/command
             </code>{" "}
