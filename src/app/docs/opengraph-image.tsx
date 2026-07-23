@@ -7,9 +7,9 @@ export const alt = "GOLC Docs";
 
 export default async function Image() {
   return renderOgImage({
-    eyebrow: "Coming soon",
+    eyebrow: "How the program works",
     title: "Docs.",
     description:
-      "Reference docs publish here as the command model, API, and TypeScript SDK stabilize.",
+      "How a show comes together, the planned interface, and the concepts used consistently across UI, docs, and marketing.",
   });
 }
