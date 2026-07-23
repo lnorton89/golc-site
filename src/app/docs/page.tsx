@@ -76,18 +76,18 @@ export default function DocsPage() {
 
       {/* CTA */}
       <section className="mx-auto max-w-[1160px] px-6 py-16 sm:px-12 sm:py-24">
-        <div className="rounded-xl border border-line bg-panel p-8 text-center">
-          <div className="mx-auto inline-flex h-10 w-10 items-center justify-center rounded-lg bg-page text-ink">
+        <div className="cta-pattern relative overflow-hidden rounded-xl border border-line px-8 py-14 text-center">
+          <div className="relative mx-auto inline-flex h-10 w-10 items-center justify-center rounded-lg bg-page text-ink">
             <ApiIcon size={20} />
           </div>
-          <h2 className="mt-4 text-xl font-bold text-ink">
+          <h2 className="relative mt-4 text-xl font-bold text-ink">
             API and SDK reference come later.
           </h2>
-          <p className="mx-auto mt-2 max-w-md text-sm text-text2">
+          <p className="relative mx-auto mt-2 max-w-md text-sm text-text2">
             Once the external API (Phase 7) and TypeScript SDK (Phase 8)
             ship, this page grows to cover them.
           </p>
-          <div className="mt-6 flex flex-wrap justify-center gap-4">
+          <div className="relative mt-6 flex flex-wrap justify-center gap-4">
             <Link
               href="/reference"
               className="inline-flex items-center gap-2 rounded-md bg-accent px-5 py-3 text-sm font-semibold text-on-accent transition-colors duration-[120ms] ease-out hover:bg-accent-dp"

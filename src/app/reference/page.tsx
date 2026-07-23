@@ -63,18 +63,18 @@ export default function ReferencePage() {
       </section>
 
       <section className="mx-auto max-w-[1160px] px-6 py-16 sm:px-12 sm:py-24">
-        <div className="rounded-xl border border-line bg-panel p-8 text-center">
-          <div className="mx-auto inline-flex h-10 w-10 items-center justify-center rounded-lg bg-page text-ink">
+        <div className="cta-pattern relative overflow-hidden rounded-xl border border-line px-8 py-14 text-center">
+          <div className="relative mx-auto inline-flex h-10 w-10 items-center justify-center rounded-lg bg-page text-ink">
             <GearIcon size={20} />
           </div>
-          <h2 className="mt-4 text-xl font-bold text-ink">
+          <h2 className="relative mt-4 text-xl font-bold text-ink">
             Building GOLC itself?
           </h2>
-          <p className="mx-auto mt-2 max-w-md text-sm text-text2">
+          <p className="relative mx-auto mt-2 max-w-md text-sm text-text2">
             The contributor walkthrough covers bootstrap, configuration, and
             the test workflow.
           </p>
-          <div className="mt-6 flex flex-wrap justify-center gap-4">
+          <div className="relative mt-6 flex flex-wrap justify-center gap-4">
             <a
               href="https://github.com/lnorton89/golc/blob/master/docs/development.md"
               target="_blank"
