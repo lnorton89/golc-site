@@ -42,7 +42,7 @@ export default function SiteHeader() {
               href="https://github.com/lnorton89/golc"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 rounded-md border border-line px-3 py-1.5 text-sm font-medium text-muted transition-colors duration-[120ms] ease-out hover:border-accent hover:text-accent"
+              className="inline-flex items-center gap-1.5 rounded-md bg-accent px-3 py-1.5 text-sm font-medium text-panel transition-colors duration-[120ms] ease-out hover:bg-accent-dp"
             >
               <GitHubIcon size={15} />
               GitHub

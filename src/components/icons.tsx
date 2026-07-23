@@ -121,6 +121,22 @@ export function CloseIcon(props: IconProps) {
   );
 }
 
+export function ArrowRightIcon(props: IconProps) {
+  return (
+    <Base {...props}>
+      <path d="M4 12h16M14 6l6 6-6 6" />
+    </Base>
+  );
+}
+
+export function ChevronRightIcon(props: IconProps) {
+  return (
+    <Base {...props}>
+      <path d="M9 6l6 6-6 6" />
+    </Base>
+  );
+}
+
 export function FolderIcon(props: IconProps) {
   return (
     <Base {...props}>

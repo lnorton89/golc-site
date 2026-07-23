@@ -1,15 +1,10 @@
 import type { Metadata } from "next";
+import { Fragment } from "react";
 import SectionHeading from "@/components/SectionHeading";
 import DependencyGraph from "@/components/architecture/DependencyGraph";
-import {
-  FolderIcon,
-  PackageIcon,
-  GearIcon,
-  TerminalIcon,
-  FixtureIcon,
-  DocIcon,
-  ApiIcon,
-} from "@/components/icons";
+import RepoTree from "@/components/architecture/RepoTree";
+import { REPO_TREE } from "@/components/architecture/repoTreeData";
+import { PackageIcon, ArrowRightIcon } from "@/components/icons";
 
 function ExternalLinkIcon({ size = 14 }: { size?: number }) {
   return (
@@ -35,15 +30,11 @@ export const metadata: Metadata = {
     "How the GOLC codebase is put together — package dependencies, command routing, configuration layering, and external dependencies.",
 };
 
-const REPO_LAYOUT = [
-  { path: "cmd/golc-project", body: "The one binary. Self-registers command routes and applies the stable 0/1/2 exit-code mapping — no route wiring lives here.", Icon: TerminalIcon },
-  { path: "internal/", body: "Every domain and infrastructure package — fixtures, pools, scenes, playback, Art-Net, show state, and the command hub that ties them together.", Icon: PackageIcon },
-  { path: "config/", body: "Committed TOML concern files (toolchain, commands, generation, application-defaults, runtime, Linear integration), each the sole owner of its values.", Icon: GearIcon },
-  { path: "schemas/", body: "Generated JSON Schemas mirroring the config concerns plus fixture and Linear contracts.", Icon: ApiIcon },
-  { path: "tests/", body: "acceptance/*.ps1 end-to-end checks (bootstrap, command-parity, offline, walking-skeleton) plus fixtures/ and golden/ — data only, no logic.", Icon: FixtureIcon },
-  { path: "tools/", body: "tools/linear-sync — an isolated Node workspace for Linear reconciliation, kept out of the Go module entirely.", Icon: PackageIcon },
-  { path: "docs/", body: "Contributor walkthrough (development.md) plus artnet/ and brand/ reference assets.", Icon: DocIcon },
-  { path: ".planning/", body: "GSD planning artifacts — PROJECT.md, ROADMAP.md, REQUIREMENTS.md, STATE.md, and per-phase plans.", Icon: FolderIcon },
+const COMMAND_STEPS = [
+  { label: "golc.ps1", body: "Provisions .tools/ on bootstrap; every other verb falls through to the pinned CLI." },
+  { label: "cmd/golc-project", body: "Imports every command file, builds the default registry, applies the 0/1/2 exit-code mapping." },
+  { label: "internal/command", body: "Each file self-registers a typed route via MustDeclareRoute — no central switch statement." },
+  { label: "Domain packages", body: "config/test routes delegate straight into projectconfig, fixture, pool, show, artnet, and the rest." },
 ];
 
 const CONCERNS = [
@@ -140,22 +131,24 @@ export default function ArchitecturePage() {
       <section className="border-y border-line bg-panel">
         <div className="mx-auto max-w-[1160px] px-6 py-16 sm:px-12 sm:py-24">
           <SectionHeading index="02" title="How a command runs" />
-          <div className="grid gap-4 sm:grid-cols-4">
-            {[
-              { label: "golc.ps1", body: "Provisions .tools/ on bootstrap; every other verb falls through to the pinned CLI." },
-              { label: "cmd/golc-project", body: "Imports every command file, builds the default registry, applies the 0/1/2 exit-code mapping." },
-              { label: "internal/command", body: "Each file self-registers a typed route via MustDeclareRoute — no central switch statement." },
-              { label: "Domain packages", body: "config/test routes delegate straight into projectconfig, fixture, pool, show, artnet, and the rest." },
-            ].map((step, i) => (
-              <div key={step.label} className="relative rounded-xl border border-line bg-page p-5">
-                <p className="font-mono text-[10px] uppercase tracking-wider text-muted">
-                  Step {i + 1}
-                </p>
-                <p className="mt-1 font-mono text-sm font-semibold text-ink">
-                  {step.label}
-                </p>
-                <p className="mt-2 text-xs leading-5 text-text2">{step.body}</p>
-              </div>
+          <div className="flex flex-col sm:flex-row sm:items-stretch">
+            {COMMAND_STEPS.map((step, i) => (
+              <Fragment key={step.label}>
+                <div className="flex-1 rounded-xl border border-line bg-page p-5">
+                  <p className="font-mono text-[10px] uppercase tracking-wider text-muted">
+                    Step {i + 1}
+                  </p>
+                  <p className="mt-1 font-mono text-sm font-semibold text-ink">
+                    {step.label}
+                  </p>
+                  <p className="mt-2 text-xs leading-5 text-text2">{step.body}</p>
+                </div>
+                {i < COMMAND_STEPS.length - 1 && (
+                  <div className="flex items-center justify-center py-2 text-line sm:px-2 sm:py-0">
+                    <ArrowRightIcon size={18} className="rotate-90 sm:rotate-0" />
+                  </div>
+                )}
+              </Fragment>
             ))}
           </div>
         </div>
@@ -164,17 +157,11 @@ export default function ArchitecturePage() {
       {/* Repository layout */}
       <section className="mx-auto max-w-[1160px] px-6 py-16 sm:px-12 sm:py-24">
         <SectionHeading index="03" title="Repository layout" />
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {REPO_LAYOUT.map((item) => (
-            <div key={item.path} className="card-hover rounded-xl border border-line bg-panel p-5">
-              <div className="mb-3 inline-flex h-9 w-9 items-center justify-center rounded-lg bg-page text-ink">
-                <item.Icon size={18} />
-              </div>
-              <p className="font-mono text-sm font-semibold text-ink">{item.path}</p>
-              <p className="mt-2 text-xs leading-5 text-text2">{item.body}</p>
-            </div>
-          ))}
-        </div>
+        <p className="mb-8 max-w-2xl text-text2">
+          The real tree, down to package and file level. Click any row with a
+          chevron to expand it.
+        </p>
+        <RepoTree data={REPO_TREE} />
       </section>
 
       {/* Config layering */}
