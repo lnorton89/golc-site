@@ -132,6 +132,8 @@ export default function ReferenceExplorer({ pages }: { pages: ReferencePage[] })
               <button
                 type="button"
                 onClick={() => setOpenSlug(isOpen ? null : page.slug)}
+                aria-expanded={isOpen}
+                aria-controls={`ref-panel-${page.slug.replace(/[^a-zA-Z0-9_-]/g, "-")}`}
                 className="flex w-full items-start gap-3 p-4 text-left"
               >
                 <span className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-page text-ink">
@@ -150,7 +152,10 @@ export default function ReferenceExplorer({ pages }: { pages: ReferencePage[] })
               </button>
 
               {isOpen && (
-                <div className="border-t border-line px-4 pb-4 pt-4">
+                <div
+                  id={`ref-panel-${page.slug.replace(/[^a-zA-Z0-9_-]/g, "-")}`}
+                  className="border-t border-line px-4 pb-4 pt-4"
+                >
                   <ReferenceBody page={page} />
                 </div>
               )}

@@ -26,7 +26,7 @@ export const metadata: Metadata = {
 export default function RoadmapPage() {
   return (
     <div className="mx-auto max-w-[1160px] px-6 py-16 sm:px-12 sm:py-24">
-      <span className="block font-mono text-[13px] tracking-[1.3px] text-accent">
+      <span className="block font-mono text-[13px] tracking-[1.3px] text-link">
         Eleven dependency-ordered phases
       </span>
       <h1 className="mt-1 text-[44px] font-extrabold leading-tight tracking-[-0.03em] text-ink sm:text-[52px]">

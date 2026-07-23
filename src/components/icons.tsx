@@ -181,6 +181,36 @@ export function TerminalIcon(props: IconProps) {
   );
 }
 
+export function WindowsIcon(props: IconProps) {
+  return (
+    <Base {...props}>
+      <rect x="3" y="3" width="7" height="7" />
+      <rect x="14" y="3" width="7" height="7" />
+      <rect x="3" y="14" width="7" height="7" />
+      <rect x="14" y="14" width="7" height="7" />
+    </Base>
+  );
+}
+
+export function AppleIcon(props: IconProps) {
+  return (
+    <Base {...props}>
+      <path d="M12 21c-3.5 0-6-3.8-6-7.8C6 9.5 8 7.5 10.3 7.5c.9 0 1.4.4 1.7.4s.8-.4 1.7-.4C16 7.5 18 9.5 18 13.2c0 4-2.5 7.8-6 7.8z" />
+      <path d="M12 5c1-1.2 2.6-1 3 .3-1.2.9-2.6.6-3-.3z" />
+    </Base>
+  );
+}
+
+export function LinuxIcon(props: IconProps) {
+  return (
+    <Base {...props}>
+      <ellipse cx="12" cy="14" rx="5" ry="6.5" />
+      <circle cx="12" cy="6.5" r="3" />
+      <path d="M9.5 20.5c0-1 .8-1.8 1.5-1.8M14.5 20.5c0-1-.8-1.8-1.5-1.8" />
+    </Base>
+  );
+}
+
 export function GitHubIcon({ size = 24, className }: IconProps) {
   return (
     <svg

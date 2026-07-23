@@ -20,17 +20,20 @@ export default function SiteFooter() {
           </p>
         </div>
         <nav className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-text2">
+          <Link href="/docs" className="transition-colors duration-[120ms] ease-out hover:text-accent">
+            Docs
+          </Link>
+          <Link href="/download" className="transition-colors duration-[120ms] ease-out hover:text-accent">
+            Download
+          </Link>
           <Link href="/architecture" className="transition-colors duration-[120ms] ease-out hover:text-accent">
             Architecture
           </Link>
           <Link href="/roadmap" className="transition-colors duration-[120ms] ease-out hover:text-accent">
             Roadmap
           </Link>
-          <Link href="/docs" className="transition-colors duration-[120ms] ease-out hover:text-accent">
-            Docs
-          </Link>
           <Link href="/changelog" className="transition-colors duration-[120ms] ease-out hover:text-accent">
-            Changelog
+            Development Log
           </Link>
           <a
             href="https://github.com/lnorton89/golc"

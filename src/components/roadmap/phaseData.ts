@@ -24,6 +24,7 @@ export type Phase = {
   requirements: string[];
   successCriteria: string[];
   plans: string;
+  completedAt?: string;
 };
 
 export const PHASES: Phase[] = [
@@ -44,6 +45,7 @@ export const PHASES: Phase[] = [
       "A contributor can preview an exact reconciliation and, when access is configured outside the repository, rerun it without duplicates; ambiguity, pagination, partial errors, and rate limits are reported without blocking local planning, builds, tests, or runtime operation.",
     ],
     plans: "32/32 plans complete",
+    completedAt: "2026-07-21",
   },
   {
     n: 2,
@@ -62,6 +64,7 @@ export const PHASES: Phase[] = [
       "A show author can map replacement fixtures by semantic capability, see every missing or incompatible capability, and accept, revise, or cancel an all-or-nothing change without silent approximation.",
     ],
     plans: "6/6 plans complete",
+    completedAt: "2026-07-21",
   },
   {
     n: 3,
@@ -80,6 +83,7 @@ export const PHASES: Phase[] = [
       "A deterministic playback harness produces the same time-indexed results when UI rendering, persistence, scripts, API clients, or LLM providers are slow, unavailable, or restarted, and adopts only complete valid show plans at safe boundaries.",
     ],
     plans: "7/7 plans complete",
+    completedAt: "2026-07-21",
   },
   {
     n: 4,
@@ -97,6 +101,7 @@ export const PHASES: Phase[] = [
       "An operator can inspect per-universe final values, frame health, target health, errors, and output enablement, and a release candidate demonstrates compatibility with both an independent simulator and real Art-Net hardware.",
     ],
     plans: "9/9 plans complete",
+    completedAt: "2026-07-22",
   },
   {
     n: 5,
@@ -114,6 +119,7 @@ export const PHASES: Phase[] = [
       "A user can run integrity diagnostics and export a versioned human-readable JSON representation for troubleshooting and interchange.",
     ],
     plans: "5/5 plans complete",
+    completedAt: "2026-07-23",
   },
   {
     n: 6,
@@ -131,7 +137,7 @@ export const PHASES: Phase[] = [
       "An operator can control group masters, Grand Master, stop/release-all, and immediate blackout through local priority paths that do not wait for UI, script, API, or model work to complete.",
       "Revoke Automation immediately blocks scripts and AI, cancels their queued actions, freezes the current look, and returns manual control even when an automation runtime is hung or disconnected.",
     ],
-    plans: "4/8 plans complete",
+    plans: "7/8 plans complete",
   },
   {
     n: 7,
@@ -197,6 +203,8 @@ export const PHASES: Phase[] = [
     successCriteria: [
       "A user can install and launch GOLC on every declared supported Windows version and architecture without a development toolchain.",
       "The packaged application includes and supervises every required runtime component, including the TypeScript helper, and reports missing or failed dependencies clearly.",
+      "Clean Windows machines pass install, launch, save/restore, migration, network-change, suspend/resume, integrity, and recovery exercises.",
+      "Long-running tests with real Art-Net hardware meet defined playback cadence, Art-Net timing, override latency, memory, and soak budgets while UI, storage, scripts, API clients, and LLM work run concurrently or fail.",
     ],
     plans: "Not yet planned",
   },
@@ -208,7 +216,7 @@ export const PHASES: Phase[] = [
     icon: "telemetry",
     goal: "Users can opt into anonymized usage/telemetry collection and crashes are automatically captured and submitted for diagnosis without blocking playback or requiring manual repro steps.",
     dependsOn: "Phase 10",
-    requirements: [],
+    requirements: ["TELE-01", "TELE-02", "TELE-03", "TELE-04"],
     successCriteria: [],
     plans: "Not yet planned",
   },

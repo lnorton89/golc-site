@@ -3,9 +3,7 @@ import type { Metadata } from "next";
 import SectionHeading from "@/components/SectionHeading";
 import StatusChipGrid from "@/components/StatusChip";
 import ViewExplorer from "@/components/docs/ViewExplorer";
-import ReferenceExplorer from "@/components/docs/ReferenceExplorer";
-import { getReferencePages } from "@/lib/reference";
-import { ApiIcon } from "@/components/icons";
+import { ApiIcon, PackageIcon } from "@/components/icons";
 
 const docsDescription =
   "How GOLC works — patching, fixture pools, scenes and chases, live playback, and the concepts behind them.";
@@ -30,14 +28,12 @@ export const metadata: Metadata = {
 };
 
 export default function DocsPage() {
-  const referencePages = getReferencePages();
-
   return (
     <div>
       {/* Hero */}
       <section className="border-b border-line bg-panel">
         <div className="mx-auto max-w-[1160px] px-6 py-20 sm:px-12 sm:py-28">
-          <span className="block font-mono text-[13px] tracking-[1.3px] text-accent">
+          <span className="block font-mono text-[13px] tracking-[1.3px] text-link">
             How the program works
           </span>
           <h1 className="mt-1 max-w-2xl text-[40px] font-extrabold leading-[1.05] tracking-[-0.03em] text-ink sm:text-[52px]">
@@ -78,18 +74,6 @@ export default function DocsPage() {
         </div>
       </section>
 
-      {/* Code reference */}
-      <section className="mx-auto max-w-[1160px] px-6 py-16 sm:px-12 sm:py-24">
-        <SectionHeading index="03" title="Code reference" />
-        <p className="mb-8 max-w-2xl text-text2">
-          Generated straight from the Go package doc comments in the golc
-          repository (<code className="rounded bg-page px-1 py-0.5 font-mono text-[13px] text-ink">golc.ps1 docs</code>{" "}
-          regenerates this section) — no hand-maintained copy to drift from
-          the source.
-        </p>
-        <ReferenceExplorer pages={referencePages} />
-      </section>
-
       {/* CTA */}
       <section className="mx-auto max-w-[1160px] px-6 py-16 sm:px-12 sm:py-24">
         <div className="rounded-xl border border-line bg-panel p-8 text-center">
@@ -101,18 +85,16 @@ export default function DocsPage() {
           </h2>
           <p className="mx-auto mt-2 max-w-md text-sm text-text2">
             Once the external API (Phase 7) and TypeScript SDK (Phase 8)
-            ship, this page grows to cover them. For now, the contributor
-            walkthrough covers building GOLC itself.
+            ship, this page grows to cover them.
           </p>
           <div className="mt-6 flex flex-wrap justify-center gap-4">
-            <a
-              href="https://github.com/lnorton89/golc/blob/master/docs/development.md"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-md bg-accent px-5 py-3 text-sm font-semibold text-on-accent transition-colors duration-[120ms] ease-out hover:bg-accent-dp"
+            <Link
+              href="/reference"
+              className="inline-flex items-center gap-2 rounded-md bg-accent px-5 py-3 text-sm font-semibold text-on-accent transition-colors duration-[120ms] ease-out hover:bg-accent-dp"
             >
-              Contributor walkthrough
-            </a>
+              <PackageIcon size={16} />
+              Browse the code reference
+            </Link>
             <Link
               href="/architecture"
               className="rounded-md border border-line px-5 py-3 text-sm font-semibold text-ink transition-colors duration-[120ms] ease-out hover:border-accent hover:text-accent"

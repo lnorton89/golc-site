@@ -81,6 +81,8 @@ export default function PhaseTimeline({ phases }: { phases: Phase[] }) {
               <button
                 type="button"
                 onClick={() => setOpenN(isOpen ? null : p.n)}
+                aria-expanded={isOpen}
+                aria-controls={`phase-panel-${p.n}`}
                 className="flex w-full items-start gap-3 p-4 text-left"
               >
                 <span className="w-5 shrink-0 pt-0.5 font-mono text-xs text-muted">
@@ -106,7 +108,7 @@ export default function PhaseTimeline({ phases }: { phases: Phase[] }) {
               </button>
 
               {isOpen && (
-                <div className="border-t border-line px-4 pb-4 pt-4">
+                <div id={`phase-panel-${p.n}`} className="border-t border-line px-4 pb-4 pt-4">
                   <PhaseDetail phase={p} showHeader={false} />
                 </div>
               )}

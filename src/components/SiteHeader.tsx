@@ -2,18 +2,18 @@ import Link from "next/link";
 import GolcMark from "./GolcMark";
 import ThemeToggle from "./ThemeToggle";
 import MobileMenu from "./MobileMenu";
+import NavLinks from "./NavLinks";
 import { GitHubIcon } from "./icons";
-
-const NAV = [
-  { href: "/architecture", label: "Architecture" },
-  { href: "/roadmap", label: "Roadmap" },
-  { href: "/docs", label: "Docs" },
-  { href: "/changelog", label: "Changelog" },
-];
 
 export default function SiteHeader() {
   return (
     <header className="border-b border-line">
+      <a
+        href="#main-content"
+        className="sr-only rounded-md bg-accent px-4 py-2 text-sm font-semibold text-on-accent focus:not-sr-only focus:fixed focus:left-6 focus:top-4 focus:z-[100]"
+      >
+        Skip to content
+      </a>
       <div className="mx-auto flex max-w-[1160px] items-center justify-between px-6 py-4 sm:px-12">
         <Link href="/" className="flex items-center gap-3">
           <GolcMark size={32} />
@@ -21,7 +21,7 @@ export default function SiteHeader() {
             <span className="text-lg font-extrabold tracking-[-0.02em] text-ink">
               GOLC
             </span>
-            <span className="font-mono text-[10px] uppercase tracking-wider text-muted">
+            <span className="hidden font-mono text-[10px] uppercase tracking-wider text-muted min-[420px]:inline">
               Go Lighting Control
             </span>
           </span>
@@ -29,15 +29,7 @@ export default function SiteHeader() {
 
         <div className="flex items-center gap-3">
           <nav className="hidden items-center gap-6 sm:flex">
-            {NAV.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="text-sm text-text2 transition-colors duration-[120ms] ease-out hover:text-accent"
-              >
-                {item.label}
-              </Link>
-            ))}
+            <NavLinks />
             <a
               href="https://github.com/lnorton89/golc"
               target="_blank"

@@ -1,6 +1,27 @@
 "use client";
 
+import { useSyncExternalStore } from "react";
+
+function subscribe(callback: () => void) {
+  const observer = new MutationObserver(callback);
+  observer.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ["data-theme"],
+  });
+  return () => observer.disconnect();
+}
+
+function getSnapshot() {
+  return document.documentElement.getAttribute("data-theme") === "dark";
+}
+
+function getServerSnapshot() {
+  return false;
+}
+
 export default function ThemeToggle() {
+  const isDark = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+
   function toggle() {
     const root = document.documentElement;
     if (root.getAttribute("data-theme") === "dark") {
@@ -17,6 +38,7 @@ export default function ThemeToggle() {
       type="button"
       onClick={toggle}
       aria-label="Toggle light or dark theme"
+      aria-pressed={isDark}
       className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-line bg-panel text-ink transition-colors duration-[120ms] ease-out hover:border-accent"
     >
       <span className="theme-ic theme-ic-moon">

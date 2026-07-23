@@ -71,6 +71,8 @@ export default function ViewExplorer() {
               <button
                 type="button"
                 onClick={() => setOpenId(isOpen ? null : v.id)}
+                aria-expanded={isOpen}
+                aria-controls={`view-panel-${v.id}`}
                 className="flex w-full items-start gap-3 p-4 text-left"
               >
                 <span className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-page text-ink">
@@ -88,7 +90,7 @@ export default function ViewExplorer() {
               </button>
 
               {isOpen && (
-                <div className="border-t border-line px-4 pb-4 pt-4">
+                <div id={`view-panel-${v.id}`} className="border-t border-line px-4 pb-4 pt-4">
                   <ViewDetail view={v} showHeader={false} />
                 </div>
               )}
