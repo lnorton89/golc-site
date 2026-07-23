@@ -98,7 +98,7 @@ body {
   color: var(--panel);
 }
 
-/* Theme toggle icon/label swap — mirrors the guide's own toggle exactly. */
+/* Theme toggle icon swap. */
 .theme-ic {
   display: inline-flex;
   align-items: center;
@@ -111,15 +111,6 @@ body {
 }
 [data-theme="dark"] .theme-ic-sun {
   display: inline-flex;
-}
-.theme-lbl-light {
-  display: none;
-}
-[data-theme="dark"] .theme-lbl-dark {
-  display: none;
-}
-[data-theme="dark"] .theme-lbl-light {
-  display: inline;
 }
 
 /* Restrained motion — 120–200ms, no bounce/spin, per the guide's motion principles. */
@@ -138,22 +129,9 @@ body {
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
 }
 
-/* CTA card background — thin channel/fader rules echoing the faders icon,
-   plus a quiet Signal Blue glow. Kept subtle per the guide's "plain over
-   clever" voice principle. */
+/* CTA card background — a subtle dot grid, one color var, nothing louder. */
 .cta-pattern {
   background-color: var(--panel);
-  background-image:
-    radial-gradient(
-      circle at 12% 20%,
-      color-mix(in srgb, var(--accent) 14%, transparent),
-      transparent 55%
-    ),
-    repeating-linear-gradient(
-      90deg,
-      var(--line) 0,
-      var(--line) 1px,
-      transparent 1px,
-      transparent 28px
-    );
+  background-image: radial-gradient(var(--line) 1px, transparent 1px);
+  background-size: 20px 20px;
 }

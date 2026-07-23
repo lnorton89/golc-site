@@ -17,12 +17,12 @@ export default function ThemeToggle() {
       type="button"
       onClick={toggle}
       aria-label="Toggle light or dark theme"
-      className="inline-flex items-center gap-[9px] rounded-full border border-line bg-panel px-3.5 py-2 font-mono text-[11px] uppercase tracking-[0.14em] text-ink transition-colors duration-[120ms] ease-out hover:border-accent"
+      className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-line bg-panel text-ink transition-colors duration-[120ms] ease-out hover:border-accent"
     >
       <span className="theme-ic theme-ic-moon">
         <svg
-          width="14"
-          height="14"
+          width="15"
+          height="15"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
@@ -35,8 +35,8 @@ export default function ThemeToggle() {
       </span>
       <span className="theme-ic theme-ic-sun">
         <svg
-          width="14"
-          height="14"
+          width="15"
+          height="15"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
@@ -48,8 +48,6 @@ export default function ThemeToggle() {
           <path d="M12 2.5v2.2M12 19.3v2.2M4.4 12H2.2M21.8 12h-2.2M5.4 5.4l1.6 1.6M17 17l1.6 1.6M18.6 5.4L17 7M7 17l-1.6 1.6" />
         </svg>
       </span>
-      <span className="theme-lbl-dark">Dark</span>
-      <span className="theme-lbl-light">Light</span>
     </button>
   );
 }

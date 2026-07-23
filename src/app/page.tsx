@@ -2,6 +2,7 @@ import Link from "next/link";
 import StatusChipGrid from "@/components/StatusChip";
 import SectionHeading from "@/components/SectionHeading";
 import GolcMark from "@/components/GolcMark";
+import PositioningIllustration from "@/components/PositioningIllustration";
 import {
   FixtureIcon,
   FadersIcon,
@@ -206,57 +207,8 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="rounded-xl border border-line bg-panel p-6">
-            <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-muted">
-              Color
-            </p>
-            <div className="mt-4 flex items-center gap-4">
-              <div
-                className="h-16 w-16 shrink-0 rounded-lg"
-                style={{ background: "#1B44D9" }}
-              />
-              <div>
-                <p className="text-sm font-semibold text-ink">Signal Blue</p>
-                <p className="font-mono text-xs text-muted">
-                  #1B44D9 — the single accent
-                </p>
-              </div>
-            </div>
-
-            <div className="mt-6 grid grid-cols-5 gap-2">
-              {[
-                { name: "Ink", hex: "#17181C" },
-                { name: "Paper", hex: "#E4E0D8" },
-                { name: "Panel", hex: "#F4F1EB" },
-                { name: "Line", hex: "#D2CCC0" },
-                { name: "Muted", hex: "#8A887F" },
-              ].map((n) => (
-                <div key={n.name}>
-                  <div
-                    className="h-8 rounded border border-line"
-                    style={{ background: n.hex }}
-                  />
-                  <p className="mt-1 font-mono text-[9px] text-muted">
-                    {n.name}
-                  </p>
-                </div>
-              ))}
-            </div>
-
-            <div className="mt-6 flex gap-1.5">
-              {SPECTRUM.map((c) => (
-                <span
-                  key={c}
-                  className="h-6 flex-1 rounded"
-                  style={{ background: c }}
-                />
-              ))}
-            </div>
-
-            <p className="mt-5 text-xs leading-5 text-muted">
-              Instrument-grade neutral: warm gray, ink black, one deep
-              signal-blue accent.
-            </p>
+          <div className="overflow-hidden rounded-xl border border-line">
+            <PositioningIllustration />
           </div>
         </div>
       </section>
