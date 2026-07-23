@@ -22,19 +22,24 @@
   --status-offline: #8a887f;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --page: #131419;
-    --panel: #1e2027;
-    --ink: #ecead3;
-    --text: #b7b5ac;
-    --text2: #a6a49b;
-    --muted: #87857d;
-    --line: #2e3038;
+/*
+ * The brand guide defaults to light (Paper) regardless of OS color-scheme
+ * preference — it has its own manual Dark/Light toggle, not a media query.
+ * Dark tokens are kept here for a future in-page toggle, but must not be
+ * applied automatically, or the site diverges from the guide for any
+ * visitor whose OS prefers dark.
+ */
+[data-theme="dark"] {
+  --page: #131419;
+  --panel: #1e2027;
+  --ink: #ecead3;
+  --text: #b7b5ac;
+  --text2: #a6a49b;
+  --muted: #87857d;
+  --line: #2e3038;
 
-    --mark-tile: #f4f1eb;
-    --mark-bar: #17181c;
-  }
+  --mark-tile: #f4f1eb;
+  --mark-bar: #17181c;
 }
 
 @theme inline {
@@ -60,7 +65,7 @@
 }
 
 html {
-  color-scheme: light dark;
+  color-scheme: light;
 }
 
 body {

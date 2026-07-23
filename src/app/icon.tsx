@@ -4,42 +4,19 @@ export const dynamic = "force-static";
 export const size = { width: 32, height: 32 };
 export const contentType = "image/png";
 
-const SPECTRUM = ["#C0554A", "#CC8A47", "#B6A24C", "#4E9E68", "#1B44D9", "#6A50A8"];
-
 export default function Icon() {
   return new ImageResponse(
     (
-      <div
-        style={{
-          width: 32,
-          height: 32,
-          borderRadius: 7,
-          background: "#17181C",
-          display: "flex",
-          position: "relative",
-        }}
-      >
-        <div
-          style={{
-            position: "absolute",
-            top: 8,
-            left: 7,
-            width: 18,
-            height: 2.5,
-            borderRadius: 2,
-            background: "#F4F1EB",
-            display: "flex",
-          }}
-        />
-        <div style={{ position: "absolute", top: 11, left: 6, display: "flex" }}>
-          {SPECTRUM.map((c) => (
-            <div
-              key={c}
-              style={{ width: 3, height: 14, background: c, marginRight: 0.6, display: "flex" }}
-            />
-          ))}
-        </div>
-      </div>
+      <svg width={32} height={32} viewBox="0 0 100 100">
+        <rect x="2" y="2" width="96" height="96" rx="22" fill="#17181C" />
+        <polygon points="50,25 18.5,84 25.5,84" fill="#C0554A" />
+        <polygon points="50,25 29.5,84 36.5,84" fill="#CC8A47" />
+        <polygon points="50,25 40.5,84 47.5,84" fill="#B6A24C" />
+        <polygon points="50,25 51.5,84 58.5,84" fill="#4E9E68" />
+        <polygon points="50,25 62.5,84 69.5,84" fill="#1B44D9" />
+        <polygon points="50,25 73.5,84 80.5,84" fill="#6A50A8" />
+        <rect x="40" y="18" width="20" height="7" rx="3" fill="#F4F1EB" />
+      </svg>
     ),
     { ...size }
   );
