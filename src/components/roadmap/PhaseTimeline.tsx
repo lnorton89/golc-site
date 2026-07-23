@@ -49,8 +49,8 @@ export default function PhaseTimeline({ phases }: { phases: Phase[] }) {
   const SelectedIcon = PHASE_ICON[selected.icon];
 
   return (
-    <div className="mt-10 grid gap-6 lg:grid-cols-[1fr_1.3fr]">
-      <ol>
+    <div className="mt-10 grid grid-cols-1 gap-6 lg:grid-cols-[1fr_1.3fr]">
+      <ol className="min-w-0">
         {phases.map((p, i) => {
           const Icon = PHASE_ICON[p.icon];
           const isSelected = p.n === selectedN;
