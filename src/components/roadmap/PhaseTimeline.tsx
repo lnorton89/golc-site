@@ -81,25 +81,25 @@ export default function PhaseTimeline({ phases }: { phases: Phase[] }) {
               <button
                 type="button"
                 onClick={() => setOpenN(isOpen ? null : p.n)}
-                className="flex w-full items-center gap-3 p-4 text-left"
+                className="flex w-full items-start gap-3 p-4 text-left"
               >
-                <span className="w-5 shrink-0 font-mono text-xs text-muted">
+                <span className="w-5 shrink-0 pt-0.5 font-mono text-xs text-muted">
                   {String(p.n).padStart(2, "0")}
                 </span>
                 <span className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-page text-ink">
                   <Icon size={15} />
                 </span>
-                <span className="min-w-0 flex-1 truncate text-sm font-medium text-ink">
+                <span className="min-w-0 flex-1 pt-1 text-sm font-medium leading-5 text-ink">
                   {p.title}
                 </span>
                 <span
-                  className="h-1.5 w-1.5 shrink-0 rounded-full"
+                  className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full"
                   style={{ background: STATUS_COLOR[p.status] }}
                   aria-hidden
                 />
                 <ChevronRightIcon
                   size={16}
-                  className={`shrink-0 text-muted transition-transform duration-[120ms] ease-out ${
+                  className={`mt-1 shrink-0 text-muted transition-transform duration-[120ms] ease-out ${
                     isOpen ? "rotate-90" : ""
                   }`}
                 />
