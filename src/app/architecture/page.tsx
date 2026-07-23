@@ -97,10 +97,10 @@ export default function ArchitecturePage() {
       {/* Hero */}
       <section className="border-b border-line bg-panel">
         <div className="mx-auto max-w-[1160px] px-6 py-20 sm:px-12 sm:py-28">
-          <p className="mb-6 inline-flex items-center gap-2 rounded-full border border-line bg-page px-3 py-1 font-mono text-xs uppercase tracking-wider text-muted">
-            github.com/lnorton89/golc
-          </p>
-          <h1 className="max-w-2xl text-[40px] font-extrabold leading-[1.05] tracking-[-0.03em] text-ink sm:text-[52px]">
+          <span className="block font-mono text-[13px] tracking-[1.3px] text-accent">
+            How the codebase works
+          </span>
+          <h1 className="mt-1 max-w-2xl text-[40px] font-extrabold leading-[1.05] tracking-[-0.03em] text-ink sm:text-[52px]">
             Architecture.
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-8 text-text2">
