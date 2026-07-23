@@ -64,7 +64,7 @@ export default function DownloadPage() {
             GOLC hasn&apos;t reached a qualified release. Windows packaging
             and install verification are Phase 10 work, which depends on
             Phases 6 through 9 first.{" "}
-            <Link href="/roadmap" className="text-link hover:underline">
+            <Link href="/roadmap" className="text-link underline underline-offset-2 hover:text-accent-dp">
               See where the project stands today
             </Link>
             .
@@ -118,7 +118,7 @@ export default function DownloadPage() {
                   href="https://github.com/lnorton89/golc/blob/master/LICENSE"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-link hover:underline"
+                  className="text-link underline underline-offset-2 hover:text-accent-dp"
                 >
                   GNU GPL v3.0
                 </a>

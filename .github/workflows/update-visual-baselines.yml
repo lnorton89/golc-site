@@ -1,0 +1,31 @@
+name: Update Visual Baselines
+
+# Manual trigger only. Playwright screenshot baselines are OS/font-rendering
+# specific — they must be generated on the same platform CI compares them
+# against (ubuntu-latest), not on a contributor's local machine. Run this,
+# then download the "visual-baselines" artifact and commit it to
+# tests/visual.spec.ts-snapshots/ to update or seed the baselines.
+on:
+  workflow_dispatch:
+
+jobs:
+  update-snapshots:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+      - run: npm run build
+      - run: npx playwright install --with-deps chromium
+      - run: npx playwright test --update-snapshots
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: visual-baselines
+          path: tests/visual.spec.ts-snapshots/
+          retention-days: 7

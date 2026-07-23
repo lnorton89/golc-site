@@ -42,3 +42,13 @@ next-env.d.ts
 
 # Local Netlify folder
 .netlify
+
+# Testing infrastructure — Playwright run artifacts (baseline screenshots in
+# tests/**/*-snapshots/ are committed, only run output is ignored here)
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+
+# Lighthouse CI
+/.lighthouseci/

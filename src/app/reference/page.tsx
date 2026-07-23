@@ -42,7 +42,7 @@ export default function ReferencePage() {
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-8 text-text2">
             Looking for how to use GOLC? See the{" "}
-            <Link href="/docs" className="text-link hover:underline">
+            <Link href="/docs" className="text-link underline underline-offset-2 hover:text-accent-dp">
               Docs
             </Link>{" "}
             page instead — this is the Go package reference for people

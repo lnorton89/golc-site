@@ -6,7 +6,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit",
+    "test:links": "start-server-and-test \"npx serve out -l 4173\" http://localhost:4173 \"linkinator http://localhost:4173 --recurse --silent\"",
+    "test:lighthouse": "lhci autorun",
+    "test:visual": "playwright test",
+    "test:visual:update": "playwright test --update-snapshots"
   },
   "dependencies": {
     "next": "16.2.11",
@@ -15,12 +20,17 @@
     "react-markdown": "^10.1.0"
   },
   "devDependencies": {
+    "@lhci/cli": "^0.15.1",
+    "@playwright/test": "^1.61.1",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.2.11",
+    "linkinator": "^8.0.1",
+    "serve": "^14.2.6",
+    "start-server-and-test": "^3.0.11",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

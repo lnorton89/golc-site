@@ -31,11 +31,37 @@ and publishes `out/`.
 ## Structure
 
 ```
-src/app/            Routes: / (landing), /roadmap, /docs, /changelog
+src/app/            Routes: / (landing), /docs, /download, /reference,
+                     /architecture, /roadmap, /changelog
 src/components/      Shared header, footer, brand mark, status chips
 src/app/globals.css  Brand tokens (color, type) as Tailwind v4 @theme
 src/app/icon.tsx     Generated favicon from the GOLC mark
 ```
+
+## Testing
+
+```bash
+npm run lint            # ESLint
+npm run typecheck       # tsc --noEmit
+npm run build            # required before test:links / test:lighthouse (they run against out/)
+npm run test:links       # linkinator — crawls the built static export for broken links
+npm run test:lighthouse  # Lighthouse CI — perf/accessibility/best-practices/SEO budgets, see lighthouserc.json
+npm run test:visual      # Playwright — visual regression (light+dark, all routes) + key interactions
+npm run test:visual:update  # regenerate baseline screenshots after an intentional visual change
+```
+
+`test:links` and `test:visual` start their own local static server
+(`serve out`) automatically — no separate terminal needed. First run of
+`test:visual` needs `npx playwright install chromium` once.
+
+Baseline screenshots live in `tests/visual.spec.ts-snapshots/` and are
+committed — when a change is intentional, run `test:visual:update` and
+review the diff before committing the new baselines. Lighthouse assertion
+thresholds live in `lighthouserc.json`; accessibility is a hard fail
+(`minScore: 0.95`), the rest warn.
+
+CI (`.github/workflows/ci.yml`) runs all of the above on every push/PR to
+`master`.
 
 ## Brand source of truth
 

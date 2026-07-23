@@ -175,7 +175,6 @@ export default function Home() {
                     background: l.on
                       ? "color-mix(in srgb, var(--accent) 10%, transparent)"
                       : "var(--panel)",
-                    opacity: l.on ? 1 : 0.55,
                   }}
                 >
                   <span className="flex items-center gap-2 text-sm">
@@ -184,9 +183,13 @@ export default function Home() {
                       style={{ background: l.on ? "var(--accent)" : "var(--muted)" }}
                       aria-hidden
                     />
+                    {/* text-text2 (not text-muted): against this tinted card
+                        background, text-muted falls just under WCAG's 4.5:1
+                        small-text minimum — caught by Lighthouse's
+                        color-contrast audit, not a stylistic choice. */}
                     <span className={l.on ? "font-semibold text-ink" : "text-text2"}>{l.name}</span>
                   </span>
-                  <span className="font-mono text-xs text-muted">{l.detail}</span>
+                  <span className="font-mono text-xs text-text2">{l.detail}</span>
                 </div>
               ))}
             </div>
@@ -318,7 +321,7 @@ export default function Home() {
           <p className="mb-8 max-w-2xl text-text2">
             Every user-facing guarantee above comes from a small set of
             architectural rules.{" "}
-            <Link href="/architecture" className="text-link hover:underline">
+            <Link href="/architecture" className="text-link underline underline-offset-2 hover:text-accent-dp">
               See how the codebase enforces them
             </Link>
             .
@@ -366,7 +369,7 @@ export default function Home() {
                     href="https://github.com/lnorton89/golc/blob/master/LICENSE"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-link hover:underline"
+                    className="text-link underline underline-offset-2 hover:text-accent-dp"
                   >
                     GNU GPL v3.0
                   </a>
@@ -387,11 +390,11 @@ export default function Home() {
               body: (
                 <>
                   Every behavior is written down. The{" "}
-                  <Link href="/architecture" className="text-link hover:underline">
+                  <Link href="/architecture" className="text-link underline underline-offset-2 hover:text-accent-dp">
                     architecture
                   </Link>{" "}
                   and{" "}
-                  <Link href="/roadmap" className="text-link hover:underline">
+                  <Link href="/roadmap" className="text-link underline underline-offset-2 hover:text-accent-dp">
                     roadmap
                   </Link>{" "}
                   are as public as the code.
@@ -450,7 +453,7 @@ export default function Home() {
           </div>
           <p className="relative mt-8 text-sm text-muted">
             In active development — Phase 6 of 11, 7/8 plans complete.{" "}
-            <Link href="/roadmap" className="inline-flex items-center gap-1 text-link hover:underline">
+            <Link href="/roadmap" className="inline-flex items-center gap-1 text-link underline underline-offset-2 hover:text-accent-dp">
               See the roadmap
               <ArrowRightIcon size={12} />
             </Link>
