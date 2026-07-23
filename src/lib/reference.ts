@@ -5,6 +5,8 @@ export type ReferencePage = {
   slug: string;
   title: string;
   importPath: string;
+  /** import path relative to internal/, e.g. "trace/apply" or "bootstrap" */
+  internalPath: string;
   synopsis: string;
   body: string;
 };
@@ -32,7 +34,9 @@ function parsePage(slug: string, raw: string): ReferencePage {
   const synopsisMatch = body.match(/^[\s\S]+?[.!?](\s|$)/);
   const synopsis = synopsisMatch ? synopsisMatch[0].trim() : body.split("\n")[0];
 
-  return { slug, title, importPath, synopsis, body };
+  const internalPath = importPath.replace(/^.*\/internal\//, "");
+
+  return { slug, title, importPath, internalPath, synopsis, body };
 }
 
 // getReferencePages reads every generated page from

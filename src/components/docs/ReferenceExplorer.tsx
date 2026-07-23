@@ -18,6 +18,16 @@ function splitLede(body: string): { lede: string; rest: string } {
 const proseCodeClasses =
   "[&_code]:rounded [&_code]:bg-page [&_code]:px-1 [&_code]:py-0.5 [&_code]:font-mono [&_code]:text-[13px] [&_code]:text-ink [&_strong]:text-ink";
 
+// parentFolder returns the folder a package sits in relative to
+// internal/, or null for a top-level package (e.g. "artnet" for
+// "artnet/ipc", null for "bootstrap") -- packages are pre-sorted by
+// import path, so a nested package's parent always immediately precedes
+// it in the list.
+function parentFolder(page: ReferencePage): string | null {
+  const segments = page.internalPath.split("/");
+  return segments.length > 1 ? segments.slice(0, -1).join("/") : null;
+}
+
 function ReferenceBody({ page }: { page: ReferencePage }) {
   const { lede, rest } = splitLede(page.body);
 
@@ -65,8 +75,9 @@ export default function ReferenceExplorer({ pages }: { pages: ReferencePage[] })
         <ol className="min-w-0">
           {pages.map((page) => {
             const isSelected = page.slug === selectedSlug;
+            const parent = parentFolder(page);
             return (
-              <li key={page.slug}>
+              <li key={page.slug} className={parent ? "ml-6" : undefined}>
                 <button
                   type="button"
                   onClick={() => setSelectedSlug(page.slug)}
@@ -75,7 +86,9 @@ export default function ReferenceExplorer({ pages }: { pages: ReferencePage[] })
                   }`}
                 >
                   <span
-                    className="mt-0.5 inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg"
+                    className={`mt-0.5 inline-flex shrink-0 items-center justify-center rounded-lg ${
+                      parent ? "h-7 w-7" : "h-9 w-9"
+                    }`}
                     style={{
                       background: isSelected
                         ? "color-mix(in srgb, var(--accent) 16%, transparent)"
@@ -83,7 +96,7 @@ export default function ReferenceExplorer({ pages }: { pages: ReferencePage[] })
                       color: isSelected ? "var(--accent)" : "var(--ink)",
                     }}
                   >
-                    <PackageIcon size={17} />
+                    <PackageIcon size={parent ? 14 : 17} />
                   </span>
                   <span className="min-w-0 flex-1">
                     <span
@@ -91,6 +104,7 @@ export default function ReferenceExplorer({ pages }: { pages: ReferencePage[] })
                         isSelected ? "font-semibold text-ink" : "font-medium text-text2"
                       }`}
                     >
+                      {parent && <span className="text-muted">{parent}/</span>}
                       {page.title}
                     </span>
                     <span className="mt-0.5 line-clamp-2 text-xs leading-5 text-muted">
@@ -112,6 +126,7 @@ export default function ReferenceExplorer({ pages }: { pages: ReferencePage[] })
       <ol className="space-y-3 lg:hidden">
         {pages.map((page) => {
           const isOpen = openSlug === page.slug;
+          const parent = parentFolder(page);
           return (
             <li key={page.slug} className="rounded-xl border border-line bg-panel">
               <button
@@ -123,6 +138,7 @@ export default function ReferenceExplorer({ pages }: { pages: ReferencePage[] })
                   <PackageIcon size={15} />
                 </span>
                 <span className="min-w-0 flex-1 pt-1 font-mono text-sm font-medium leading-5 text-ink">
+                  {parent && <span className="text-muted">{parent}/</span>}
                   {page.title}
                 </span>
                 <ChevronRightIcon
