@@ -93,7 +93,7 @@ export default function DocsPage() {
               href="https://github.com/lnorton89/golc/blob/master/docs/development.md"
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded-md bg-accent px-5 py-3 text-sm font-semibold text-panel transition-colors duration-[120ms] ease-out hover:bg-accent-dp"
+              className="rounded-md bg-accent px-5 py-3 text-sm font-semibold text-on-accent transition-colors duration-[120ms] ease-out hover:bg-accent-dp"
             >
               Contributor walkthrough
             </a>

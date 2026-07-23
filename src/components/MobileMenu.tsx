@@ -44,7 +44,7 @@ export default function MobileMenu() {
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setOpen(false)}
-              className="mt-2 inline-flex items-center gap-2 rounded-md bg-accent px-3 py-2.5 text-sm font-medium text-panel transition-colors duration-[120ms] ease-out hover:bg-accent-dp"
+              className="mt-2 inline-flex items-center gap-2 rounded-md bg-accent px-3 py-2.5 text-sm font-medium text-on-accent transition-colors duration-[120ms] ease-out hover:bg-accent-dp"
             >
               <GitHubIcon size={15} />
               GitHub

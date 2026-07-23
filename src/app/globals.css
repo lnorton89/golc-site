@@ -10,6 +10,9 @@
   --line: #d2ccc0;
   --accent: #1b44d9;
   --accent-dp: #1233a8;
+  /* Signal Blue is the same in both themes, so text on it must be too —
+     never tie this to --panel, which inverts with the theme. */
+  --on-accent: #f4f1eb;
 
   --mark-tile: #17181c;
   --mark-bar: #f4f1eb;
@@ -64,6 +67,7 @@
   --color-line: var(--line);
   --color-accent: var(--accent);
   --color-accent-dp: var(--accent-dp);
+  --color-on-accent: var(--on-accent);
 
   --color-status-live: var(--status-live);
   --color-status-frame-lock: var(--status-frame-lock);
