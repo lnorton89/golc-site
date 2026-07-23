@@ -24,7 +24,7 @@ function ReferenceBody({ page }: { page: ReferencePage }) {
   return (
     <>
       <p className="font-mono text-[10px] uppercase tracking-wider text-muted">
-        {page.importPath}
+        {page.importPath.replace(/^github\.com\/lnorton89\//, "")}
       </p>
       <h3 className="mt-1 font-mono font-semibold text-ink">{page.title}</h3>
 
