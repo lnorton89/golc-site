@@ -1,0 +1,42 @@
+import Link from "next/link";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Docs",
+  description: "GOLC documentation — coming soon.",
+};
+
+export default function DocsPage() {
+  return (
+    <div className="mx-auto max-w-3xl px-6 py-16 sm:py-24">
+      <p className="font-mono text-xs uppercase tracking-wider text-muted">
+        Coming soon
+      </p>
+      <h1 className="mt-3 text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">
+        Docs
+      </h1>
+      <p className="mt-4 max-w-xl text-text2">
+        GOLC is early in development, and reference docs will publish here
+        as the command model, API, and TypeScript SDK stabilize. In the
+        meantime, the contributor walkthrough and architecture notes live in
+        the repository.
+      </p>
+      <div className="mt-8 flex flex-wrap gap-4">
+        <a
+          href="https://github.com/lnorton89/golc/blob/master/docs/development.md"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="rounded-md bg-accent px-5 py-3 text-sm font-semibold text-panel transition-colors hover:bg-accent-dp"
+        >
+          Contributor walkthrough
+        </a>
+        <Link
+          href="/roadmap"
+          className="rounded-md border border-line px-5 py-3 text-sm font-semibold text-ink transition-colors hover:border-accent hover:text-accent"
+        >
+          See the roadmap
+        </Link>
+      </div>
+    </div>
+  );
+}
