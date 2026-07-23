@@ -40,20 +40,20 @@ export async function renderOgImage({
           height: 630,
           display: "flex",
           flexDirection: "column",
-          background: "#17181C",
+          background: "#E4E0D8",
           padding: 64,
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
           <svg width="56" height="56" viewBox="0 0 100 100">
-            <rect x="2" y="2" width="96" height="96" rx="22" fill="#F4F1EB" />
+            <rect x="2" y="2" width="96" height="96" rx="22" fill="#17181C" />
             <polygon points="50,25 18.5,84 25.5,84" fill="#C0554A" />
             <polygon points="50,25 29.5,84 36.5,84" fill="#CC8A47" />
             <polygon points="50,25 40.5,84 47.5,84" fill="#B6A24C" />
             <polygon points="50,25 51.5,84 58.5,84" fill="#4E9E68" />
             <polygon points="50,25 62.5,84 69.5,84" fill="#1B44D9" />
             <polygon points="50,25 73.5,84 80.5,84" fill="#6A50A8" />
-            <rect x="40" y="18" width="20" height="7" rx="3" fill="#17181C" />
+            <rect x="40" y="18" width="20" height="7" rx="3" fill="#F4F1EB" />
           </svg>
           <div style={{ display: "flex", flexDirection: "column" }}>
             <span
@@ -61,7 +61,7 @@ export async function renderOgImage({
                 fontFamily: "Archivo",
                 fontWeight: 800,
                 fontSize: 30,
-                color: "#ECEAE3",
+                color: "#17181C",
                 letterSpacing: -0.6,
               }}
             >
@@ -72,7 +72,7 @@ export async function renderOgImage({
                 fontFamily: "JetBrains Mono",
                 fontWeight: 500,
                 fontSize: 13,
-                color: "#87857D",
+                color: "#8A887F",
                 letterSpacing: 2,
                 textTransform: "uppercase",
               }}
@@ -110,7 +110,7 @@ export async function renderOgImage({
               fontFamily: "Archivo",
               fontWeight: 800,
               fontSize: 62,
-              color: "#ECEAE3",
+              color: "#17181C",
               letterSpacing: -2,
               lineHeight: 1.05,
               maxWidth: 1000,
@@ -124,7 +124,7 @@ export async function renderOgImage({
               fontFamily: "Archivo",
               fontWeight: 400,
               fontSize: 26,
-              color: "#B7B5AC",
+              color: "#57564E",
               marginTop: 22,
               maxWidth: 920,
               lineHeight: 1.4,
