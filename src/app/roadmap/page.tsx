@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import PhaseAccordion from "@/components/roadmap/PhaseAccordion";
+import PhaseTimeline from "@/components/roadmap/PhaseTimeline";
 import { PHASES } from "@/components/roadmap/phaseData";
 
 export const metadata: Metadata = {
@@ -21,11 +21,11 @@ export default function RoadmapPage() {
         phase proves a working, reviewable capability before the next
         depends on it — the deterministic playback and Art-Net timing path
         stays independent of UI, storage, scripts, API, and LLM providers
-        throughout. Click a phase to see its goal, requirements, and success
-        criteria.
+        throughout. Select a phase to see its goal, requirements, and
+        success criteria.
       </p>
 
-      <PhaseAccordion phases={PHASES} />
+      <PhaseTimeline phases={PHASES} />
     </div>
   );
 }
