@@ -8,7 +8,7 @@ export const REPO_TREE: TreeNode[] = [
   {
     name: "cmd/",
     doc: "The one binary. Self-registers command routes and applies the stable 0/1/2 exit-code mapping — no route wiring lives here.",
-    children: [{ name: "golc-project/" }],
+    children: [{ name: "golc-project/", doc: "The pinned project CLI that golc.ps1 delegates every verb to." }],
   },
   {
     name: "internal/",
@@ -52,52 +52,20 @@ export const REPO_TREE: TreeNode[] = [
   },
   {
     name: "config/",
-    doc: "Committed TOML concern files, each the sole owner of its values.",
+    doc: "Committed TOML concern files — toolchain, commands, generation, application-defaults, runtime, Linear — each the sole owner of its values.",
     children: [
-      { name: "toolchain.toml", doc: "Pinned tool versions and checksums." },
-      { name: "commands.toml", doc: "Command definitions — references toolchain via ref: keys." },
-      { name: "generation.toml", doc: "Schema/codegen settings." },
-      { name: "application-defaults.toml", doc: "Default application configuration." },
-      { name: "runtime.toml", doc: "Runtime and logging settings." },
-      {
-        name: "integrations/",
-        children: [{ name: "linear.toml", doc: "Linear integration configuration." }],
-      },
+      { name: "integrations/", doc: "Third-party integration configs (Linear), kept separate from core concerns." },
     ],
   },
   {
     name: "schemas/",
     doc: "Generated JSON Schemas mirroring the config concerns plus fixture and Linear contracts.",
-    children: [
-      { name: "golc-project.schema.json" },
-      { name: "config-toolchain.schema.json" },
-      { name: "config-commands.schema.json" },
-      { name: "config-generation.schema.json" },
-      { name: "config-application-defaults.schema.json" },
-      { name: "config-runtime.schema.json" },
-      { name: "config-linear.schema.json" },
-      { name: "fixture.schema.json" },
-      { name: "linear-map.schema.json" },
-      { name: "linear-plan.schema.json" },
-      { name: "linear-report.schema.json" },
-    ],
   },
   {
     name: "tests/",
     doc: "acceptance/*.ps1 end-to-end checks plus fixtures/ and golden/ — data only, no logic.",
     children: [
-      {
-        name: "acceptance/",
-        doc: "PowerShell end-to-end checks run against the real CLI.",
-        children: [
-          { name: "bootstrap.ps1" },
-          { name: "bootstrap-node.ps1" },
-          { name: "command-parity.ps1" },
-          { name: "linear-transport.ps1" },
-          { name: "offline.ps1" },
-          { name: "walking-skeleton.ps1" },
-        ],
-      },
+      { name: "acceptance/", doc: "PowerShell end-to-end checks run against the real CLI (bootstrap, command-parity, offline, walking-skeleton, and more)." },
       {
         name: "fixtures/",
         doc: "Data-only fixtures, no logic.",
@@ -109,36 +77,27 @@ export const REPO_TREE: TreeNode[] = [
   {
     name: "tools/",
     doc: "tools/linear-sync — an isolated Node workspace for Linear reconciliation, kept out of the Go module entirely.",
-    children: [{ name: "linear-sync/" }],
+    children: [{ name: "linear-sync/", doc: "The Linear reconciliation service itself (TypeScript, own package.json)." }],
   },
   {
     name: "docs/",
     doc: "Contributor walkthrough plus artnet/ and brand/ reference assets.",
     children: [
-      { name: "development.md", doc: "Full contributor walkthrough." },
-      {
-        name: "artnet/",
-        children: [{ name: "ARTN-06-verification-runbook.md", doc: "Art-Net output verification runbook." }],
-      },
-      {
-        name: "brand/",
-        doc: "README banner assets.",
-        children: [{ name: "golc-card-light.svg" }, { name: "golc-card-dark.svg" }],
-      },
+      { name: "artnet/", doc: "Art-Net output verification runbook." },
+      { name: "brand/", doc: "README banner assets (light/dark SVG cards)." },
     ],
   },
   {
     name: ".planning/",
     doc: "GSD planning artifacts — the project's own roadmap and phase history.",
     children: [
-      { name: "PROJECT.md", doc: "Project charter and context." },
-      { name: "ROADMAP.md", doc: "Ten dependency-ordered phases and their status." },
-      { name: "REQUIREMENTS.md", doc: "Full requirement set the roadmap traces back to." },
-      { name: "STATE.md", doc: "Current execution state — which phase, what's next." },
       { name: "phases/", doc: "Per-phase research, plans, and verification records." },
       { name: "brand/", doc: "The brand guidelines this site is built from." },
-      { name: "quick/" },
-      { name: "research/" },
+      { name: "artnet/", doc: "Art-Net verification evidence — packet captures and reports." },
+      { name: "midi/", doc: "Reference manuals for the Phase 6 MIDI controller acceptance set." },
+      { name: "research/", doc: "Project research notes — architecture, features, pitfalls, stack." },
+      { name: "max-plan-research/", doc: "Planning research artifacts." },
+      { name: "quick/", doc: "Quick, one-off task records outside the phase workflow." },
     ],
   },
 ];

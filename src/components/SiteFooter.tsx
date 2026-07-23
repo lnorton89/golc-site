@@ -12,23 +12,23 @@ export default function SiteFooter() {
           </p>
         </div>
         <nav className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-text2">
-          <Link href="/architecture" className="hover:text-accent">
+          <Link href="/architecture" className="transition-colors duration-[120ms] ease-out hover:text-accent">
             Architecture
           </Link>
-          <Link href="/roadmap" className="hover:text-accent">
+          <Link href="/roadmap" className="transition-colors duration-[120ms] ease-out hover:text-accent">
             Roadmap
           </Link>
-          <Link href="/docs" className="hover:text-accent">
+          <Link href="/docs" className="transition-colors duration-[120ms] ease-out hover:text-accent">
             Docs
           </Link>
-          <Link href="/changelog" className="hover:text-accent">
+          <Link href="/changelog" className="transition-colors duration-[120ms] ease-out hover:text-accent">
             Changelog
           </Link>
           <a
             href="https://github.com/lnorton89/golc"
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-accent"
+            className="transition-colors duration-[120ms] ease-out hover:text-accent"
           >
             GitHub
           </a>

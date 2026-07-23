@@ -302,7 +302,7 @@ export default function DependencyGraph() {
               <button
                 type="button"
                 onClick={() => setSelected(null)}
-                className="font-mono text-[10px] uppercase tracking-wider text-muted hover:text-accent"
+                className="font-mono text-[10px] uppercase tracking-wider text-muted transition-colors duration-[120ms] ease-out hover:text-accent"
               >
                 Clear
               </button>
@@ -327,7 +327,7 @@ export default function DependencyGraph() {
                   <button
                     key={d}
                     onClick={() => setSelected(d)}
-                    className="rounded-full border border-line bg-page px-2.5 py-1 font-mono text-[10px] text-text2 hover:border-accent hover:text-accent"
+                    className="rounded-full border border-line bg-page px-2.5 py-1 font-mono text-[10px] text-text2 transition-colors duration-[120ms] ease-out hover:border-accent hover:text-accent"
                   >
                     {NODES_BY_ID[d].label}
                   </button>

@@ -134,7 +134,7 @@ export default function ArchitecturePage() {
           <div className="flex flex-col sm:flex-row sm:items-stretch">
             {COMMAND_STEPS.map((step, i) => (
               <Fragment key={step.label}>
-                <div className="flex-1 rounded-xl border border-line bg-page p-5">
+                <div className="card-hover flex-1 rounded-xl border border-line bg-page p-5">
                   <p className="font-mono text-[10px] uppercase tracking-wider text-muted">
                     Step {i + 1}
                   </p>
@@ -158,8 +158,8 @@ export default function ArchitecturePage() {
       <section className="mx-auto max-w-[1160px] px-6 py-16 sm:px-12 sm:py-24">
         <SectionHeading index="03" title="Repository layout" />
         <p className="mb-8 max-w-2xl text-text2">
-          The real tree, down to package and file level. Click any row with a
-          chevron to expand it.
+          The real directory tree, down to package level. Click any row with
+          a chevron to expand it.
         </p>
         <RepoTree data={REPO_TREE} />
       </section>
