@@ -78,24 +78,68 @@ const NODES: NodeDef[] = [
 const NODES_BY_ID = Object.fromEntries(NODES.map((n) => [n.id, n]));
 const MAX_LAYER = Math.max(...NODES.map((n) => n.layer));
 
-const WIDTH = 980;
-const LAYER_HEIGHT = 84;
-const TOP_MARGIN = 46;
+const WIDTH = 900;
+const LAYER_HEIGHT = 62;
+const SIDE_MARGIN = 60;
+const TOP_MARGIN = 34;
 const HEIGHT = TOP_MARGIN * 2 + MAX_LAYER * LAYER_HEIGHT;
 
+// Sugiyama-style barycenter ordering: a couple of alternating up/down passes
+// so edges read as a clean flow instead of a tangle of straight crossings.
 function layout() {
-  const byLayer: Record<number, NodeDef[]> = {};
-  for (const n of NODES) (byLayer[n.layer] ??= []).push(n);
+  const order: Record<number, string[]> = {};
+  for (const n of NODES) (order[n.layer] ??= []).push(n.id);
+
+  const childrenOf: Record<string, string[]> = {};
+  const parentsOf: Record<string, string[]> = {};
+  for (const n of NODES) {
+    childrenOf[n.id] = n.deps;
+    for (const d of n.deps) (parentsOf[d] ??= []).push(n.id);
+  }
+
+  function indexMap() {
+    const idx: Record<string, number> = {};
+    for (const ids of Object.values(order)) ids.forEach((id, i) => (idx[id] = i));
+    return idx;
+  }
+
+  function pass(neighborsOf: Record<string, string[]>) {
+    for (let layer = 0; layer <= MAX_LAYER; layer++) {
+      const ids = order[layer];
+      if (!ids || ids.length < 2) continue;
+      const idx = indexMap();
+      const scored = ids.map((id) => {
+        const neighbors = neighborsOf[id] ?? [];
+        if (neighbors.length === 0) return { id, score: idx[id] };
+        const avg = neighbors.reduce((s, nb) => s + (idx[nb] ?? 0), 0) / neighbors.length;
+        return { id, score: avg };
+      });
+      scored.sort((a, b) => a.score - b.score);
+      order[layer] = scored.map((s) => s.id);
+    }
+  }
+
+  for (let i = 0; i < 4; i++) {
+    pass(childrenOf);
+    pass(parentsOf);
+  }
+
   const pos: Record<string, { x: number; y: number }> = {};
-  for (const [layerStr, list] of Object.entries(byLayer)) {
+  const usableWidth = WIDTH - SIDE_MARGIN * 2;
+  for (const [layerStr, ids] of Object.entries(order)) {
     const layer = Number(layerStr);
     const y = TOP_MARGIN + (MAX_LAYER - layer) * LAYER_HEIGHT;
-    const spacing = WIDTH / (list.length + 1);
-    list.forEach((n, i) => {
-      pos[n.id] = { x: spacing * (i + 1), y };
+    const spacing = usableWidth / (ids.length + 1);
+    ids.forEach((id, i) => {
+      pos[id] = { x: SIDE_MARGIN + spacing * (i + 1), y };
     });
   }
   return pos;
+}
+
+function edgePath(a: { x: number; y: number }, b: { x: number; y: number }) {
+  const ymid = (a.y + b.y) / 2;
+  return `M ${a.x},${a.y} C ${a.x},${ymid} ${b.x},${ymid} ${b.x},${b.y}`;
 }
 
 function transitiveDeps(id: string): Set<string> {
@@ -129,6 +173,7 @@ function transitiveDependents(id: string): Set<string> {
 export default function DependencyGraph() {
   const pos = useMemo(layout, []);
   const [selected, setSelected] = useState<string | null>(null);
+  const [hovered, setHovered] = useState<string | null>(null);
 
   const deps = selected ? transitiveDeps(selected) : null;
   const dependents = selected ? transitiveDependents(selected) : null;
@@ -145,11 +190,10 @@ export default function DependencyGraph() {
 
   return (
     <div className="grid gap-6 lg:grid-cols-[1.5fr_1fr]">
-      <div className="overflow-x-auto rounded-xl border border-line bg-panel p-4">
+      <div className="rounded-xl border border-line bg-panel p-4">
         <svg
           viewBox={`0 0 ${WIDTH} ${HEIGHT}`}
-          style={{ minWidth: 720 }}
-          className="w-full"
+          className="block h-auto w-full"
           role="img"
           aria-label="Interactive package dependency graph"
         >
@@ -158,21 +202,19 @@ export default function DependencyGraph() {
             n.deps.map((depId) => {
               const a = pos[n.id];
               const b = pos[depId];
-              const state = selected
-                ? (n.id === selected || deps?.has(n.id)) && (depId === selected || deps?.has(depId))
-                  ? "active"
-                  : "dim"
-                : "normal";
+              const active =
+                selected &&
+                (n.id === selected || deps?.has(n.id)) &&
+                (depId === selected || deps?.has(depId));
+              const dim = selected && !active;
               return (
-                <line
+                <path
                   key={`${n.id}-${depId}`}
-                  x1={a.x}
-                  y1={a.y}
-                  x2={b.x}
-                  y2={b.y}
-                  stroke={state === "active" ? "var(--accent)" : "var(--line)"}
-                  strokeWidth={state === "active" ? 1.6 : 1}
-                  opacity={state === "dim" ? 0.15 : state === "active" ? 0.8 : 0.4}
+                  d={edgePath(a, b)}
+                  fill="none"
+                  stroke={active ? "var(--accent)" : "var(--line)"}
+                  strokeWidth={active ? 1.8 : 1.1}
+                  opacity={dim ? 0.12 : active ? 0.85 : 0.5}
                 />
               );
             })
@@ -182,11 +224,15 @@ export default function DependencyGraph() {
           {NODES.map((n) => {
             const { x, y } = pos[n.id];
             const state = nodeState(n.id);
-            const r = n.id === "command" ? 16 : 12;
+            const isHovered = hovered === n.id && state !== "selected";
+            const base = n.id === "command" ? 15 : 10;
+            const r = isHovered ? base + 2 : base;
             return (
               <g
                 key={n.id}
                 onClick={() => setSelected(selected === n.id ? null : n.id)}
+                onMouseEnter={() => setHovered(n.id)}
+                onMouseLeave={() => setHovered((h) => (h === n.id ? null : h))}
                 style={{ cursor: "pointer" }}
               >
                 <circle
@@ -194,18 +240,27 @@ export default function DependencyGraph() {
                   cy={y}
                   r={r}
                   fill={PHASE_COLOR[n.phase]}
-                  opacity={state === "dim" ? 0.25 : 1}
-                  stroke={state === "selected" ? "var(--ink)" : "var(--panel)"}
-                  strokeWidth={state === "selected" ? 3 : 1.5}
+                  opacity={state === "dim" ? 0.28 : 1}
+                  stroke={
+                    state === "selected"
+                      ? "var(--ink)"
+                      : isHovered
+                        ? "var(--accent)"
+                        : "var(--panel)"
+                  }
+                  strokeWidth={state === "selected" ? 3 : isHovered ? 2.5 : 1.5}
                 />
                 <text
                   x={x}
-                  y={y + r + 14}
+                  y={y + base + 15}
                   textAnchor="middle"
                   fontFamily="var(--font-mono)"
                   fontSize="10.5"
+                  stroke="var(--panel)"
+                  strokeWidth={3}
+                  paintOrder="stroke"
                   fill={state === "dim" ? "var(--muted)" : "var(--ink)"}
-                  opacity={state === "dim" ? 0.4 : 1}
+                  opacity={state === "dim" ? 0.45 : 1}
                 >
                   {n.label}
                 </text>

@@ -11,6 +11,24 @@ import {
   ApiIcon,
 } from "@/components/icons";
 
+function ExternalLinkIcon({ size = 14 }: { size?: number }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={1.75}
+      strokeLinecap="square"
+      strokeLinejoin="round"
+      aria-hidden
+    >
+      <path d="M9 6H6a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-3M14 4h6v6M20 4l-9 9" />
+    </svg>
+  );
+}
+
 export const metadata: Metadata = {
   title: "Architecture",
   description:
@@ -38,12 +56,48 @@ const CONCERNS = [
 ];
 
 const DEPENDENCIES = [
-  { module: "BurntSushi/toml", body: "TOML parsing for every config/*.toml concern file." },
-  { module: "google/uuid", body: "UUIDv7 identity for deployments and trace records." },
-  { module: "invopop/jsonschema", body: "Generates the JSON Schemas under schemas/ from Go types." },
-  { module: "go.yaml.in/yaml/v4", body: "Strict YAML 1.2 parsing for fixture definitions." },
-  { module: "modernc.org/sqlite", body: "Pure-Go SQLite — backs the show package's durable state." },
-  { module: "Microsoft/go-winio", body: "Windows named pipes — the Art-Net daemon/worker IPC transport." },
+  {
+    name: "BurntSushi/toml",
+    path: "github.com/BurntSushi/toml",
+    version: "v1.6.0",
+    body: "TOML parsing for every config/*.toml concern file.",
+    usedBy: ["projectconfig"],
+  },
+  {
+    name: "google/uuid",
+    path: "github.com/google/uuid",
+    version: "v1.6.0",
+    body: "UUIDv7 identity for deployments and trace records.",
+    usedBy: ["deployment", "trace/catalog"],
+  },
+  {
+    name: "invopop/jsonschema",
+    path: "github.com/invopop/jsonschema",
+    version: "v0.14.0",
+    body: "Generates the JSON Schemas under schemas/ from Go types.",
+    usedBy: ["contracts"],
+  },
+  {
+    name: "go.yaml.in/yaml/v4",
+    path: "go.yaml.in/yaml/v4",
+    version: "v4.0.0-rc.6",
+    body: "Strict YAML 1.2 parsing for fixture definitions.",
+    usedBy: ["fixture"],
+  },
+  {
+    name: "modernc.org/sqlite",
+    path: "modernc.org/sqlite",
+    version: "v1.54.0",
+    body: "Pure-Go SQLite (no cgo) — backs the show package's durable state.",
+    usedBy: ["show"],
+  },
+  {
+    name: "Microsoft/go-winio",
+    path: "github.com/Microsoft/go-winio",
+    version: "v0.6.2",
+    body: "Windows named pipes — the Art-Net daemon/worker IPC transport.",
+    usedBy: ["artnet/ipc"],
+  },
 ];
 
 export default function ArchitecturePage() {
@@ -175,10 +229,44 @@ export default function ArchitecturePage() {
         </p>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {DEPENDENCIES.map((d) => (
-            <div key={d.module} className="rounded-xl border border-line p-5">
-              <p className="font-mono text-sm font-semibold text-ink">{d.module}</p>
-              <p className="mt-2 text-xs leading-5 text-text2">{d.body}</p>
-            </div>
+            <a
+              key={d.path}
+              href={`https://pkg.go.dev/${d.path}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="card-hover group rounded-xl border border-line bg-panel p-5"
+            >
+              <div className="flex items-start justify-between gap-2">
+                <div className="flex items-center gap-2.5">
+                  <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-page text-ink">
+                    <PackageIcon size={16} />
+                  </span>
+                  <p className="font-mono text-sm font-semibold text-ink">
+                    {d.name}
+                  </p>
+                </div>
+                <span className="mt-1 text-muted transition-colors duration-[120ms] ease-out group-hover:text-accent">
+                  <ExternalLinkIcon />
+                </span>
+              </div>
+              <p className="mt-1 truncate font-mono text-[10px] text-muted">
+                {d.path}
+              </p>
+              <p className="mt-3 text-xs leading-5 text-text2">{d.body}</p>
+              <div className="mt-4 flex flex-wrap items-center gap-1.5">
+                <span className="rounded-full border border-line bg-page px-2 py-0.5 font-mono text-[10px] text-text2">
+                  {d.version}
+                </span>
+                {d.usedBy.map((u) => (
+                  <span
+                    key={u}
+                    className="rounded-full border border-line bg-page px-2 py-0.5 font-mono text-[10px] text-muted"
+                  >
+                    {u}
+                  </span>
+                ))}
+              </div>
+            </a>
           ))}
         </div>
       </section>
