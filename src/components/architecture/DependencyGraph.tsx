@@ -217,16 +217,22 @@ export default function DependencyGraph() {
   const pos = useMemo(layout, []);
   const [selected, setSelected] = useState<string | null>(null);
   const [hovered, setHovered] = useState<string | null>(null);
+  const [hoveredDomain, setHoveredDomain] = useState<Domain | null>(null);
 
   const deps = selected ? transitiveDeps(selected) : null;
   const dependents = selected ? transitiveDependents(selected) : null;
 
-  function nodeState(id: string): "selected" | "dep" | "dependent" | "dim" | "normal" {
-    if (!selected) return "normal";
-    if (id === selected) return "selected";
-    if (deps?.has(id)) return "dep";
-    if (dependents?.has(id)) return "dependent";
-    return "dim";
+  function nodeState(id: string): "selected" | "dep" | "dependent" | "dim" | "domain" | "normal" {
+    if (selected) {
+      if (id === selected) return "selected";
+      if (deps?.has(id)) return "dep";
+      if (dependents?.has(id)) return "dependent";
+      return "dim";
+    }
+    if (hoveredDomain) {
+      return NODES_BY_ID[id].domain === hoveredDomain ? "domain" : "dim";
+    }
+    return "normal";
   }
 
   const selectedNode = selected ? NODES_BY_ID[selected] : null;
@@ -297,11 +303,13 @@ export default function DependencyGraph() {
                     stroke={
                       state === "selected"
                         ? "var(--ink)"
-                        : isHovered
+                        : isHovered || state === "domain"
                           ? "var(--accent)"
                           : "var(--panel)"
                     }
-                    strokeWidth={state === "selected" ? 3 : isHovered ? 2.5 : 1.5}
+                    strokeWidth={
+                      state === "selected" ? 3 : isHovered || state === "domain" ? 2.5 : 1.5
+                    }
                   />
                   <text
                     x={x}
@@ -337,8 +345,16 @@ export default function DependencyGraph() {
               <div className="mt-6 space-y-3">
                 {(Object.keys(DOMAIN_LABEL) as Domain[]).map((d) => {
                   const Icon = DOMAIN_ICON[d];
+                  const isHoveredDomain = hoveredDomain === d;
                   return (
-                    <div key={d} className="flex items-start gap-2.5">
+                    <div
+                      key={d}
+                      onMouseEnter={() => setHoveredDomain(d)}
+                      onMouseLeave={() => setHoveredDomain((h) => (h === d ? null : h))}
+                      className={`flex cursor-default items-start gap-2.5 rounded-lg p-1.5 transition-colors duration-[120ms] ease-out ${
+                        isHoveredDomain ? "bg-page" : ""
+                      }`}
+                    >
                       <span
                         className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-md"
                         style={{

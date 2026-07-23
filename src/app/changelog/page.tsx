@@ -1,9 +1,25 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 
+const changelogDescription = "GOLC changelog — coming soon.";
+
 export const metadata: Metadata = {
   title: "Changelog",
-  description: "GOLC changelog — coming soon.",
+  description: changelogDescription,
+  alternates: { canonical: "/changelog" },
+  openGraph: {
+    siteName: "GOLC",
+    type: "website",
+    locale: "en_US",
+    title: "Changelog · GOLC",
+    description: changelogDescription,
+    url: "/changelog",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Changelog · GOLC",
+    description: changelogDescription,
+  },
 };
 
 export default function ChangelogPage() {

@@ -24,10 +24,26 @@ function ExternalLinkIcon({ size = 14 }: { size?: number }) {
   );
 }
 
+const architectureDescription =
+  "How the GOLC codebase is put together — package dependencies, command routing, configuration layering, and external dependencies.";
+
 export const metadata: Metadata = {
   title: "Architecture",
-  description:
-    "How the GOLC codebase is put together — package dependencies, command routing, configuration layering, and external dependencies.",
+  description: architectureDescription,
+  alternates: { canonical: "/architecture" },
+  openGraph: {
+    siteName: "GOLC",
+    type: "website",
+    locale: "en_US",
+    title: "Architecture · GOLC",
+    description: architectureDescription,
+    url: "/architecture",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Architecture · GOLC",
+    description: architectureDescription,
+  },
 };
 
 const COMMAND_STEPS = [

@@ -2,9 +2,25 @@ import type { Metadata } from "next";
 import PhaseTimeline from "@/components/roadmap/PhaseTimeline";
 import { PHASES } from "@/components/roadmap/phaseData";
 
+const roadmapDescription = "GOLC v1 ships through eleven dependency-ordered phases.";
+
 export const metadata: Metadata = {
   title: "Roadmap",
-  description: "GOLC v1 ships through eleven dependency-ordered phases.",
+  description: roadmapDescription,
+  alternates: { canonical: "/roadmap" },
+  openGraph: {
+    siteName: "GOLC",
+    type: "website",
+    locale: "en_US",
+    title: "Roadmap · GOLC",
+    description: roadmapDescription,
+    url: "/roadmap",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Roadmap · GOLC",
+    description: roadmapDescription,
+  },
 };
 
 export default function RoadmapPage() {

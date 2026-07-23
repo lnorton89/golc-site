@@ -23,15 +23,31 @@ const description =
   "Cross-platform desktop lighting control with deterministic Art-Net playback, TypeScript automation, a public API, and autonomous LLM control — built in Go.";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://golc-site.netlify.app"),
   title: {
     default: "GOLC — Lighting control that behaves.",
     template: "%s · GOLC",
   },
   description,
+  applicationName: "GOLC",
+  alternates: { canonical: "/" },
+  keywords: [
+    "GOLC",
+    "lighting control",
+    "Art-Net",
+    "DMX",
+    "stage lighting software",
+    "show programming",
+    "Go",
+  ],
+  authors: [{ name: "Lawrence Norton" }],
   openGraph: {
+    siteName: "GOLC",
     title: "GOLC — Lighting control that behaves.",
     description,
     type: "website",
+    locale: "en_US",
+    url: "/",
   },
   twitter: {
     card: "summary_large_image",

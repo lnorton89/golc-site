@@ -1,9 +1,25 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 
+const docsDescription = "GOLC documentation — coming soon.";
+
 export const metadata: Metadata = {
   title: "Docs",
-  description: "GOLC documentation — coming soon.",
+  description: docsDescription,
+  alternates: { canonical: "/docs" },
+  openGraph: {
+    siteName: "GOLC",
+    type: "website",
+    locale: "en_US",
+    title: "Docs · GOLC",
+    description: docsDescription,
+    url: "/docs",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Docs · GOLC",
+    description: docsDescription,
+  },
 };
 
 export default function DocsPage() {
