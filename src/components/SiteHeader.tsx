@@ -1,6 +1,7 @@
 import Link from "next/link";
 import GolcMark from "./GolcMark";
 import ThemeToggle from "./ThemeToggle";
+import { GitHubIcon } from "./icons";
 
 const NAV = [
   { href: "/roadmap", label: "Roadmap" },
@@ -38,8 +39,9 @@ export default function SiteHeader() {
             href="https://github.com/lnorton89/golc"
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-md border border-line px-3 py-1.5 text-sm font-medium text-ink transition-colors duration-[120ms] ease-out hover:border-accent hover:text-accent"
+            className="inline-flex items-center gap-1.5 rounded-md border border-line px-3 py-1.5 text-sm font-medium text-ink transition-colors duration-[120ms] ease-out hover:border-accent hover:text-accent"
           >
+            <GitHubIcon size={15} />
             GitHub
           </a>
           <ThemeToggle />

@@ -11,6 +11,8 @@ import {
   ApiIcon,
   TimelineIcon,
   BlackoutIcon,
+  DocIcon,
+  GitHubIcon,
 } from "@/components/icons";
 
 const SPECTRUM = [
@@ -146,14 +148,16 @@ export default function Home() {
                 href="https://github.com/lnorton89/golc"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="rounded-md bg-accent px-5 py-3 text-sm font-semibold text-panel transition-colors duration-[120ms] ease-out hover:bg-accent-dp"
+                className="inline-flex items-center gap-2 rounded-md bg-accent px-5 py-3 text-sm font-semibold text-panel transition-colors duration-[120ms] ease-out hover:bg-accent-dp"
               >
+                <GitHubIcon size={16} />
                 View on GitHub
               </a>
               <Link
                 href="/roadmap"
-                className="rounded-md border border-line px-5 py-3 text-sm font-semibold text-ink transition-colors duration-[120ms] ease-out hover:border-accent hover:text-accent"
+                className="inline-flex items-center gap-2 rounded-md border border-line px-5 py-3 text-sm font-semibold text-ink transition-colors duration-[120ms] ease-out hover:border-accent hover:text-accent"
               >
+                <TimelineIcon size={16} />
                 See the roadmap
               </Link>
             </div>
@@ -180,25 +184,80 @@ export default function Home() {
       {/* Positioning */}
       <section className="mx-auto max-w-[1160px] px-6 py-16 sm:px-12 sm:py-24">
         <SectionHeading index="01" title="Positioning" />
-        <div className="max-w-2xl space-y-5 text-lg leading-8 text-text">
-          <p>
-            GOLC is desktop lighting control that behaves like an instrument:
-            deterministic Art-Net playback, scriptable in TypeScript, open by
-            default — precise enough for professionals, calm enough for a
-            volunteer on a Sunday.
-          </p>
-          <p>
-            Built for operators of small live shows — clubs, churches,
-            schools, community venues. Reliability is the feature: cues fire
-            the same way every time, state is inspectable, nothing hides
-            behind a dongle.
-          </p>
-          <p className="rounded-xl border border-line bg-panel px-5 py-4 font-mono text-sm leading-7 text-text2">
-            An operator can author a modular show once, adapt its fixture
-            pools to different deployments in one or two actions, and hand a
-            simple controller surface to another person for reliable
-            playback.
-          </p>
+        <div className="grid gap-10 lg:grid-cols-[1.15fr_1fr]">
+          <div className="max-w-2xl space-y-5 text-lg leading-8 text-text">
+            <p>
+              GOLC is desktop lighting control that behaves like an
+              instrument: deterministic Art-Net playback, scriptable in
+              TypeScript, open by default — precise enough for professionals,
+              calm enough for a volunteer on a Sunday.
+            </p>
+            <p>
+              Built for operators of small live shows — clubs, churches,
+              schools, community venues. Reliability is the feature: cues
+              fire the same way every time, state is inspectable, nothing
+              hides behind a dongle.
+            </p>
+            <p className="rounded-xl border border-line bg-panel px-5 py-4 font-mono text-sm leading-7 text-text2">
+              An operator can author a modular show once, adapt its fixture
+              pools to different deployments in one or two actions, and hand
+              a simple controller surface to another person for reliable
+              playback.
+            </p>
+          </div>
+
+          <div className="rounded-xl border border-line bg-panel p-6">
+            <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-muted">
+              Color
+            </p>
+            <div className="mt-4 flex items-center gap-4">
+              <div
+                className="h-16 w-16 shrink-0 rounded-lg"
+                style={{ background: "#1B44D9" }}
+              />
+              <div>
+                <p className="text-sm font-semibold text-ink">Signal Blue</p>
+                <p className="font-mono text-xs text-muted">
+                  #1B44D9 — the single accent
+                </p>
+              </div>
+            </div>
+
+            <div className="mt-6 grid grid-cols-5 gap-2">
+              {[
+                { name: "Ink", hex: "#17181C" },
+                { name: "Paper", hex: "#E4E0D8" },
+                { name: "Panel", hex: "#F4F1EB" },
+                { name: "Line", hex: "#D2CCC0" },
+                { name: "Muted", hex: "#8A887F" },
+              ].map((n) => (
+                <div key={n.name}>
+                  <div
+                    className="h-8 rounded border border-line"
+                    style={{ background: n.hex }}
+                  />
+                  <p className="mt-1 font-mono text-[9px] text-muted">
+                    {n.name}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-6 flex gap-1.5">
+              {SPECTRUM.map((c) => (
+                <span
+                  key={c}
+                  className="h-6 flex-1 rounded"
+                  style={{ background: c }}
+                />
+              ))}
+            </div>
+
+            <p className="mt-5 text-xs leading-5 text-muted">
+              Instrument-grade neutral: warm gray, ink black, one deep
+              signal-blue accent.
+            </p>
+          </div>
         </div>
       </section>
 
@@ -232,7 +291,7 @@ export default function Home() {
             return (
               <div
                 key={c.title}
-                className="card-hover rounded-xl border border-line p-6"
+                className="card-hover rounded-xl border border-line bg-panel p-6"
                 style={{ borderTopColor: color, borderTopWidth: 2 }}
               >
                 <div
@@ -390,27 +449,29 @@ export default function Home() {
 
       {/* CTA */}
       <section className="mx-auto max-w-[1160px] px-6 py-16 sm:px-12 sm:py-28">
-        <div className="rounded-xl border border-line bg-panel px-8 py-14 text-center">
-          <h2 className="text-[32px] font-bold tracking-[-0.02em] text-ink">
+        <div className="cta-pattern relative overflow-hidden rounded-xl border border-line px-8 py-14 text-center">
+          <h2 className="relative text-[32px] font-bold tracking-[-0.02em] text-ink">
             Follow the build.
           </h2>
-          <p className="mx-auto mt-3 max-w-xl text-text2">
+          <p className="relative mx-auto mt-3 max-w-xl text-text2">
             GOLC is being built in ten dependency-ordered phases, in the open.
             Track progress, read the docs, or watch the repo.
           </p>
-          <div className="mt-8 flex flex-wrap justify-center gap-4">
+          <div className="relative mt-8 flex flex-wrap justify-center gap-4">
             <a
               href="https://github.com/lnorton89/golc"
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded-md bg-accent px-5 py-3 text-sm font-semibold text-panel transition-colors duration-[120ms] ease-out hover:bg-accent-dp"
+              className="inline-flex items-center gap-2 rounded-md bg-accent px-5 py-3 text-sm font-semibold text-panel transition-colors duration-[120ms] ease-out hover:bg-accent-dp"
             >
+              <GitHubIcon size={16} />
               Star on GitHub
             </a>
             <Link
               href="/docs"
-              className="rounded-md border border-line px-5 py-3 text-sm font-semibold text-ink transition-colors duration-[120ms] ease-out hover:border-accent hover:text-accent"
+              className="inline-flex items-center gap-2 rounded-md border border-line px-5 py-3 text-sm font-semibold text-ink transition-colors duration-[120ms] ease-out hover:border-accent hover:text-accent"
             >
+              <DocIcon size={16} />
               Read the docs
             </Link>
           </div>

@@ -137,3 +137,23 @@ body {
 [data-theme="dark"] .card-hover:hover {
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
 }
+
+/* CTA card background — thin channel/fader rules echoing the faders icon,
+   plus a quiet Signal Blue glow. Kept subtle per the guide's "plain over
+   clever" voice principle. */
+.cta-pattern {
+  background-color: var(--panel);
+  background-image:
+    radial-gradient(
+      circle at 12% 20%,
+      color-mix(in srgb, var(--accent) 14%, transparent),
+      transparent 55%
+    ),
+    repeating-linear-gradient(
+      90deg,
+      var(--line) 0,
+      var(--line) 1px,
+      transparent 1px,
+      transparent 28px
+    );
+}
