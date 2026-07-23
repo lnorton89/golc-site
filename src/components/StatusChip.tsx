@@ -13,7 +13,8 @@ export default function StatusChipGrid() {
       {STATES.map((s) => (
         <div
           key={s.name}
-          className="rounded-lg border border-line bg-panel p-4"
+          className="card-hover rounded-xl border border-line bg-panel p-4"
+          style={{ borderTopColor: s.color, borderTopWidth: 2 }}
         >
           <dt className="flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-wider text-ink">
             <span
