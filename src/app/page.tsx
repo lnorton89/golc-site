@@ -1,5 +1,6 @@
 import Link from "next/link";
 import StatusChipGrid from "@/components/StatusChip";
+import SectionHeading from "@/components/SectionHeading";
 
 const CAPABILITIES = [
   {
@@ -83,12 +84,12 @@ export default function Home() {
     <div>
       {/* Hero */}
       <section className="border-b border-line bg-panel">
-        <div className="mx-auto max-w-5xl px-6 py-20 sm:py-28">
-          <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-line bg-page px-3 py-1 font-mono text-xs uppercase tracking-wider text-muted">
+        <div className="mx-auto max-w-[1160px] px-6 py-20 sm:px-12 sm:py-28">
+          <p className="mb-6 inline-flex items-center gap-2 rounded-full border border-line bg-page px-3 py-1 font-mono text-xs uppercase tracking-wider text-muted">
             <span className="inline-block h-1.5 w-1.5 rounded-full bg-status-armed" />
             Status: early development
           </p>
-          <h1 className="max-w-3xl text-4xl font-extrabold leading-tight tracking-tight text-ink sm:text-6xl">
+          <h1 className="max-w-3xl text-[44px] font-extrabold leading-[1.05] tracking-[-0.03em] text-ink sm:text-[64px]">
             Lighting control that behaves.
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-8 text-text2 sm:text-xl">
@@ -116,44 +117,43 @@ export default function Home() {
       </section>
 
       {/* Positioning */}
-      <section className="mx-auto max-w-5xl px-6 py-16 sm:py-20">
-        <div className="grid gap-10 sm:grid-cols-[1fr_1.4fr]">
-          <h2 className="text-sm font-semibold uppercase tracking-wider text-muted">
-            Positioning
-          </h2>
-          <div className="max-w-2xl space-y-5 text-lg leading-8 text-text">
-            <p>
-              GOLC is desktop lighting control that behaves like an instrument:
-              deterministic Art-Net playback, scriptable in TypeScript, open by
-              default — precise enough for professionals, calm enough for a
-              volunteer on a Sunday.
-            </p>
-            <p>
-              Built for operators of small live shows — clubs, churches,
-              schools, community venues. Reliability is the feature: cues fire
-              the same way every time, state is inspectable, nothing hides
-              behind a dongle.
-            </p>
-            <p className="rounded-lg border border-line bg-panel px-5 py-4 font-mono text-sm leading-7 text-text2">
-              An operator can author a modular show once, adapt its fixture
-              pools to different deployments in one or two actions, and hand a
-              simple controller surface to another person for reliable
-              playback.
-            </p>
-          </div>
+      <section className="mx-auto max-w-[1160px] px-6 py-16 sm:px-12 sm:py-24">
+        <SectionHeading index="01" title="Positioning" />
+        <div className="max-w-2xl space-y-5 text-lg leading-8 text-text">
+          <p>
+            GOLC is desktop lighting control that behaves like an instrument:
+            deterministic Art-Net playback, scriptable in TypeScript, open by
+            default — precise enough for professionals, calm enough for a
+            volunteer on a Sunday.
+          </p>
+          <p>
+            Built for operators of small live shows — clubs, churches,
+            schools, community venues. Reliability is the feature: cues fire
+            the same way every time, state is inspectable, nothing hides
+            behind a dongle.
+          </p>
+          <p className="rounded-xl border border-line bg-panel px-5 py-4 font-mono text-sm leading-7 text-text2">
+            An operator can author a modular show once, adapt its fixture
+            pools to different deployments in one or two actions, and hand a
+            simple controller surface to another person for reliable
+            playback.
+          </p>
         </div>
       </section>
 
       {/* Voice / principles */}
       <section className="border-y border-line bg-panel">
-        <div className="mx-auto max-w-5xl px-6 py-16 sm:py-20">
-          <h2 className="text-sm font-semibold uppercase tracking-wider text-muted">
-            Why it behaves
-          </h2>
-          <div className="mt-8 grid gap-6 sm:grid-cols-2">
+        <div className="mx-auto max-w-[1160px] px-6 py-16 sm:px-12 sm:py-24">
+          <SectionHeading index="02" title="Why it behaves" />
+          <div className="grid gap-6 sm:grid-cols-2">
             {PRINCIPLES.map((p) => (
-              <div key={p.title} className="rounded-lg border border-line bg-page p-6">
-                <h3 className="font-semibold text-ink">{p.title}</h3>
+              <div
+                key={p.title}
+                className="rounded-xl border border-line bg-page p-6"
+              >
+                <h3 className="text-lg font-semibold tracking-[-0.01em] text-ink">
+                  {p.title}
+                </h3>
                 <p className="mt-2 text-sm leading-6 text-text2">{p.body}</p>
               </div>
             ))}
@@ -162,14 +162,14 @@ export default function Home() {
       </section>
 
       {/* Capabilities */}
-      <section className="mx-auto max-w-5xl px-6 py-16 sm:py-20">
-        <h2 className="text-sm font-semibold uppercase tracking-wider text-muted">
-          Planned capabilities (v1)
-        </h2>
-        <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <section className="mx-auto max-w-[1160px] px-6 py-16 sm:px-12 sm:py-24">
+        <SectionHeading index="03" title="Planned capabilities (v1)" />
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {CAPABILITIES.map((c) => (
-            <div key={c.title} className="rounded-lg border border-line p-6">
-              <h3 className="font-semibold text-ink">{c.title}</h3>
+            <div key={c.title} className="rounded-xl border border-line p-6">
+              <h3 className="text-lg font-semibold tracking-[-0.01em] text-ink">
+                {c.title}
+              </h3>
               <p className="mt-2 text-sm leading-6 text-text2">{c.body}</p>
             </div>
           ))}
@@ -184,32 +184,28 @@ export default function Home() {
 
       {/* Operator authority / states */}
       <section className="border-y border-line bg-panel">
-        <div className="mx-auto max-w-5xl px-6 py-16 sm:py-20">
-          <h2 className="text-sm font-semibold uppercase tracking-wider text-muted">
-            One command model, one set of states
-          </h2>
-          <p className="mt-4 max-w-2xl text-text2">
+        <div className="mx-auto max-w-[1160px] px-6 py-16 sm:px-12 sm:py-24">
+          <SectionHeading index="04" title="One command model, one set of states" />
+          <p className="-mt-4 mb-8 max-w-2xl text-text2">
             Color is never the only signal — every state pairs with a text
             label. Operator authority always belongs to the person in the
             room: <strong className="text-ink">Blackout</strong> and{" "}
             <strong className="text-ink">Revoke Automation</strong> are the
             heaviest elements in the UI, never hidden in a menu.
           </p>
-          <div className="mt-8">
-            <StatusChipGrid />
-          </div>
+          <StatusChipGrid />
         </div>
       </section>
 
       {/* Architecture principles */}
-      <section className="mx-auto max-w-5xl px-6 py-16 sm:py-20">
-        <h2 className="text-sm font-semibold uppercase tracking-wider text-muted">
-          Architecture principles
-        </h2>
-        <div className="mt-8 grid gap-6 sm:grid-cols-2">
+      <section className="mx-auto max-w-[1160px] px-6 py-16 sm:px-12 sm:py-24">
+        <SectionHeading index="05" title="Architecture principles" />
+        <div className="grid gap-6 sm:grid-cols-2">
           {ARCHITECTURE.map((a) => (
-            <div key={a.title} className="rounded-lg border border-line p-6">
-              <h3 className="font-semibold text-ink">{a.title}</h3>
+            <div key={a.title} className="rounded-xl border border-line p-6">
+              <h3 className="text-lg font-semibold tracking-[-0.01em] text-ink">
+                {a.title}
+              </h3>
               <p className="mt-2 text-sm leading-6 text-text2">{a.body}</p>
             </div>
           ))}
@@ -217,9 +213,9 @@ export default function Home() {
       </section>
 
       {/* CTA */}
-      <section className="mx-auto max-w-5xl px-6 py-16 sm:py-24">
-        <div className="rounded-xl border border-line bg-panel px-8 py-12 text-center">
-          <h2 className="text-2xl font-bold text-ink sm:text-3xl">
+      <section className="mx-auto max-w-[1160px] px-6 py-16 sm:px-12 sm:py-28">
+        <div className="rounded-xl border border-line bg-panel px-8 py-14 text-center">
+          <h2 className="text-[32px] font-bold tracking-[-0.02em] text-ink">
             Follow the build.
           </h2>
           <p className="mx-auto mt-3 max-w-xl text-text2">

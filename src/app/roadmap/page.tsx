@@ -82,8 +82,11 @@ const STATUS_COLOR: Record<string, string> = {
 
 export default function RoadmapPage() {
   return (
-    <div className="mx-auto max-w-3xl px-6 py-16 sm:py-20">
-      <h1 className="text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">
+    <div className="mx-auto max-w-[1160px] px-6 py-16 sm:px-12 sm:py-24">
+      <span className="block font-mono text-[13px] tracking-[1.3px] text-accent">
+        Ten dependency-ordered phases
+      </span>
+      <h1 className="mt-1 text-[44px] font-extrabold leading-tight tracking-[-0.03em] text-ink sm:text-[52px]">
         Roadmap
       </h1>
       <p className="mt-4 max-w-xl text-text2">
@@ -94,11 +97,11 @@ export default function RoadmapPage() {
         throughout.
       </p>
 
-      <ol className="mt-10 space-y-4">
+      <ol className="mt-10 max-w-3xl space-y-4">
         {PHASES.map((p) => (
           <li
             key={p.n}
-            className="flex gap-4 rounded-lg border border-line p-5"
+            className="flex gap-4 rounded-xl border border-line p-5"
           >
             <span className="font-mono text-sm text-muted">
               {String(p.n).padStart(2, "0")}

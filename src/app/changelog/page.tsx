@@ -8,11 +8,11 @@ export const metadata: Metadata = {
 
 export default function ChangelogPage() {
   return (
-    <div className="mx-auto max-w-3xl px-6 py-16 sm:py-24">
-      <p className="font-mono text-xs uppercase tracking-wider text-muted">
+    <div className="mx-auto max-w-[1160px] px-6 py-16 sm:px-12 sm:py-24">
+      <span className="block font-mono text-[13px] tracking-[1.3px] text-accent">
         Coming soon
-      </p>
-      <h1 className="mt-3 text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">
+      </span>
+      <h1 className="mt-1 max-w-3xl text-[44px] font-extrabold leading-tight tracking-[-0.03em] text-ink sm:text-[52px]">
         Changelog
       </h1>
       <p className="mt-4 max-w-xl text-text2">

@@ -10,11 +10,11 @@ const NAV = [
 export default function SiteHeader() {
   return (
     <header className="border-b border-line">
-      <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
+      <div className="mx-auto flex max-w-[1160px] items-center justify-between px-6 py-4 sm:px-12">
         <Link href="/" className="flex items-center gap-3">
           <GolcMark size={32} />
           <span className="flex flex-col leading-none">
-            <span className="text-lg font-extrabold tracking-tight text-ink">
+            <span className="text-lg font-extrabold tracking-[-0.02em] text-ink">
               GOLC
             </span>
             <span className="font-mono text-[10px] uppercase tracking-wider text-muted">

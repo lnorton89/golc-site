@@ -4,7 +4,7 @@ import GolcMark from "./GolcMark";
 export default function SiteFooter() {
   return (
     <footer className="border-t border-line">
-      <div className="mx-auto flex max-w-5xl flex-col gap-6 px-6 py-10 sm:flex-row sm:items-center sm:justify-between">
+      <div className="mx-auto flex max-w-[1160px] flex-col gap-6 px-6 py-10 sm:flex-row sm:items-center sm:justify-between sm:px-12">
         <div className="flex items-center gap-3">
           <GolcMark size={24} />
           <p className="font-mono text-xs text-muted">
