@@ -1,6 +1,7 @@
 import Link from "next/link";
 import GolcMark from "./GolcMark";
 import ThemeToggle from "./ThemeToggle";
+import MobileMenu from "./MobileMenu";
 import { GitHubIcon } from "./icons";
 
 const NAV = [
@@ -25,27 +26,30 @@ export default function SiteHeader() {
           </span>
         </Link>
 
-        <nav className="flex items-center gap-6">
-          {NAV.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="text-sm text-text2 transition-colors duration-[120ms] ease-out hover:text-accent"
+        <div className="flex items-center gap-3">
+          <nav className="hidden items-center gap-6 sm:flex">
+            {NAV.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="text-sm text-text2 transition-colors duration-[120ms] ease-out hover:text-accent"
+              >
+                {item.label}
+              </Link>
+            ))}
+            <a
+              href="https://github.com/lnorton89/golc"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 rounded-md border border-line px-3 py-1.5 text-sm font-medium text-muted transition-colors duration-[120ms] ease-out hover:border-accent hover:text-accent"
             >
-              {item.label}
-            </Link>
-          ))}
-          <a
-            href="https://github.com/lnorton89/golc"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 rounded-md border border-line px-3 py-1.5 text-sm font-medium text-muted transition-colors duration-[120ms] ease-out hover:border-accent hover:text-accent"
-          >
-            <GitHubIcon size={15} />
-            GitHub
-          </a>
+              <GitHubIcon size={15} />
+              GitHub
+            </a>
+          </nav>
           <ThemeToggle />
-        </nav>
+          <MobileMenu />
+        </div>
       </div>
     </header>
   );

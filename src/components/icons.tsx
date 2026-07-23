@@ -105,6 +105,22 @@ export function DocIcon(props: IconProps) {
   );
 }
 
+export function MenuIcon(props: IconProps) {
+  return (
+    <Base {...props}>
+      <path d="M4 6h16M4 12h16M4 18h16" />
+    </Base>
+  );
+}
+
+export function CloseIcon(props: IconProps) {
+  return (
+    <Base {...props}>
+      <path d="M5 5l14 14M19 5L5 19" />
+    </Base>
+  );
+}
+
 export function GitHubIcon({ size = 24, className }: IconProps) {
   return (
     <svg
