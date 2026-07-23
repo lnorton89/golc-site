@@ -7,12 +7,19 @@ export type TreeNode = {
 export const REPO_TREE: TreeNode[] = [
   {
     name: "cmd/",
-    doc: "The one binary. Self-registers command routes and applies the stable 0/1/2 exit-code mapping — no route wiring lives here.",
-    children: [{ name: "golc-project/", doc: "The pinned project CLI that golc.ps1 delegates every verb to." }],
+    doc: "The binaries. Self-register command routes and apply the stable 0/1/2 exit-code mapping — no route wiring lives here.",
+    children: [
+      { name: "golc-project/", doc: "The pinned project CLI that golc.ps1 delegates every verb to." },
+      { name: "golc-desktop/", doc: "Wails desktop entrypoint — lifecycle, daemon supervision, OS-level safety hotkeys." },
+    ],
+  },
+  {
+    name: "frontend/",
+    doc: "React/TypeScript operator surface for the Wails desktop app (Zustand state, hotkeys, IPC to the Go host).",
   },
   {
     name: "internal/",
-    doc: "Every domain and infrastructure package — fixtures, pools, scenes, playback, Art-Net, show state, and the command hub that ties them together.",
+    doc: "Every domain and infrastructure package — fixtures, pools, scenes, playback, Art-Net, show state, MIDI, the Wails host, and the command hub that ties them together.",
     children: [
       { name: "command/", doc: "The hub. Every command file self-registers a typed route — no central switch." },
       {
@@ -29,6 +36,8 @@ export const REPO_TREE: TreeNode[] = [
         doc: "Strict schema-validated YAML 1.2 fixture definitions with deterministic normalization.",
         children: [{ name: "ofl/", doc: "Open Fixture Library import, with an SSRF guard on fetched definitions." }],
       },
+      { name: "midi/", doc: "Generic MIDI Note/CC learn and soft-takeover state machine." },
+      { name: "operatorsurface/", doc: "Shared operator-facing command surface used by the desktop UI." },
       { name: "playback/", doc: "Real-time deterministic playback engine — an atomic.Pointer state." },
       { name: "pool/", doc: "Fixture pools and the reviewable impact-plan machinery." },
       { name: "programming/", doc: "Attribute programmer — theme, chase, preset, and motion." },
@@ -48,6 +57,7 @@ export const REPO_TREE: TreeNode[] = [
           { name: "transport/", doc: "Credential-external transport — never blocks, never sees secrets directly." },
         ],
       },
+      { name: "wails/", doc: "Wails host lifecycle, daemon supervision, and OS-level safety hotkeys." },
     ],
   },
   {
@@ -100,4 +110,5 @@ export const REPO_TREE: TreeNode[] = [
       { name: "quick/", doc: "Quick, one-off task records outside the phase workflow." },
     ],
   },
+  { name: "LICENSE", doc: "GNU General Public License v3.0 — the terms GOLC is distributed under." },
 ];

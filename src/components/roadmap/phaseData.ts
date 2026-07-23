@@ -119,7 +119,7 @@ export const PHASES: Phase[] = [
     n: 6,
     title: "Wails Authoring and Operator Surface",
     body: "Complete authoring and playback on screen or by keyboard, with constrained generic MIDI control and independent local safety actions.",
-    status: "planned",
+    status: "active",
     icon: "faders",
     goal: "Authors and playback operators can complete the conventional show workflow through a responsive Wails application, keyboard, and constrained generic MIDI controls without the frontend becoming runtime authority.",
     dependsOn: "Phases 2, 3, 4, and 5",
@@ -131,7 +131,7 @@ export const PHASES: Phase[] = [
       "An operator can control group masters, Grand Master, stop/release-all, and immediate blackout through local priority paths that do not wait for UI, script, API, or model work to complete.",
       "Revoke Automation immediately blocks scripts and AI, cancels their queued actions, freezes the current look, and returns manual control even when an automation runtime is hung or disconnected.",
     ],
-    plans: "Not yet planned",
+    plans: "4/8 plans complete",
   },
   {
     n: 7,

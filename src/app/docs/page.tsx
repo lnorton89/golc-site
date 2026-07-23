@@ -44,10 +44,10 @@ export default function DocsPage() {
             Docs.
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-8 text-text2">
-            GOLC has no desktop UI yet — Phase 6 hasn&apos;t started. This
-            page covers the product concepts and workflow as designed.
-            Reference docs for the API and TypeScript SDK publish once those
-            phases ship.
+            Phase 6 (the Wails desktop UI) is in progress but not yet
+            usable end-to-end. This page covers the product concepts and
+            workflow as designed. Reference docs for the API and TypeScript
+            SDK publish once those phases ship.
           </p>
         </div>
       </section>

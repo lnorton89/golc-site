@@ -8,7 +8,15 @@ export default function SiteFooter() {
         <div className="flex items-center gap-3">
           <GolcMark size={24} />
           <p className="font-mono text-xs text-muted">
-            GOLC · deterministic Art-Net playback · built in Go
+            GOLC · deterministic Art-Net playback · built in Go ·{" "}
+            <a
+              href="https://github.com/lnorton89/golc/blob/master/LICENSE"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="transition-colors duration-[120ms] ease-out hover:text-accent"
+            >
+              GPL-3.0
+            </a>
           </p>
         </div>
         <nav className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-text2">
