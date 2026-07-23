@@ -3,6 +3,8 @@ import type { Metadata } from "next";
 import SectionHeading from "@/components/SectionHeading";
 import StatusChipGrid from "@/components/StatusChip";
 import ViewExplorer from "@/components/docs/ViewExplorer";
+import ReferenceExplorer from "@/components/docs/ReferenceExplorer";
+import { getReferencePages } from "@/lib/reference";
 import { ApiIcon } from "@/components/icons";
 
 const docsDescription =
@@ -28,6 +30,8 @@ export const metadata: Metadata = {
 };
 
 export default function DocsPage() {
+  const referencePages = getReferencePages();
+
   return (
     <div>
       {/* Hero */}
@@ -72,6 +76,18 @@ export default function DocsPage() {
           </p>
           <StatusChipGrid />
         </div>
+      </section>
+
+      {/* Code reference */}
+      <section className="mx-auto max-w-[1160px] px-6 py-16 sm:px-12 sm:py-24">
+        <SectionHeading index="03" title="Code reference" />
+        <p className="mb-8 max-w-2xl text-text2">
+          Generated straight from the Go package doc comments in the golc
+          repository (<code className="rounded bg-page px-1 py-0.5 font-mono text-[13px] text-ink">golc.ps1 docs</code>{" "}
+          regenerates this section) — no hand-maintained copy to drift from
+          the source.
+        </p>
+        <ReferenceExplorer pages={referencePages} />
       </section>
 
       {/* CTA */}
