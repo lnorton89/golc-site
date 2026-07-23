@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import SectionHeading from "@/components/SectionHeading";
 import ReferenceExplorer from "@/components/docs/ReferenceExplorer";
 import { getReferencePages } from "@/lib/reference";
-import { GearIcon } from "@/components/icons";
+import { GearIcon, DocIcon, ArrowRightIcon } from "@/components/icons";
 
 const referenceDescription =
   "Generated Go package reference for GOLC contributors — straight from the source's doc comments.";
@@ -79,15 +79,17 @@ export default function ReferencePage() {
               href="https://github.com/lnorton89/golc/blob/master/docs/development.md"
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded-md bg-accent px-5 py-3 text-sm font-semibold text-on-accent transition-colors duration-[120ms] ease-out hover:bg-accent-dp"
+              className="inline-flex items-center gap-2 rounded-md bg-accent px-5 py-3 text-sm font-semibold text-on-accent transition-colors duration-[120ms] ease-out hover:bg-accent-dp"
             >
+              <DocIcon size={16} />
               Contributor walkthrough
             </a>
             <Link
               href="/architecture"
-              className="rounded-md border border-line px-5 py-3 text-sm font-semibold text-ink transition-colors duration-[120ms] ease-out hover:border-accent hover:text-accent"
+              className="inline-flex items-center gap-2 rounded-md border border-line px-5 py-3 text-sm font-semibold text-ink transition-colors duration-[120ms] ease-out hover:border-accent hover:text-accent"
             >
               See the architecture
+              <ArrowRightIcon size={16} />
             </Link>
           </div>
         </div>

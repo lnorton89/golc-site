@@ -124,6 +124,7 @@ export default function Home() {
                 href="#workflow"
                 className="inline-flex items-center gap-2 rounded-md bg-accent px-5 py-3 text-sm font-semibold text-on-accent transition-colors duration-[120ms] ease-out hover:bg-accent-dp"
               >
+                <TimelineIcon size={16} />
                 Explore the workflow
               </a>
               <Link

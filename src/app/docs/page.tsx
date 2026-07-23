@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import SectionHeading from "@/components/SectionHeading";
 import StatusChipGrid from "@/components/StatusChip";
 import ViewExplorer from "@/components/docs/ViewExplorer";
-import { ApiIcon, PackageIcon } from "@/components/icons";
+import { ApiIcon, PackageIcon, ArrowRightIcon } from "@/components/icons";
 
 const docsDescription =
   "How GOLC works — patching, fixture pools, scenes and chases, live playback, and the concepts behind them.";
@@ -97,9 +97,10 @@ export default function DocsPage() {
             </Link>
             <Link
               href="/architecture"
-              className="rounded-md border border-line px-5 py-3 text-sm font-semibold text-ink transition-colors duration-[120ms] ease-out hover:border-accent hover:text-accent"
+              className="inline-flex items-center gap-2 rounded-md border border-line px-5 py-3 text-sm font-semibold text-ink transition-colors duration-[120ms] ease-out hover:border-accent hover:text-accent"
             >
               See the architecture
+              <ArrowRightIcon size={16} />
             </Link>
           </div>
         </div>

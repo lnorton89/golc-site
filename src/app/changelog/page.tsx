@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { PHASES } from "@/components/roadmap/phaseData";
 import { PHASE_ICON, STATUS_COLOR } from "@/components/roadmap/PhaseDetail";
-import { GitHubIcon, TimelineIcon } from "@/components/icons";
+import { GitHubIcon, TimelineIcon, ArrowRightIcon } from "@/components/icons";
 
 const changelogDescription =
   "What's shipped in GOLC so far, phase by phase, generated from the roadmap.";
@@ -134,9 +134,10 @@ export default function ChangelogPage() {
         </a>
         <Link
           href="/roadmap"
-          className="rounded-md border border-line px-5 py-3 text-sm font-semibold text-ink transition-colors duration-[120ms] ease-out hover:border-accent hover:text-accent"
+          className="inline-flex items-center gap-2 rounded-md border border-line px-5 py-3 text-sm font-semibold text-ink transition-colors duration-[120ms] ease-out hover:border-accent hover:text-accent"
         >
           See the roadmap
+          <ArrowRightIcon size={16} />
         </Link>
       </div>
     </div>

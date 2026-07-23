@@ -165,8 +165,9 @@ export default function DownloadPage() {
               href="https://github.com/lnorton89/golc/blob/master/docs/development.md"
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded-md bg-accent px-5 py-3 text-sm font-semibold text-on-accent transition-colors duration-[120ms] ease-out hover:bg-accent-dp"
+              className="inline-flex items-center gap-2 rounded-md bg-accent px-5 py-3 text-sm font-semibold text-on-accent transition-colors duration-[120ms] ease-out hover:bg-accent-dp"
             >
+              <DocIcon size={16} />
               Contributor walkthrough
             </a>
             <a
