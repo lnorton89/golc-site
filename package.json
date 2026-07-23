@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
-    "test:links": "start-server-and-test \"npx serve out -l 4173\" http://localhost:4173 \"linkinator http://localhost:4173 --recurse --silent\"",
+    "test:links": "start-server-and-test \"npx serve out -l 4173\" http://localhost:4173 \"linkinator http://localhost:4173 --recurse --silent --status-code 429:warn\"",
     "test:lighthouse": "lhci autorun",
     "test:visual": "playwright test",
     "test:visual:update": "playwright test --update-snapshots"
