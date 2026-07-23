@@ -1,17 +1,9 @@
-import { Fragment } from "react";
 import Link from "next/link";
 import type { Metadata } from "next";
 import SectionHeading from "@/components/SectionHeading";
 import StatusChipGrid from "@/components/StatusChip";
-import {
-  FixtureIcon,
-  CueIcon,
-  BeamIcon,
-  ScriptIcon,
-  BlackoutIcon,
-  ApiIcon,
-  ArrowRightIcon,
-} from "@/components/icons";
+import ViewExplorer from "@/components/docs/ViewExplorer";
+import { ApiIcon } from "@/components/icons";
 
 const docsDescription =
   "How GOLC works — patching, fixture pools, scenes and chases, live playback, and the concepts behind them.";
@@ -35,79 +27,6 @@ export const metadata: Metadata = {
   },
 };
 
-const WORKFLOW = [
-  {
-    label: "Patch",
-    Icon: FixtureIcon,
-    body: "Map logical fixtures to Art-Net addresses and modes.",
-  },
-  {
-    label: "Build pools",
-    Icon: FixtureIcon,
-    body: "Group fixtures into reusable pools, independent of concrete count or address.",
-  },
-  {
-    label: "Program looks & scenes",
-    Icon: CueIcon,
-    body: "Set intensity, color, position, and beam; assemble tempo-aware scenes and chases.",
-  },
-  {
-    label: "Play back",
-    Icon: BeamIcon,
-    body: "Run the show through the deterministic engine, output to Art-Net.",
-  },
-  {
-    label: "Automate",
-    Icon: ScriptIcon,
-    body: "Optionally hand control to a script or an armed, revocable AI lease.",
-  },
-];
-
-const VIEWS = [
-  {
-    title: "Live output & playback",
-    Icon: BeamIcon,
-    body: "Deterministic Art-Net, frame-locked channel output.",
-  },
-  {
-    title: "Patch & pools",
-    Icon: FixtureIcon,
-    body: "Modular fixture pools; substitution shows an Impact preview before commit.",
-  },
-  {
-    title: "Scene editor",
-    Icon: CueIcon,
-    body: "Tempo-aware (BPM / tap), attribute groups (Intensity, Color, Position, Beam), chases.",
-  },
-  {
-    title: "AI & automation",
-    Icon: BlackoutIcon,
-    body: "Armed, time-bounded lease with an audit log; Revoke always available.",
-  },
-  {
-    title: "TypeScript",
-    Icon: ScriptIcon,
-    body: "Sandboxed, capability-limited scripts against a generated typed SDK.",
-  },
-];
-
-const LEXICON = [
-  { term: "Patch", body: "Mapping logical fixtures to Art-Net addresses and modes." },
-  { term: "Fixture pool", body: "A reusable logical group a show targets, independent of concrete count or address." },
-  { term: "Look / Scene", body: "A stored state of attributes; tempo-aware scenes loop in bars." },
-  { term: "Chase", body: "An ordered sequence of steps advanced on tempo." },
-  { term: "Transition preset", body: "A reusable blend applied between looks." },
-  { term: "Impact preview", body: "A deterministic plan shown before a pool resize or fixture substitution." },
-  { term: "Soft takeover", body: "MIDI control that engages only once a fader matches the live value." },
-  { term: "Art-Net", body: "The Ethernet DMX protocol GOLC outputs (Art-Net 4)." },
-  { term: "Universe", body: "512 DMX channels carried over Art-Net." },
-  { term: "Deterministic playback", body: "Output timing isolated from the UI, scripts, and providers." },
-  { term: "Lease", body: "A time-bounded, armed grant that lets an AI operate the app." },
-  { term: "Revoke Automation", body: "The control that blocks AI/scripts and freezes the current look." },
-  { term: "Blackout", body: "A separate, immediate intensity kill." },
-  { term: "Command model", body: "One typed command set shared by the UI, API, scripts, and AI." },
-];
-
 export default function DocsPage() {
   return (
     <div>
@@ -122,95 +41,36 @@ export default function DocsPage() {
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-8 text-text2">
             GOLC has no desktop UI yet — Phase 6 hasn&apos;t started. This
-            page covers the product concepts and workflow as designed: how a
-            show comes together, the terms used consistently across UI,
-            docs, and marketing, and the planned interface. Reference docs
-            for the API and TypeScript SDK publish once those phases ship.
+            page covers the product concepts and workflow as designed.
+            Reference docs for the API and TypeScript SDK publish once those
+            phases ship.
           </p>
         </div>
       </section>
 
-      {/* Workflow */}
+      {/* Explore by view */}
       <section className="mx-auto max-w-[1160px] px-6 py-16 sm:px-12 sm:py-24">
-        <SectionHeading index="01" title="How a show comes together" />
+        <SectionHeading index="01" title="Explore by view" />
         <p className="mb-8 max-w-2xl text-text2">
-          An operator authors a show once, then adapts its fixture pools to
-          each deployment in one or two actions.
+          GOLC v1 is five representative views in one Wails desktop app —
+          author once, deploy repeatedly. Each is also a stage in how a show
+          comes together: select a view to see where it sits in the
+          workflow, the concepts it introduces, and the states it shows.
         </p>
-        <div className="flex flex-col sm:flex-row sm:items-stretch">
-          {WORKFLOW.map((step, i) => (
-            <Fragment key={step.label}>
-              <div className="card-hover flex-1 rounded-xl border border-line bg-panel p-5">
-                <div className="mb-3 inline-flex h-9 w-9 items-center justify-center rounded-lg bg-page text-ink">
-                  <step.Icon size={18} />
-                </div>
-                <p className="font-mono text-sm font-semibold text-ink">
-                  {step.label}
-                </p>
-                <p className="mt-2 text-xs leading-5 text-text2">{step.body}</p>
-              </div>
-              {i < WORKFLOW.length - 1 && (
-                <div className="flex items-center justify-center py-2 text-line sm:px-2 sm:py-0">
-                  <ArrowRightIcon size={18} className="rotate-90 sm:rotate-0" />
-                </div>
-              )}
-            </Fragment>
-          ))}
-        </div>
-      </section>
-
-      {/* Planned interface */}
-      <section className="border-y border-line bg-panel">
-        <div className="mx-auto max-w-[1160px] px-6 py-16 sm:px-12 sm:py-24">
-          <SectionHeading index="02" title="Planned interface" />
-          <p className="mb-8 max-w-2xl text-text2">
-            A Wails desktop app, Windows first. Five representative views —
-            author once, deploy repeatedly.
-          </p>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {VIEWS.map((v) => (
-              <div key={v.title} className="card-hover rounded-xl border border-line bg-page p-5">
-                <div className="mb-3 inline-flex h-9 w-9 items-center justify-center rounded-lg bg-panel text-ink">
-                  <v.Icon size={18} />
-                </div>
-                <p className="font-semibold text-ink">{v.title}</p>
-                <p className="mt-2 text-sm leading-6 text-text2">{v.body}</p>
-              </div>
-            ))}
-          </div>
-        </div>
+        <ViewExplorer />
       </section>
 
       {/* Operating states */}
-      <section className="mx-auto max-w-[1160px] px-6 py-16 sm:px-12 sm:py-24">
-        <SectionHeading index="03" title="Operating states" />
-        <p className="mb-8 max-w-2xl text-text2">
-          Color is never the only signal — every state pairs with a text
-          label. <strong className="text-ink">Blackout</strong> and{" "}
-          <strong className="text-ink">Revoke Automation</strong> always
-          belong to the person in the room.
-        </p>
-        <StatusChipGrid />
-      </section>
-
-      {/* Lexicon */}
       <section className="border-y border-line bg-panel">
         <div className="mx-auto max-w-[1160px] px-6 py-16 sm:px-12 sm:py-24">
-          <SectionHeading index="04" title="Core concepts" />
+          <SectionHeading index="02" title="Operating states" />
           <p className="mb-8 max-w-2xl text-text2">
-            Used consistently across the UI, docs, and marketing — each term
-            is a distinct concept on purpose.
+            Color is never the only signal — every state pairs with a text
+            label. <strong className="text-ink">Blackout</strong> and{" "}
+            <strong className="text-ink">Revoke Automation</strong> always
+            belong to the person in the room.
           </p>
-          <dl className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {LEXICON.map((l) => (
-              <div key={l.term} className="rounded-xl border border-line p-5">
-                <dt className="font-mono text-sm font-semibold text-ink">
-                  {l.term}
-                </dt>
-                <dd className="mt-2 text-sm leading-6 text-text2">{l.body}</dd>
-              </div>
-            ))}
-          </dl>
+          <StatusChipGrid />
         </div>
       </section>
 
