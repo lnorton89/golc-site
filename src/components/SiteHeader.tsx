@@ -5,6 +5,7 @@ import MobileMenu from "./MobileMenu";
 import { GitHubIcon } from "./icons";
 
 const NAV = [
+  { href: "/architecture", label: "Architecture" },
   { href: "/roadmap", label: "Roadmap" },
   { href: "/docs", label: "Docs" },
   { href: "/changelog", label: "Changelog" },

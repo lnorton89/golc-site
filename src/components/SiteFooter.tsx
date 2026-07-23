@@ -12,6 +12,9 @@ export default function SiteFooter() {
           </p>
         </div>
         <nav className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-text2">
+          <Link href="/architecture" className="hover:text-accent">
+            Architecture
+          </Link>
           <Link href="/roadmap" className="hover:text-accent">
             Roadmap
           </Link>

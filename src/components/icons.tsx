@@ -121,6 +121,41 @@ export function CloseIcon(props: IconProps) {
   );
 }
 
+export function FolderIcon(props: IconProps) {
+  return (
+    <Base {...props}>
+      <path d="M3 6h6l2 2.5h10V19H3V6z" />
+    </Base>
+  );
+}
+
+export function PackageIcon(props: IconProps) {
+  return (
+    <Base {...props}>
+      <path d="M4 8l8-4.5L20 8v8l-8 4.5L4 16V8z" />
+      <path d="M4 8l8 4.5L20 8M12 12.5V21" />
+    </Base>
+  );
+}
+
+export function GearIcon(props: IconProps) {
+  return (
+    <Base {...props}>
+      <circle cx="12" cy="12" r="3" />
+      <path d="M12 3v2.5M12 18.5V21M4.2 7.8l2.2 1.3M17.6 14.9l2.2 1.3M4.2 16.2l2.2-1.3M17.6 9.1l2.2-1.3" />
+    </Base>
+  );
+}
+
+export function TerminalIcon(props: IconProps) {
+  return (
+    <Base {...props}>
+      <rect x="3" y="4" width="18" height="16" rx="1" />
+      <path d="M7 9l3 3-3 3M12 15h5" />
+    </Base>
+  );
+}
+
 export function GitHubIcon({ size = 24, className }: IconProps) {
   return (
     <svg

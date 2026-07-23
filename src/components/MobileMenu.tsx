@@ -5,6 +5,7 @@ import Link from "next/link";
 import { MenuIcon, CloseIcon, GitHubIcon } from "./icons";
 
 const NAV = [
+  { href: "/architecture", label: "Architecture" },
   { href: "/roadmap", label: "Roadmap" },
   { href: "/docs", label: "Docs" },
   { href: "/changelog", label: "Changelog" },
