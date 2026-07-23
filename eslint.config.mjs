@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Local Netlify CLI state/build cache (netlify link / netlify deploy).
+    ".netlify/**",
   ]),
 ]);
 
