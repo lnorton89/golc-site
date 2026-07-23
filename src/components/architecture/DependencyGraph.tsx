@@ -10,7 +10,7 @@ import {
   ApiIcon,
 } from "@/components/icons";
 
-type Phase = 1 | 2 | 3 | 4 | 5;
+type Phase = 0 | 1 | 2 | 3 | 4 | 5;
 type Domain = "foundation" | "traceability" | "fixtures" | "authoring" | "playback" | "hub";
 
 type NodeDef = {
@@ -60,6 +60,7 @@ const DOMAIN_ICON: Record<Domain, (props: { size?: number }) => React.ReactEleme
 };
 
 const PHASE_LABEL: Record<Phase, string> = {
+  0: "Contributor tooling · not tied to a roadmap phase",
   1: "Phase 1 · Offline Foundation & Traceability",
   2: "Phase 2 · Modular Fixtures & Deployments",
   3: "Phase 3 · Deterministic Playback",
@@ -76,6 +77,7 @@ const NODES: NodeDef[] = [
   { id: "bootstrap", label: "bootstrap", layer: 0, domain: "foundation", phase: 1, doc: "Checksum-pinned toolchain install with atomic promotion. Invoked from golc.ps1, not from command.", deps: [] },
   { id: "trace-catalog", label: "trace/catalog", layer: 0, domain: "traceability", phase: 1, doc: "Base identity catalog for Linear traceability — durable local IDs that never depend on remote state.", deps: [] },
   { id: "deployment", label: "deployment", layer: 0, domain: "fixtures", phase: 2, doc: "Pure domain model for concrete deployments, identified by UUIDv7 — no dependency on fixture or pool logic.", deps: [] },
+  { id: "docgen", label: "docgen", layer: 0, domain: "foundation", phase: 0, doc: "Extracts each internal package's doc comment into a generated Markdown reference page (golc.ps1 docs) — pure go/parser and go/doc over the checkout, no lighting-domain logic.", deps: [] },
 
   // Layer 1
   { id: "fixture", label: "fixture", layer: 1, domain: "fixtures", phase: 2, doc: "Fixture domain: strict schema-validated YAML 1.2 subset with deterministic normalization.", deps: ["strictjson"] },
@@ -110,7 +112,7 @@ const NODES: NodeDef[] = [
   { id: "artnet", label: "artnet", layer: 9, domain: "playback", phase: 4, doc: "Art-Net daemon, worker, and CLI over the named-pipe IPC — deterministic frame output, live per the roadmap.", deps: ["artnet-ipc", "deployment", "fixture", "playback", "show", "strictjson"] },
 
   // Layer 10 — the hub
-  { id: "command", label: "command", layer: 10, domain: "hub", phase: 1, doc: "The command hub. Every command file self-registers a typed route in package-level initializers — no central switch. This is the one command model every surface (UI, API, scripts, AI) will route through.", deps: ["artnet", "artnet-ipc", "contracts", "delivery", "deployment", "fixture", "fixture-ofl", "playback", "pool", "programming", "projectconfig", "scene", "security", "show", "strictjson", "substitution", "trace-apply", "trace-catalog", "trace-reconcile", "trace-transport"] },
+  { id: "command", label: "command", layer: 10, domain: "hub", phase: 1, doc: "The command hub. Every command file self-registers a typed route in package-level initializers — no central switch. This is the one command model every surface (UI, API, scripts, AI) will route through.", deps: ["artnet", "artnet-ipc", "contracts", "delivery", "deployment", "docgen", "fixture", "fixture-ofl", "playback", "pool", "programming", "projectconfig", "scene", "security", "show", "strictjson", "substitution", "trace-apply", "trace-catalog", "trace-reconcile", "trace-transport"] },
 ];
 
 const NODES_BY_ID = Object.fromEntries(NODES.map((n) => [n.id, n]));
@@ -214,7 +216,7 @@ function transitiveDependents(id: string): Set<string> {
 }
 
 export default function DependencyGraph() {
-  const pos = useMemo(layout, []);
+  const pos = useMemo(() => layout(), []);
   const [selected, setSelected] = useState<string | null>(null);
   const [hovered, setHovered] = useState<string | null>(null);
   const [hoveredDomain, setHoveredDomain] = useState<Domain | null>(null);
