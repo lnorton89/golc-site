@@ -40,22 +40,37 @@ export default function DocsPage() {
             Docs.
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-8 text-text2">
-            Phase 6 (the Wails desktop UI) is in progress but not yet
-            usable end-to-end. This page covers the product concepts and
-            workflow as designed. Reference docs for the API and TypeScript
-            SDK publish once those phases ship.
+            Learn the current desktop workspaces and the product concepts
+            behind patching, programming, playback, and automation.
           </p>
         </div>
       </section>
 
       {/* Explore by view */}
       <section className="mx-auto max-w-[1160px] px-6 py-16 sm:px-12 sm:py-24">
-        <SectionHeading index="01" title="Explore by view" />
+        <SectionHeading index="01" title="Desktop views" />
         <p className="mb-8 max-w-2xl text-text2">
-          GOLC v1 is five representative views in one Wails desktop app —
-          author once, deploy repeatedly. Each is also a stage in how a show
-          comes together: select a view to see where it sits in the
-          workflow, the concepts it introduces, and the states it shows.
+          The generated guide follows the desktop shell directly: all twelve
+          Show, Build, Operate, and Output destinations, with current
+          screenshots and principal operator actions.
+        </p>
+        <Link
+          href="/docs/desktop-views"
+          className="card-hover mb-16 flex items-center justify-between gap-6 rounded-xl border border-line bg-panel p-6 text-ink"
+        >
+          <span>
+            <span className="block text-lg font-bold">Browse the desktop views guide</span>
+            <span className="mt-1 block text-sm leading-6 text-text2">
+              Find the purpose, controls, concepts, and operating notes for every workspace.
+            </span>
+          </span>
+          <ArrowRightIcon size={20} className="shrink-0 text-link" />
+        </Link>
+
+        <SectionHeading index="02" title="Product concepts" />
+        <p className="mb-8 max-w-2xl text-text2">
+          These representative concepts explain how authoring, playback,
+          scripting, and operator safety fit together across the workspaces.
         </p>
         <ViewExplorer />
       </section>
@@ -63,7 +78,7 @@ export default function DocsPage() {
       {/* Operating states */}
       <section className="border-y border-line bg-panel">
         <div className="mx-auto max-w-[1160px] px-6 py-16 sm:px-12 sm:py-24">
-          <SectionHeading index="02" title="Operating states" />
+          <SectionHeading index="03" title="Operating states" />
           <p className="mb-8 max-w-2xl text-text2">
             Color is never the only signal — every state pairs with a text
             label. <strong className="text-ink">Blackout</strong> and{" "}
