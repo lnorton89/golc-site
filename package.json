@@ -11,7 +11,8 @@
     "test:links": "start-server-and-test \"npx serve out -l 4173\" http://localhost:4173 \"linkinator http://localhost:4173 --recurse --silent --status-code 429:warn --skip https://golc-site.netlify.app/\"",
     "test:lighthouse": "lhci autorun",
     "test:visual": "playwright test",
-    "test:visual:update": "playwright test --update-snapshots"
+    "test:visual:update": "playwright test --update-snapshots",
+    "deploy": "netlify deploy --build --prod"
   },
   "dependencies": {
     "next": "16.2.11",
@@ -29,6 +30,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.2.11",
     "linkinator": "^8.0.1",
+    "netlify-cli": "27.0.1",
     "serve": "^14.2.6",
     "start-server-and-test": "^3.0.11",
     "tailwindcss": "^4",

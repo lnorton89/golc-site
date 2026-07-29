@@ -73,5 +73,11 @@ When the brand system changes, update `src/app/globals.css` and the copy in
 ## Deploy
 
 ```bash
-npx netlify-cli deploy --build --prod
+npm run deploy
 ```
+
+This command uses the repository-pinned Netlify CLI to build from
+`netlify.toml` and deploy the already-linked site directly to production.
+Netlify authentication is a runtime prerequisite; credentials are never stored
+in the repository. A release is complete only when the command succeeds and the
+reported production URL is verified live.
