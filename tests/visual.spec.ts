@@ -221,7 +221,9 @@ test("docs navigation communicates family and exact-route state", async ({ page 
     "aria-current",
     "page",
   );
-  await expect(page.getByRole("link", { name: "Desktop Views" })).not.toHaveAttribute(
+  await expect(
+    page.getByRole("link", { name: "Desktop Views", exact: true }),
+  ).not.toHaveAttribute(
     "aria-current",
     "page",
   );
@@ -229,7 +231,9 @@ test("docs navigation communicates family and exact-route state", async ({ page 
   await page.goto("/docs/desktop-views");
   await expect(docsTrigger).toHaveAttribute("aria-current", "page");
   await docsTrigger.click();
-  await expect(page.getByRole("link", { name: "Desktop Views" })).toHaveAttribute(
+  await expect(
+    page.getByRole("link", { name: "Desktop Views", exact: true }),
+  ).toHaveAttribute(
     "aria-current",
     "page",
   );
@@ -253,7 +257,7 @@ test("docs navigation closes on Escape, outside click, and link activation", asy
   await expect(page).toHaveURL(/\/$/);
 
   await docsTrigger.click();
-  await page.getByRole("heading", { name: "The open-source lighting console" }).click();
+  await page.locator("main").click({ position: { x: 8, y: 8 } });
   await expect(docsTrigger).toHaveAttribute("aria-expanded", "false");
   await expect(page).toHaveURL(/\/$/);
 
