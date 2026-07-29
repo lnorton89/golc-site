@@ -34,7 +34,7 @@ export default function DesktopViewsPage() {
   return (
     <div>
       <section className="border-b border-line bg-panel">
-        <div className="mx-auto max-w-[1160px] px-6 py-20 sm:px-12 sm:py-28">
+        <div className="mx-auto max-w-[1360px] px-6 py-20 sm:px-12 sm:py-28">
           <span className="block font-mono text-[13px] tracking-[1.3px] text-link">
             Desktop guide · catalog schema {desktopViews.schemaVersion}
           </span>
@@ -49,7 +49,7 @@ export default function DesktopViewsPage() {
         </div>
       </section>
 
-      <main className="mx-auto max-w-[1160px] px-6 py-16 sm:px-12 sm:py-24">
+      <main className="mx-auto max-w-[1360px] px-6 py-16 sm:px-12 sm:py-24">
         <DesktopViewExplorer groups={groups} />
       </main>
     </div>
