@@ -2,12 +2,12 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { MenuIcon, CloseIcon, GitHubIcon } from "./icons";
 
-const NAV = [
-  { href: "/#workflow", label: "Workflow" },
-  { href: "/docs", label: "Docs" },
-  { href: "/download", label: "Download" },
+const DOCS = [
+  { href: "/docs", label: "Docs overview" },
+  { href: "/docs/desktop-views", label: "Desktop Views" },
 ];
 
 const RESOURCES = [
@@ -18,6 +18,7 @@ const RESOURCES = [
 ];
 
 export default function MobileMenu() {
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
@@ -62,16 +63,41 @@ export default function MobileMenu() {
           className="fixed inset-x-0 top-[65px] z-50 border-b border-line bg-page px-6 py-4 shadow-lg"
         >
           <nav className="flex flex-col gap-1">
-            {NAV.map((item) => (
+            <Link
+              href="/#workflow"
+              onClick={() => setOpen(false)}
+              className="rounded-md px-2 py-2.5 text-sm text-text2 transition-colors duration-[120ms] ease-out hover:bg-panel hover:text-accent"
+            >
+              Workflow
+            </Link>
+
+            <p className="mt-3 px-2 font-mono text-[10px] uppercase tracking-wider text-muted">
+              Docs
+            </p>
+            {DOCS.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
+                aria-current={pathname === item.href ? "page" : undefined}
                 onClick={() => setOpen(false)}
-                className="rounded-md px-2 py-2.5 text-sm text-text2 transition-colors duration-[120ms] ease-out hover:bg-panel hover:text-accent"
+                className={`rounded-md px-2 py-2.5 text-sm transition-colors duration-[120ms] ease-out hover:bg-panel hover:text-accent ${
+                  pathname === item.href ? "font-semibold text-link" : "text-text2"
+                }`}
               >
                 {item.label}
               </Link>
             ))}
+
+            <Link
+              href="/download"
+              aria-current={pathname === "/download" ? "page" : undefined}
+              onClick={() => setOpen(false)}
+              className={`rounded-md px-2 py-2.5 text-sm transition-colors duration-[120ms] ease-out hover:bg-panel hover:text-accent ${
+                pathname === "/download" ? "font-semibold text-link" : "text-text2"
+              }`}
+            >
+              Download
+            </Link>
 
             <p className="mt-3 px-2 font-mono text-[10px] uppercase tracking-wider text-muted">
               Resources

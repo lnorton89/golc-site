@@ -2,34 +2,31 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import DocsMenu from "./DocsMenu";
 import ResourcesMenu from "./ResourcesMenu";
-
-const NAV = [
-  { href: "/#workflow", label: "Workflow" },
-  { href: "/docs", label: "Docs" },
-  { href: "/download", label: "Download" },
-];
 
 export default function NavLinks() {
   const pathname = usePathname();
+  const downloadActive = pathname === "/download";
 
   return (
     <>
-      {NAV.map((item) => {
-        const active = pathname === item.href;
-        return (
-          <Link
-            key={item.href}
-            href={item.href}
-            aria-current={active ? "page" : undefined}
-            className={`text-sm transition-colors duration-[120ms] ease-out hover:text-accent ${
-              active ? "font-semibold text-link" : "text-text2"
-            }`}
-          >
-            {item.label}
-          </Link>
-        );
-      })}
+      <Link
+        href="/#workflow"
+        className="text-sm text-text2 transition-colors duration-[120ms] ease-out hover:text-accent"
+      >
+        Workflow
+      </Link>
+      <DocsMenu />
+      <Link
+        href="/download"
+        aria-current={downloadActive ? "page" : undefined}
+        className={`text-sm transition-colors duration-[120ms] ease-out hover:text-accent ${
+          downloadActive ? "font-semibold text-link" : "text-text2"
+        }`}
+      >
+        Download
+      </Link>
       <ResourcesMenu />
     </>
   );
