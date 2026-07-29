@@ -191,3 +191,89 @@ test("resources dropdown opens and links to architecture", async ({ page }) => {
   await architectureLink.click();
   await expect(page).toHaveURL(/\/architecture$/);
 });
+
+test("docs navigation disclosure opens and reaches Desktop Views", async ({ page }) => {
+  await page.goto("/");
+
+  const docsTrigger = page.getByRole("button", { name: "Docs" });
+  const docsOverview = page.getByRole("link", { name: "Docs overview" });
+  const desktopViews = page.getByRole("link", { name: "Desktop Views" });
+
+  await expect(docsTrigger).toHaveAttribute("aria-expanded", "false");
+  await expect(docsOverview).toBeHidden();
+  await docsTrigger.click();
+  await expect(docsTrigger).toHaveAttribute("aria-expanded", "true");
+  await expect(docsOverview).toBeVisible();
+  await expect(desktopViews).toBeVisible();
+
+  await desktopViews.click();
+  await expect(page).toHaveURL(/\/docs\/desktop-views$/);
+  await expect(docsTrigger).toHaveAttribute("aria-expanded", "false");
+});
+
+test("docs navigation communicates family and exact-route state", async ({ page }) => {
+  await page.goto("/docs");
+
+  const docsTrigger = page.getByRole("button", { name: "Docs" });
+  await expect(docsTrigger).toHaveAttribute("aria-current", "page");
+  await docsTrigger.click();
+  await expect(page.getByRole("link", { name: "Docs overview" })).toHaveAttribute(
+    "aria-current",
+    "page",
+  );
+  await expect(page.getByRole("link", { name: "Desktop Views" })).not.toHaveAttribute(
+    "aria-current",
+    "page",
+  );
+
+  await page.goto("/docs/desktop-views");
+  await expect(docsTrigger).toHaveAttribute("aria-current", "page");
+  await docsTrigger.click();
+  await expect(page.getByRole("link", { name: "Desktop Views" })).toHaveAttribute(
+    "aria-current",
+    "page",
+  );
+  await expect(page.getByRole("link", { name: "Docs overview" })).not.toHaveAttribute(
+    "aria-current",
+    "page",
+  );
+});
+
+test("docs navigation closes on Escape, outside click, and link activation", async ({
+  page,
+}) => {
+  await page.goto("/");
+
+  const docsTrigger = page.getByRole("button", { name: "Docs" });
+  const docsOverview = page.getByRole("link", { name: "Docs overview" });
+
+  await docsTrigger.click();
+  await page.keyboard.press("Escape");
+  await expect(docsTrigger).toHaveAttribute("aria-expanded", "false");
+  await expect(page).toHaveURL(/\/$/);
+
+  await docsTrigger.click();
+  await page.getByRole("heading", { name: "The open-source lighting console" }).click();
+  await expect(docsTrigger).toHaveAttribute("aria-expanded", "false");
+  await expect(page).toHaveURL(/\/$/);
+
+  await docsTrigger.click();
+  await docsOverview.click();
+  await expect(page).toHaveURL(/\/docs$/);
+  await expect(docsTrigger).toHaveAttribute("aria-expanded", "false");
+});
+
+test("docs navigation is grouped and navigable in the mobile dialog", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/");
+  await page.getByRole("button", { name: /open menu/i }).click();
+
+  const dialog = page.getByRole("dialog", { name: /site navigation/i });
+  await expect(dialog.getByText("Docs", { exact: true })).toBeVisible();
+  await expect(dialog.getByRole("link", { name: "Docs overview" })).toBeVisible();
+  await expect(dialog.getByRole("link", { name: "Desktop Views" })).toBeVisible();
+
+  await dialog.getByRole("link", { name: "Desktop Views" }).click();
+  await expect(page).toHaveURL(/\/docs\/desktop-views$/);
+  await expect(dialog).toBeHidden();
+});
