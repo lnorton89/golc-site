@@ -19,11 +19,28 @@ export const metadata: Metadata = {
     title: "Desktop views · GOLC",
     description,
     url: "/docs/desktop-views",
+    images: [
+      {
+        url: "/desktop-views-og.png",
+        width: 1200,
+        height: 630,
+        alt: "GOLC Desktop Views",
+        type: "image/png",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Desktop views · GOLC",
     description,
+    images: [
+      {
+        url: "/desktop-views-og.png",
+        width: 1200,
+        height: 630,
+        alt: "GOLC Desktop Views",
+      },
+    ],
   },
 };
 
