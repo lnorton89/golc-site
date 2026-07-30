@@ -53,7 +53,7 @@ test("desktop views remain readable without horizontal overflow on mobile", asyn
   await expect(page.getByRole("heading", { name: "Every workspace, in one guide." })).toBeVisible();
   const selector = page.getByRole("tablist", { name: "Desktop views" });
   const detail = page.getByRole("tabpanel");
-  await expect(selector.getByRole("tab")).toHaveCount(12);
+  await expect(selector.getByRole("tab")).toHaveCount(17);
   await expect(detail).toHaveCount(1);
 
   const selectorBox = await selector.boundingBox();
@@ -236,8 +236,8 @@ test("desktop views expose one grouped selector and complete selected detail", a
   await page.goto("/docs/desktop-views");
 
   const selector = page.getByRole("tablist", { name: "Desktop views" });
-  await expect(selector.getByRole("heading")).toHaveText(["Show", "Build", "Operate", "Output"]);
-  await expect(selector.getByRole("tab")).toHaveCount(12);
+  await expect(selector.getByRole("heading")).toHaveText(["Show", "Guided Setup", "Build", "Operate", "Output"]);
+  await expect(selector.getByRole("tab")).toHaveCount(17);
   await expect(selector.getByRole("tab", { selected: true })).toHaveCount(1);
   await expect(selector.getByRole("tab", { name: "Overview" })).toHaveAttribute("aria-selected", "true");
 

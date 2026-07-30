@@ -45,7 +45,17 @@ export const metadata: Metadata = {
 };
 
 export default function DesktopViewsPage() {
-  const groups = desktopViews.groups as DesktopViewGroup[];
+  // The Guided First Show onboarding overlay is intentionally kept out of
+  // desktopViews.groups (it is never a real nav destination), so it lives
+  // in the catalog's separate top-level "onboarding" section instead.
+  // Docs readers still want it documented alongside every workspace, so it
+  // is spliced in here as one more explorer group, right after Show --
+  // this keeps Overview (Show's first view) the page's default selection,
+  // unchanged from before onboarding had any documented views.
+  const catalogGroups = desktopViews.groups as DesktopViewGroup[];
+  const groups = desktopViews.onboarding
+    ? [catalogGroups[0], desktopViews.onboarding as DesktopViewGroup, ...catalogGroups.slice(1)]
+    : catalogGroups;
   const viewCount = groups.reduce((total, group) => total + group.views.length, 0);
 
   return (
@@ -59,9 +69,9 @@ export default function DesktopViewsPage() {
             Every workspace, in one guide.
           </h1>
           <p className="mt-6 max-w-3xl text-lg leading-8 text-text2">
-            Browse all {viewCount} current destinations across Show, Build, Operate, and Output.
-            Each entry uses a screenshot captured from the real browser-safe desktop frontend and
-            describes the controls available in that workspace.
+            Browse all {viewCount} current destinations across Show, Guided Setup, Build, Operate,
+            and Output. Each entry uses a screenshot captured from the real browser-safe desktop
+            frontend and describes the controls available in that workspace.
           </p>
         </div>
       </section>
