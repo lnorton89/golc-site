@@ -43,6 +43,11 @@ next-env.d.ts
 # Local Netlify folder
 .netlify
 
+# Netlify CLI's own Deno lockfile for local edge-function bundling --
+# not a project dependency lock (nothing here uses Deno), regenerated
+# by netlify build/deploy, never deliberately committed.
+deno.lock
+
 # Testing infrastructure — Playwright run artifacts (baseline screenshots in
 # tests/**/*-snapshots/ are committed, only run output is ignored here)
 /test-results/
