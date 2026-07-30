@@ -199,7 +199,7 @@ export default function DesktopViewExplorer({ groups }: { groups: DesktopViewGro
             aria-label={`Enlarge ${selectedView.navLabel} workspace screenshot`}
             data-testid="desktop-view-screenshot-stage"
             onClick={() => setLightboxOpen(true)}
-            className="group block min-h-11 w-full cursor-zoom-in border-b border-line bg-page p-3 text-left sm:p-5"
+            className="group block min-h-11 w-full cursor-zoom-in border-b border-line bg-screenshot-stage p-3 text-left sm:p-5"
           >
             <Image
               src={selectedView.screenshot}
