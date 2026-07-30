@@ -115,6 +115,86 @@ test("desktop views screenshot stage stays distinct from detail across themes an
       const imageBox = imageElement.getBoundingClientRect();
       const stageStyles = getComputedStyle(stageElement);
       const detailStyles = getComputedStyle(detailElement);
+      const pageStyles = getComputedStyle(document.body);
+      const imageStyles = getComputedStyle(imageElement);
+      const canvas = document.createElement("canvas");
+      const sampleSize = 8;
+      canvas.width = sampleSize * 2;
+      canvas.height = sampleSize * 2;
+      const context = canvas.getContext("2d", { willReadFrequently: true });
+      if (!context) {
+        throw new Error("Canvas context is unavailable");
+      }
+      context.drawImage(
+        imageElement,
+        0,
+        0,
+        sampleSize,
+        sampleSize,
+        0,
+        0,
+        sampleSize,
+        sampleSize,
+      );
+      context.drawImage(
+        imageElement,
+        imageElement.naturalWidth - sampleSize,
+        0,
+        sampleSize,
+        sampleSize,
+        sampleSize,
+        0,
+        sampleSize,
+        sampleSize,
+      );
+      context.drawImage(
+        imageElement,
+        0,
+        imageElement.naturalHeight - sampleSize,
+        sampleSize,
+        sampleSize,
+        0,
+        sampleSize,
+        sampleSize,
+        sampleSize,
+      );
+      context.drawImage(
+        imageElement,
+        imageElement.naturalWidth - sampleSize,
+        imageElement.naturalHeight - sampleSize,
+        sampleSize,
+        sampleSize,
+        sampleSize,
+        sampleSize,
+        sampleSize,
+        sampleSize,
+      );
+      const pixels = context.getImageData(0, 0, canvas.width, canvas.height).data;
+      const screenshotEdge = [0, 0, 0];
+      let opaquePixels = 0;
+      for (let offset = 0; offset < pixels.length; offset += 4) {
+        if (pixels[offset + 3] === 0) continue;
+        screenshotEdge[0] += pixels[offset];
+        screenshotEdge[1] += pixels[offset + 1];
+        screenshotEdge[2] += pixels[offset + 2];
+        opaquePixels += 1;
+      }
+      if (opaquePixels === 0) {
+        throw new Error("Screenshot edge sampling returned no opaque pixels");
+      }
+      const averageScreenshotEdge = screenshotEdge.map((value) => value / opaquePixels);
+      const stageRgb = stageStyles.backgroundColor.match(/\d+(?:\.\d+)?/g)?.slice(0, 3).map(Number);
+      if (!stageRgb || stageRgb.length !== 3) {
+        throw new Error(`Unable to parse stage color: ${stageStyles.backgroundColor}`);
+      }
+      const colorDistance = Math.sqrt(
+        stageRgb.reduce(
+          (sum, channel, index) => sum + (channel - averageScreenshotEdge[index]) ** 2,
+          0,
+        ),
+      );
+      const luminance = (rgb: number[]) =>
+        0.2126 * rgb[0] + 0.7152 * rgb[1] + 0.0722 * rgb[2];
 
       return {
         stageBottom: stageBox.bottom,
@@ -124,7 +204,11 @@ test("desktop views screenshot stage stays distinct from detail across themes an
         insetRight: stageBox.right - imageBox.right,
         stageBackground: stageStyles.backgroundColor,
         detailBackground: detailStyles.backgroundColor,
+        pageBackground: pageStyles.backgroundColor,
+        colorDistance,
+        luminanceDistance: Math.abs(luminance(stageRgb) - luminance(averageScreenshotEdge)),
         lowerBorderWidth: Number.parseFloat(stageStyles.borderBottomWidth),
+        imageBorderWidth: Number.parseFloat(imageStyles.borderTopWidth),
         documentOverflows:
           document.documentElement.scrollWidth > document.documentElement.clientWidth + 1,
         mainOverflows: main.scrollWidth > main.clientWidth + 1,
@@ -136,7 +220,13 @@ test("desktop views screenshot stage stays distinct from detail across themes an
     expect(layout.insetLeft).toBeGreaterThanOrEqual(12);
     expect(layout.insetRight).toBeGreaterThanOrEqual(12);
     expect(layout.lowerBorderWidth).toBeGreaterThan(0);
+    expect(layout.imageBorderWidth).toBeGreaterThan(0);
     expect(layout.stageBackground).not.toBe(layout.detailBackground);
+    expect(layout.stageBackground).not.toBe(layout.pageBackground);
+    // A modest objective floor catches the reported warm-gray blending while
+    // leaving the stage visually subordinate to the captured application.
+    expect(layout.colorDistance).toBeGreaterThanOrEqual(24);
+    expect(layout.luminanceDistance).toBeGreaterThanOrEqual(8);
     expect(layout.documentOverflows).toBe(false);
     expect(layout.mainOverflows).toBe(false);
   }
@@ -259,6 +349,111 @@ test("resources dropdown opens and links to architecture", async ({ page }) => {
   await expect(architectureLink).toBeVisible();
   await architectureLink.click();
   await expect(page).toHaveURL(/\/architecture$/);
+});
+
+test("dropdown parity covers computed presentation and disclosure interactions", async ({ page }) => {
+  await page.goto("/");
+
+  const docs = page.getByTestId("desktop-dropdown-docs");
+  const resources = page.getByTestId("desktop-dropdown-resources");
+  const docsTrigger = docs.getByRole("button", { name: "Docs" });
+  const resourcesTrigger = resources.getByRole("button", { name: "Resources" });
+
+  const triggerPresentation = async (trigger: typeof docsTrigger) =>
+    trigger.evaluate((element) => {
+      const box = element.getBoundingClientRect();
+      const styles = getComputedStyle(element);
+      const chevron = element.querySelector("svg");
+      if (!chevron) throw new Error("Dropdown chevron is missing");
+      const chevronBox = chevron.getBoundingClientRect();
+      return {
+        height: box.height,
+        fontSize: styles.fontSize,
+        lineHeight: styles.lineHeight,
+        gap: styles.gap,
+        fontWeight: styles.fontWeight,
+        color: styles.color,
+        outlineStyle: styles.outlineStyle,
+        outlineWidth: styles.outlineWidth,
+        outlineOffset: styles.outlineOffset,
+        chevronWidth: chevronBox.width,
+        chevronHeight: chevronBox.height,
+        chevronTransform: getComputedStyle(chevron).transform,
+      };
+    });
+
+  await docsTrigger.focus();
+  const docsTriggerStyles = await triggerPresentation(docsTrigger);
+  await resourcesTrigger.focus();
+  const resourcesTriggerStyles = await triggerPresentation(resourcesTrigger);
+  expect(docsTriggerStyles).toEqual(resourcesTriggerStyles);
+
+  const panelPresentation = async (container: typeof docs) => {
+    const panel = container.getByTestId("desktop-dropdown-panel");
+    const firstLink = panel.getByRole("link").first();
+    const label = firstLink.getByTestId("desktop-dropdown-item-label");
+    const body = firstLink.getByTestId("desktop-dropdown-item-body");
+    return panel.evaluate((element, childData) => {
+      const trigger = element.parentElement?.querySelector("summary");
+      const link = element.querySelector("a");
+      const labelElement = link?.querySelector('[data-testid="desktop-dropdown-item-label"]');
+      const bodyElement = link?.querySelector('[data-testid="desktop-dropdown-item-body"]');
+      if (!trigger || !link || !labelElement || !bodyElement) {
+        throw new Error("Dropdown presentation elements are missing");
+      }
+      const box = element.getBoundingClientRect();
+      const triggerBox = trigger.getBoundingClientRect();
+      const styles = getComputedStyle(element);
+      const linkStyles = getComputedStyle(link);
+      const labelStyles = getComputedStyle(labelElement);
+      const bodyStyles = getComputedStyle(bodyElement);
+      return {
+        width: box.width,
+        padding: styles.padding,
+        borderRadius: styles.borderRadius,
+        borderWidth: styles.borderWidth,
+        borderColor: styles.borderColor,
+        backgroundColor: styles.backgroundColor,
+        boxShadow: styles.boxShadow,
+        topOffset: box.top - triggerBox.bottom,
+        rightOffset: triggerBox.right - box.right,
+        itemPadding: linkStyles.padding,
+        labelFontSize: labelStyles.fontSize,
+        labelFontWeight: labelStyles.fontWeight,
+        bodyFontSize: bodyStyles.fontSize,
+        childData,
+      };
+    }, { labelCount: await label.count(), bodyCount: await body.count() });
+  };
+
+  await docsTrigger.click();
+  await expect(docsTrigger).toHaveAttribute("aria-expanded", "true");
+  const docsPanelStyles = await panelPresentation(docs);
+  await resourcesTrigger.click();
+  await expect(docsTrigger).toHaveAttribute("aria-expanded", "false");
+  await expect(resourcesTrigger).toHaveAttribute("aria-expanded", "true");
+  const resourcesPanelStyles = await panelPresentation(resources);
+  expect(docsPanelStyles).toEqual(resourcesPanelStyles);
+  expect(docsPanelStyles.childData).toEqual({ labelCount: 1, bodyCount: 1 });
+
+  await page.keyboard.press("Escape");
+  await expect(resourcesTrigger).toHaveAttribute("aria-expanded", "false");
+  await expect(resourcesTrigger).toBeFocused();
+
+  await docsTrigger.focus();
+  await page.keyboard.press("Enter");
+  await expect(docsTrigger).toHaveAttribute("aria-expanded", "true");
+  await page.keyboard.press("Tab");
+  await expect(docs.getByRole("link").first()).toBeFocused();
+  await page.locator("main").click({ position: { x: 8, y: 8 } });
+  await expect(docsTrigger).toHaveAttribute("aria-expanded", "false");
+
+  await resourcesTrigger.focus();
+  await page.keyboard.press("Space");
+  await expect(resourcesTrigger).toHaveAttribute("aria-expanded", "true");
+  await resources.getByRole("link", { name: /Architecture/ }).click();
+  await expect(page).toHaveURL(/\/architecture$/);
+  await expect(resourcesTrigger).toHaveAttribute("aria-expanded", "false");
 });
 
 test("docs navigation disclosure opens and reaches Desktop Views", async ({ page }) => {
