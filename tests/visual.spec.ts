@@ -73,6 +73,75 @@ test("desktop views remain readable without horizontal overflow on mobile", asyn
   expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(390);
 });
 
+test("desktop views screenshot stage stays distinct from detail across themes and viewports", async ({
+  page,
+}) => {
+  const cases = [
+    { theme: "light", width: 1280, height: 900 },
+    { theme: "dark", width: 1280, height: 900 },
+    { theme: "light", width: 390, height: 844 },
+    { theme: "dark", width: 390, height: 844 },
+  ] as const;
+
+  for (const testCase of cases) {
+    await page.setViewportSize({ width: testCase.width, height: testCase.height });
+    await page.goto("/docs/desktop-views");
+    await page.evaluate((theme) => {
+      document.documentElement.setAttribute("data-theme", theme);
+    }, testCase.theme);
+
+    const stage = page.getByTestId("desktop-view-screenshot-stage");
+    const detail = page.getByTestId("desktop-view-detail");
+    const image = stage.getByRole("img");
+    await expect(stage).toBeVisible();
+    await expect(detail).toBeVisible();
+    await expect(image).toHaveJSProperty("complete", true);
+
+    const layout = await page.evaluate(() => {
+      const stageElement = document.querySelector<HTMLElement>(
+        '[data-testid="desktop-view-screenshot-stage"]',
+      );
+      const detailElement = document.querySelector<HTMLElement>(
+        '[data-testid="desktop-view-detail"]',
+      );
+      const imageElement = stageElement?.querySelector<HTMLImageElement>("img");
+      const main = document.querySelector<HTMLElement>("main");
+      if (!stageElement || !detailElement || !imageElement || !main) {
+        throw new Error("Desktop Views stage, detail, image, or main element is missing");
+      }
+
+      const stageBox = stageElement.getBoundingClientRect();
+      const detailBox = detailElement.getBoundingClientRect();
+      const imageBox = imageElement.getBoundingClientRect();
+      const stageStyles = getComputedStyle(stageElement);
+      const detailStyles = getComputedStyle(detailElement);
+
+      return {
+        stageBottom: stageBox.bottom,
+        detailTop: detailBox.top,
+        insetTop: imageBox.top - stageBox.top,
+        insetLeft: imageBox.left - stageBox.left,
+        insetRight: stageBox.right - imageBox.right,
+        stageBackground: stageStyles.backgroundColor,
+        detailBackground: detailStyles.backgroundColor,
+        lowerBorderWidth: Number.parseFloat(stageStyles.borderBottomWidth),
+        documentOverflows:
+          document.documentElement.scrollWidth > document.documentElement.clientWidth + 1,
+        mainOverflows: main.scrollWidth > main.clientWidth + 1,
+      };
+    });
+
+    expect(layout.stageBottom).toBeLessThanOrEqual(layout.detailTop);
+    expect(layout.insetTop).toBeGreaterThanOrEqual(12);
+    expect(layout.insetLeft).toBeGreaterThanOrEqual(12);
+    expect(layout.insetRight).toBeGreaterThanOrEqual(12);
+    expect(layout.lowerBorderWidth).toBeGreaterThan(0);
+    expect(layout.stageBackground).not.toBe(layout.detailBackground);
+    expect(layout.documentOverflows).toBe(false);
+    expect(layout.mainOverflows).toBe(false);
+  }
+});
+
 test("desktop views expose one grouped selector and complete selected detail", async ({ page }) => {
   await page.goto("/docs/desktop-views");
 
