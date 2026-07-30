@@ -390,6 +390,9 @@ test("dropdown parity covers computed presentation and disclosure interactions",
 
   const panelPresentation = async (container: typeof docs) => {
     const panel = container.getByTestId("desktop-dropdown-panel");
+    await panel.evaluate((element) =>
+      Promise.all(element.getAnimations().map((animation) => animation.finished)),
+    );
     const firstLink = panel.getByRole("link").first();
     const label = firstLink.getByTestId("desktop-dropdown-item-label");
     const body = firstLink.getByTestId("desktop-dropdown-item-body");
@@ -478,6 +481,7 @@ test("docs navigation disclosure opens and reaches Desktop Views", async ({ page
 test("docs navigation communicates family and exact-route state", async ({ page }) => {
   await page.goto("/docs");
 
+  const docs = page.getByTestId("desktop-dropdown-docs");
   const docsTrigger = page.getByRole("button", { name: "Docs" });
   await expect(docsTrigger).toHaveAttribute("aria-current", "page");
   await docsTrigger.click();
@@ -486,7 +490,7 @@ test("docs navigation communicates family and exact-route state", async ({ page 
     "page",
   );
   await expect(
-    page.getByRole("link", { name: "Desktop Views", exact: true }),
+    docs.getByRole("link", { name: /Desktop Views/ }),
   ).not.toHaveAttribute(
     "aria-current",
     "page",
@@ -496,7 +500,7 @@ test("docs navigation communicates family and exact-route state", async ({ page 
   await expect(docsTrigger).toHaveAttribute("aria-current", "page");
   await docsTrigger.click();
   await expect(
-    page.getByRole("link", { name: "Desktop Views", exact: true }),
+    docs.getByRole("link", { name: /Desktop Views/ }),
   ).toHaveAttribute(
     "aria-current",
     "page",
