@@ -197,8 +197,9 @@ export default function DesktopViewExplorer({ groups }: { groups: DesktopViewGro
             ref={openerRef}
             type="button"
             aria-label={`Enlarge ${selectedView.navLabel} workspace screenshot`}
+            data-testid="desktop-view-screenshot-stage"
             onClick={() => setLightboxOpen(true)}
-            className="group block min-h-11 w-full cursor-zoom-in overflow-hidden border-b border-line bg-page text-left"
+            className="group block min-h-11 w-full cursor-zoom-in border-b border-line bg-page p-3 text-left sm:p-5"
           >
             <Image
               src={selectedView.screenshot}
@@ -206,16 +207,16 @@ export default function DesktopViewExplorer({ groups }: { groups: DesktopViewGro
               width={1440}
               height={900}
               priority
-              className="h-auto w-full transition-transform duration-200 ease-out motion-reduce:transition-none group-hover:scale-[1.005]"
+              className="h-auto w-full rounded-lg border border-line shadow-sm transition-transform duration-200 ease-out motion-reduce:transition-none group-hover:scale-[1.005]"
               sizes="(min-width: 1280px) 980px, (min-width: 1024px) calc(100vw - 22rem), 100vw"
             />
-            <span className="flex min-h-11 items-center justify-center gap-2 px-4 font-mono text-[11px] font-semibold uppercase tracking-wider text-link">
+            <span className="flex min-h-11 items-end justify-center gap-2 pt-3 font-mono text-[11px] font-semibold uppercase tracking-wider text-link">
               <span aria-hidden>↗</span>
               Enlarge screenshot
             </span>
           </button>
 
-          <div className="p-5 sm:p-8">
+          <div data-testid="desktop-view-detail" className="bg-panel p-5 sm:p-8">
             <span className="font-mono text-[11px] uppercase tracking-[1.1px] text-link">
               {selectedView.id}
             </span>
