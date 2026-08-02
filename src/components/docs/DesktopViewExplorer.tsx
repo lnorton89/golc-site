@@ -3,12 +3,15 @@
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 
+import InfoTooltip from "./InfoTooltip";
+
 export type DesktopView = {
   id: string;
   slug: string;
   navLabel: string;
   title: string;
   purpose: string;
+  howItWorks: string;
   actions: string[];
   concepts?: string[];
   operatingNotes?: string[];
@@ -17,6 +20,7 @@ export type DesktopView = {
 
 export type DesktopViewGroup = {
   label: string;
+  description: string;
   views: DesktopView[];
 };
 
@@ -139,47 +143,52 @@ export default function DesktopViewExplorer({ groups }: { groups: DesktopViewGro
               key={group.label}
               className="not-first:mt-4 not-first:border-t not-first:border-line not-first:pt-4"
             >
-              <h2 className="px-2 font-mono text-[11px] font-semibold uppercase tracking-[1.1px] text-muted">
-                {group.label}
-              </h2>
+              <div className="flex items-center gap-1.5 px-2">
+                <h2 className="font-mono text-[11px] font-semibold uppercase tracking-[1.1px] text-muted">
+                  {group.label}
+                </h2>
+                <InfoTooltip label={`About the ${group.label} section`} text={group.description} />
+              </div>
               <div className="mt-1 grid gap-1 sm:grid-cols-2 lg:grid-cols-1">
                 {group.views.map((view) => {
                   const index = orderedViews.findIndex((candidate) => candidate.id === view.id);
                   const selected = view.id === selectedView.id;
                   return (
-                    <button
-                      key={view.id}
-                      ref={(node) => {
-                        if (node) {
-                          tabRefs.current.set(view.id, node);
-                        } else {
-                          tabRefs.current.delete(view.id);
-                        }
-                      }}
-                      id={`desktop-tab-${view.id}`}
-                      type="button"
-                      role="tab"
-                      aria-controls={view.slug}
-                      aria-selected={selected}
-                      tabIndex={selected ? 0 : -1}
-                      onClick={() => setSelectedId(view.id)}
-                      onKeyDown={(event) => handleTabKeyDown(event, index)}
-                      className={`flex min-h-11 w-full items-center justify-between gap-3 rounded-md border px-3 py-2 text-left text-sm font-semibold transition-colors duration-[120ms] ease-out ${
-                        selected
-                          ? "border-accent bg-accent text-on-accent"
-                          : "border-transparent text-text2 hover:border-line hover:bg-page hover:text-ink"
-                      }`}
-                    >
-                      <span>{view.navLabel}</span>
-                      <span
-                        className={`font-mono text-[9px] uppercase tracking-wider ${
-                          selected ? "text-on-accent" : "text-muted"
+                    <div key={view.id} className="flex min-w-0 items-center gap-1">
+                      <button
+                        ref={(node) => {
+                          if (node) {
+                            tabRefs.current.set(view.id, node);
+                          } else {
+                            tabRefs.current.delete(view.id);
+                          }
+                        }}
+                        id={`desktop-tab-${view.id}`}
+                        type="button"
+                        role="tab"
+                        aria-controls={view.slug}
+                        aria-selected={selected}
+                        tabIndex={selected ? 0 : -1}
+                        onClick={() => setSelectedId(view.id)}
+                        onKeyDown={(event) => handleTabKeyDown(event, index)}
+                        className={`flex min-h-11 w-full min-w-0 flex-1 items-center justify-between gap-3 rounded-md border px-3 py-2 text-left text-sm font-semibold transition-colors duration-[120ms] ease-out ${
+                          selected
+                            ? "border-accent bg-accent text-on-accent"
+                            : "border-transparent text-text2 hover:border-line hover:bg-page hover:text-ink"
                         }`}
-                        aria-hidden
                       >
-                        {view.id.split("-")[0]}
-                      </span>
-                    </button>
+                        <span>{view.navLabel}</span>
+                        <span
+                          className={`font-mono text-[9px] uppercase tracking-wider ${
+                            selected ? "text-on-accent" : "text-muted"
+                          }`}
+                          aria-hidden
+                        >
+                          {view.id.split("-")[0]}
+                        </span>
+                      </button>
+                      <InfoTooltip label={`How ${view.navLabel} works`} text={view.howItWorks} />
+                    </div>
                   );
                 })}
               </div>
@@ -220,9 +229,14 @@ export default function DesktopViewExplorer({ groups }: { groups: DesktopViewGro
             <span className="font-mono text-[11px] uppercase tracking-[1.1px] text-link">
               {selectedView.id}
             </span>
-            <h2 className="mt-1 text-3xl font-bold tracking-[-0.02em] text-ink">
-              {selectedView.title}
-            </h2>
+            <div className="mt-1 flex items-center gap-2">
+              <h2 className="text-3xl font-bold tracking-[-0.02em] text-ink">{selectedView.title}</h2>
+              <InfoTooltip
+                label={`How ${selectedView.navLabel} works`}
+                text={selectedView.howItWorks}
+                placement="bottom"
+              />
+            </div>
             <p className="mt-4 max-w-3xl text-lg leading-8 text-text2">{selectedView.purpose}</p>
 
             <div className="mt-8 grid gap-8 xl:grid-cols-2">
