@@ -20,7 +20,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 const description =
-  "Cross-platform desktop lighting control with deterministic Art-Net playback, TypeScript automation, a public API, and autonomous LLM control — built in Go.";
+  "Cross-platform desktop lighting control built in Go with a modern React UI — deterministic Art-Net playback, Open Fixture Library import, TypeScript automation, and a public API, engineered for reliability.";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://golc-site.netlify.app"),

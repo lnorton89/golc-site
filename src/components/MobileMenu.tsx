@@ -48,7 +48,7 @@ export default function MobileMenu() {
         aria-label={open ? "Close menu" : "Open menu"}
         aria-expanded={open}
         aria-controls="mobile-menu-panel"
-        className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-line bg-panel text-ink transition-colors duration-[120ms] ease-out hover:border-accent"
+        className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-line bg-panel text-ink transition-colors duration-120 ease-out hover:border-accent"
       >
         {open ? <CloseIcon size={16} /> : <MenuIcon size={16} />}
       </button>
@@ -66,7 +66,7 @@ export default function MobileMenu() {
             <Link
               href="/#workflow"
               onClick={() => setOpen(false)}
-              className="rounded-md px-2 py-2.5 text-sm text-text2 transition-colors duration-[120ms] ease-out hover:bg-panel hover:text-accent"
+              className="rounded-md px-2 py-2.5 text-sm text-text2 transition-colors duration-120 ease-out hover:bg-panel hover:text-accent"
             >
               Workflow
             </Link>
@@ -80,7 +80,7 @@ export default function MobileMenu() {
                 href={item.href}
                 aria-current={pathname === item.href ? "page" : undefined}
                 onClick={() => setOpen(false)}
-                className={`rounded-md px-2 py-2.5 text-sm transition-colors duration-[120ms] ease-out hover:bg-panel hover:text-accent ${
+                className={`rounded-md px-2 py-2.5 text-sm transition-colors duration-120 ease-out hover:bg-panel hover:text-accent ${
                   pathname === item.href ? "font-semibold text-link" : "text-text2"
                 }`}
               >
@@ -92,7 +92,7 @@ export default function MobileMenu() {
               href="/download"
               aria-current={pathname === "/download" ? "page" : undefined}
               onClick={() => setOpen(false)}
-              className={`rounded-md px-2 py-2.5 text-sm transition-colors duration-[120ms] ease-out hover:bg-panel hover:text-accent ${
+              className={`rounded-md px-2 py-2.5 text-sm transition-colors duration-120 ease-out hover:bg-panel hover:text-accent ${
                 pathname === "/download" ? "font-semibold text-link" : "text-text2"
               }`}
             >
@@ -107,7 +107,7 @@ export default function MobileMenu() {
                 key={item.href}
                 href={item.href}
                 onClick={() => setOpen(false)}
-                className="rounded-md px-2 py-2.5 text-sm text-text2 transition-colors duration-[120ms] ease-out hover:bg-panel hover:text-accent"
+                className="rounded-md px-2 py-2.5 text-sm text-text2 transition-colors duration-120 ease-out hover:bg-panel hover:text-accent"
               >
                 {item.label}
               </Link>
@@ -118,7 +118,7 @@ export default function MobileMenu() {
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setOpen(false)}
-              className="mt-3 inline-flex items-center gap-2 rounded-md bg-accent px-3 py-2.5 text-sm font-medium text-on-accent transition-colors duration-[120ms] ease-out hover:bg-accent-dp"
+              className="mt-3 inline-flex items-center gap-2 rounded-md bg-accent px-3 py-2.5 text-sm font-medium text-on-accent transition-colors duration-120 ease-out hover:bg-accent-dp"
             >
               <GitHubIcon size={15} />
               GitHub

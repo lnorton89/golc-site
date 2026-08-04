@@ -43,7 +43,7 @@ export default function ChangelogPage() {
   const ActiveIcon = active ? PHASE_ICON[active.icon] : TimelineIcon;
 
   return (
-    <div className="mx-auto max-w-[1160px] px-6 py-16 sm:px-12 sm:py-24">
+    <div className="mx-auto max-w-290 px-6 py-16 sm:px-12 sm:py-24">
       <span className="block font-mono text-[13px] tracking-[1.3px] text-link">
         Generated from the roadmap
       </span>
@@ -53,8 +53,8 @@ export default function ChangelogPage() {
       <p className="mt-4 max-w-xl text-text2">
         GOLC hasn&apos;t shipped a qualified release, so there are no
         version-numbered release notes yet — this log tracks what each
-        completed phase actually delivered. Once Phase 10 (Windows Release
-        Qualification) lands, this becomes proper release notes.
+        completed phase actually delivered. Once Windows Release
+        Qualification (Phase 11) lands, this becomes proper release notes.
       </p>
 
       {active && (
@@ -92,7 +92,7 @@ export default function ChangelogPage() {
           return (
             <li key={p.n} className="relative">
               <span
-                className="absolute -left-[31px] top-6 inline-block h-2.5 w-2.5 rounded-full border-2 border-page"
+                className="absolute -left-7.75 top-6 inline-block h-2.5 w-2.5 rounded-full border-2 border-page"
                 style={{ background: STATUS_COLOR[p.status] }}
                 aria-hidden
               />
@@ -127,14 +127,14 @@ export default function ChangelogPage() {
           href="https://github.com/lnorton89/golc/commits/master"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 rounded-md bg-accent px-5 py-3 text-sm font-semibold text-on-accent transition-colors duration-[120ms] ease-out hover:bg-accent-dp"
+          className="inline-flex items-center gap-2 rounded-md bg-accent px-5 py-3 text-sm font-semibold text-on-accent transition-colors duration-120 ease-out hover:bg-accent-dp"
         >
           <GitHubIcon size={16} />
           Full commit history
         </a>
         <Link
           href="/roadmap"
-          className="inline-flex items-center gap-2 rounded-md border border-line px-5 py-3 text-sm font-semibold text-ink transition-colors duration-[120ms] ease-out hover:border-accent hover:text-accent"
+          className="inline-flex items-center gap-2 rounded-md border border-line px-5 py-3 text-sm font-semibold text-ink transition-colors duration-120 ease-out hover:border-accent hover:text-accent"
         >
           See the roadmap
           <ArrowRightIcon size={16} />

@@ -14,7 +14,7 @@ export default function SiteHeader() {
       >
         Skip to content
       </a>
-      <div className="mx-auto flex max-w-[1160px] items-center justify-between px-6 py-4 sm:px-12">
+      <div className="mx-auto flex max-w-290 items-center justify-between px-6 py-4 sm:px-12">
         <Link href="/" className="flex items-center gap-3">
           <GolcMark size={32} />
           <span className="flex flex-col leading-none">
@@ -34,7 +34,7 @@ export default function SiteHeader() {
               href="https://github.com/lnorton89/golc"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 rounded-md bg-accent px-3 py-1.5 text-sm font-medium text-on-accent transition-colors duration-[120ms] ease-out hover:bg-accent-dp"
+              className="inline-flex items-center gap-1.5 rounded-md bg-accent px-3 py-1.5 text-sm font-medium text-on-accent transition-colors duration-120 ease-out hover:bg-accent-dp"
             >
               <GitHubIcon size={15} />
               GitHub

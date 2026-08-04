@@ -10,6 +10,6 @@ export default async function Image() {
     eyebrow: "Status: early development",
     title: "Lighting control that behaves.",
     description:
-      "Deterministic Art-Net playback, TypeScript automation, a public API, and autonomous LLM control — built in Go.",
+      "Built in Go with a modern React UI — deterministic Art-Net playback, Open Fixture Library import, and a public API, engineered for reliability.",
   });
 }

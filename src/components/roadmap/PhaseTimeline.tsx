@@ -24,7 +24,7 @@ export default function PhaseTimeline({ phases }: { phases: Phase[] }) {
                 <button
                   type="button"
                   onClick={() => setSelectedN(p.n)}
-                  className={`flex w-full items-center gap-3 rounded-lg px-2 py-2 text-left transition-colors duration-[120ms] ease-out ${
+                  className={`flex w-full items-center gap-3 rounded-lg px-2 py-2 text-left transition-colors duration-120 ease-out ${
                     isSelected ? "bg-panel" : "hover:bg-page"
                   }`}
                 >
@@ -101,7 +101,7 @@ export default function PhaseTimeline({ phases }: { phases: Phase[] }) {
                 />
                 <ChevronRightIcon
                   size={16}
-                  className={`mt-1 shrink-0 text-muted transition-transform duration-[120ms] ease-out ${
+                  className={`mt-1 shrink-0 text-muted transition-transform duration-120 ease-out ${
                     isOpen ? "rotate-90" : ""
                   }`}
                 />

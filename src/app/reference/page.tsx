@@ -33,7 +33,7 @@ export default function ReferencePage() {
   return (
     <div>
       <section className="border-b border-line bg-panel">
-        <div className="mx-auto max-w-[1160px] px-6 py-20 sm:px-12 sm:py-28">
+        <div className="mx-auto max-w-290 px-6 py-20 sm:px-12 sm:py-28">
           <span className="block font-mono text-[13px] tracking-[1.3px] text-link">
             For contributors
           </span>
@@ -51,7 +51,7 @@ export default function ReferencePage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-[1160px] px-6 py-16 sm:px-12 sm:py-24">
+      <section className="mx-auto max-w-290 px-6 py-16 sm:px-12 sm:py-24">
         <SectionHeading index="01" title="Go package reference" />
         <p className="mb-8 max-w-2xl text-text2">
           Generated straight from the Go package doc comments in the golc
@@ -62,7 +62,7 @@ export default function ReferencePage() {
         <ReferenceExplorer pages={referencePages} />
       </section>
 
-      <section className="mx-auto max-w-[1160px] px-6 py-16 sm:px-12 sm:py-24">
+      <section className="mx-auto max-w-290 px-6 py-16 sm:px-12 sm:py-24">
         <div className="cta-pattern relative overflow-hidden rounded-xl border border-line px-8 py-14 text-center">
           <div className="relative mx-auto inline-flex h-10 w-10 items-center justify-center rounded-lg bg-page text-ink">
             <GearIcon size={20} />
@@ -79,14 +79,14 @@ export default function ReferencePage() {
               href="https://github.com/lnorton89/golc/blob/master/docs/development.md"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-md bg-accent px-5 py-3 text-sm font-semibold text-on-accent transition-colors duration-[120ms] ease-out hover:bg-accent-dp"
+              className="inline-flex items-center gap-2 rounded-md bg-accent px-5 py-3 text-sm font-semibold text-on-accent transition-colors duration-120 ease-out hover:bg-accent-dp"
             >
               <DocIcon size={16} />
               Contributor walkthrough
             </a>
             <Link
               href="/architecture"
-              className="inline-flex items-center gap-2 rounded-md border border-line px-5 py-3 text-sm font-semibold text-ink transition-colors duration-[120ms] ease-out hover:border-accent hover:text-accent"
+              className="inline-flex items-center gap-2 rounded-md border border-line px-5 py-3 text-sm font-semibold text-ink transition-colors duration-120 ease-out hover:border-accent hover:text-accent"
             >
               See the architecture
               <ArrowRightIcon size={16} />

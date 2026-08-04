@@ -171,7 +171,7 @@ export default function DesktopViewExplorer({ groups }: { groups: DesktopViewGro
                         tabIndex={selected ? 0 : -1}
                         onClick={() => setSelectedId(view.id)}
                         onKeyDown={(event) => handleTabKeyDown(event, index)}
-                        className={`flex min-h-11 w-full min-w-0 flex-1 items-center justify-between gap-3 rounded-md border px-3 py-2 text-left text-sm font-semibold transition-colors duration-[120ms] ease-out ${
+                        className={`flex min-h-11 w-full min-w-0 flex-1 items-center justify-between gap-3 rounded-md border px-3 py-2 text-left text-sm font-semibold transition-colors duration-120 ease-out ${
                           selected
                             ? "border-accent bg-accent text-on-accent"
                             : "border-transparent text-text2 hover:border-line hover:bg-page hover:text-ink"
@@ -303,7 +303,7 @@ export default function DesktopViewExplorer({ groups }: { groups: DesktopViewGro
               type="button"
               aria-label="Close screenshot"
               onClick={closeLightbox}
-              className="absolute right-3 top-3 z-10 flex min-h-11 min-w-11 items-center justify-center rounded-full border border-line bg-panel text-xl font-bold text-ink shadow-lg transition-colors duration-[120ms] ease-out hover:border-accent hover:text-link"
+              className="absolute right-3 top-3 z-10 flex min-h-11 min-w-11 items-center justify-center rounded-full border border-line bg-panel text-xl font-bold text-ink shadow-lg transition-colors duration-120 ease-out hover:border-accent hover:text-link"
             >
               <span aria-hidden>×</span>
             </button>

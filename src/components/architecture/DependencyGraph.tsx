@@ -353,7 +353,7 @@ export default function DependencyGraph() {
                       key={d}
                       onMouseEnter={() => setHoveredDomain(d)}
                       onMouseLeave={() => setHoveredDomain((h) => (h === d ? null : h))}
-                      className={`flex cursor-default items-start gap-2.5 rounded-lg p-1.5 transition-colors duration-[120ms] ease-out ${
+                      className={`flex cursor-default items-start gap-2.5 rounded-lg p-1.5 transition-colors duration-120 ease-out ${
                         isHoveredDomain ? "bg-page" : ""
                       }`}
                     >
@@ -391,7 +391,7 @@ export default function DependencyGraph() {
                 <button
                   type="button"
                   onClick={() => setSelected(null)}
-                  className="font-mono text-[10px] uppercase tracking-wider text-muted transition-colors duration-[120ms] ease-out hover:text-accent"
+                  className="font-mono text-[10px] uppercase tracking-wider text-muted transition-colors duration-120 ease-out hover:text-accent"
                 >
                   Clear
                 </button>
@@ -440,7 +440,7 @@ export default function DependencyGraph() {
                     <button
                       key={d}
                       onClick={() => setSelected(d)}
-                      className="rounded-full border border-line bg-page px-2.5 py-1 font-mono text-[10px] text-text2 transition-colors duration-[120ms] ease-out hover:border-accent hover:text-accent"
+                      className="rounded-full border border-line bg-page px-2.5 py-1 font-mono text-[10px] text-text2 transition-colors duration-120 ease-out hover:border-accent hover:text-accent"
                     >
                       {NODES_BY_ID[d].label}
                     </button>
@@ -456,7 +456,7 @@ export default function DependencyGraph() {
                   <button
                     key={n.id}
                     onClick={() => setSelected(n.id)}
-                    className="rounded-full border border-line bg-page px-2.5 py-1 font-mono text-[10px] text-text2 transition-colors duration-[120ms] ease-out hover:border-accent hover:text-accent"
+                    className="rounded-full border border-line bg-page px-2.5 py-1 font-mono text-[10px] text-text2 transition-colors duration-120 ease-out hover:border-accent hover:text-accent"
                   >
                     {n.label}
                   </button>

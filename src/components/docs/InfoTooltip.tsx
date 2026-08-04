@@ -21,7 +21,7 @@ export default function InfoTooltip({ label, text, placement = "right" }: InfoTo
       <button
         type="button"
         aria-label={label}
-        className="flex h-5 w-5 items-center justify-center rounded-full border border-line font-mono text-[10px] font-bold leading-none text-muted transition-colors duration-[120ms] ease-out hover:border-accent hover:text-link focus-visible:border-accent focus-visible:text-link focus-visible:outline-none"
+        className="flex h-5 w-5 items-center justify-center rounded-full border border-line font-mono text-[10px] font-bold leading-none text-muted transition-colors duration-120 ease-out hover:border-accent hover:text-link focus-visible:border-accent focus-visible:text-link focus-visible:outline-none"
       >
         i
       </button>

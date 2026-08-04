@@ -13,7 +13,7 @@ export default function NavLinks() {
     <>
       <Link
         href="/#workflow"
-        className="text-sm text-text2 transition-colors duration-[120ms] ease-out hover:text-accent"
+        className="text-sm text-text2 transition-colors duration-120 ease-out hover:text-accent"
       >
         Workflow
       </Link>
@@ -21,7 +21,7 @@ export default function NavLinks() {
       <Link
         href="/download"
         aria-current={downloadActive ? "page" : undefined}
-        className={`text-sm transition-colors duration-[120ms] ease-out hover:text-accent ${
+        className={`text-sm transition-colors duration-120 ease-out hover:text-accent ${
           downloadActive ? "font-semibold text-link" : "text-text2"
         }`}
       >

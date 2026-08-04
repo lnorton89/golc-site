@@ -47,7 +47,7 @@ export const metadata: Metadata = {
 };
 
 const COMMAND_STEPS = [
-  { label: "golc.ps1", body: "Provisions .tools/ on bootstrap; every other verb falls through to the pinned CLI." },
+  { label: "mage Bootstrap", body: "Provisions .tools/ from committed toolchain pins; every open-ended route falls through to the pinned golc-project CLI binary it builds." },
   { label: "cmd/golc-project", body: "Imports every command file, builds the default registry, applies the 0/1/2 exit-code mapping." },
   { label: "internal/command", body: "Each file self-registers a typed route via MustDeclareRoute — no central switch statement." },
   { label: "Domain packages", body: "config/test routes delegate straight into projectconfig, fixture, pool, show, artnet, and the rest." },
@@ -112,7 +112,7 @@ export default function ArchitecturePage() {
     <div>
       {/* Hero */}
       <section className="border-b border-line bg-panel">
-        <div className="mx-auto max-w-[1160px] px-6 py-20 sm:px-12 sm:py-28">
+        <div className="mx-auto max-w-290 px-6 py-20 sm:px-12 sm:py-28">
           <span className="block font-mono text-[13px] tracking-[1.3px] text-link">
             How the codebase works
           </span>
@@ -133,7 +133,7 @@ export default function ArchitecturePage() {
       </section>
 
       {/* Dependency graph */}
-      <section className="mx-auto max-w-[1160px] px-6 py-16 sm:px-12 sm:py-24">
+      <section className="mx-auto max-w-290 px-6 py-16 sm:px-12 sm:py-24">
         <SectionHeading index="01" title="Package dependency graph" />
         <p className="mb-8 max-w-2xl text-text2">
           Every real package under <code className="font-mono text-[0.9em]">internal/</code>,
@@ -146,7 +146,7 @@ export default function ArchitecturePage() {
 
       {/* Command flow */}
       <section className="border-y border-line bg-panel">
-        <div className="mx-auto max-w-[1160px] px-6 py-16 sm:px-12 sm:py-24">
+        <div className="mx-auto max-w-290 px-6 py-16 sm:px-12 sm:py-24">
           <SectionHeading index="02" title="How a command runs" />
           <div className="flex flex-col sm:flex-row sm:items-stretch">
             {COMMAND_STEPS.map((step, i) => (
@@ -172,7 +172,7 @@ export default function ArchitecturePage() {
       </section>
 
       {/* Repository layout */}
-      <section className="mx-auto max-w-[1160px] px-6 py-16 sm:px-12 sm:py-24">
+      <section className="mx-auto max-w-290 px-6 py-16 sm:px-12 sm:py-24">
         <SectionHeading index="03" title="Repository layout" />
         <p className="mb-8 max-w-2xl text-text2">
           The real directory tree, down to package level. Click any row with
@@ -183,7 +183,7 @@ export default function ArchitecturePage() {
 
       {/* Config layering */}
       <section className="border-y border-line bg-panel">
-        <div className="mx-auto max-w-[1160px] px-6 py-16 sm:px-12 sm:py-24">
+        <div className="mx-auto max-w-290 px-6 py-16 sm:px-12 sm:py-24">
           <SectionHeading index="04" title="Configuration layering" />
           <p className="mb-8 max-w-2xl text-text2">
             <code className="font-mono text-[0.9em]">golc.project.toml</code>{" "}
@@ -224,7 +224,7 @@ export default function ArchitecturePage() {
       </section>
 
       {/* External dependencies */}
-      <section className="mx-auto max-w-[1160px] px-6 py-16 sm:px-12 sm:py-24">
+      <section className="mx-auto max-w-290 px-6 py-16 sm:px-12 sm:py-24">
         <SectionHeading index="05" title="External dependencies" />
         <p className="mb-8 max-w-2xl text-text2">
           The direct requires in <code className="font-mono text-[0.9em]">go.mod</code> —
@@ -249,7 +249,7 @@ export default function ArchitecturePage() {
                     {d.name}
                   </p>
                 </div>
-                <span className="mt-1 text-muted transition-colors duration-[120ms] ease-out group-hover:text-accent">
+                <span className="mt-1 text-muted transition-colors duration-120 ease-out group-hover:text-accent">
                   <ExternalLinkIcon />
                 </span>
               </div>

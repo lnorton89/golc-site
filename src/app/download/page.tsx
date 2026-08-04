@@ -28,8 +28,8 @@ export const metadata: Metadata = {
 const PLATFORMS = [
   {
     name: "Windows",
-    status: "Qualified for v1",
-    detail: "Phase 10 (Windows Release Qualification) has not started — no build has been produced or tested yet.",
+    status: "Planned for v1",
+    detail: "Windows Release Qualification (Phase 11) has not started — no build has been produced or tested yet.",
     Icon: WindowsIcon,
     color: "var(--spectrum-5)",
   },
@@ -53,7 +53,7 @@ export default function DownloadPage() {
   return (
     <div>
       <section className="border-b border-line bg-panel">
-        <div className="mx-auto max-w-[1160px] px-6 py-20 sm:px-12 sm:py-28">
+        <div className="mx-auto max-w-290 px-6 py-20 sm:px-12 sm:py-28">
           <span className="block font-mono text-[13px] tracking-[1.3px] text-link">
             No release yet
           </span>
@@ -62,8 +62,8 @@ export default function DownloadPage() {
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-8 text-text2">
             GOLC hasn&apos;t reached a qualified release. Windows packaging
-            and install verification are Phase 10 work, which depends on
-            Phases 6 through 9 first.{" "}
+            and install verification are Windows Release Qualification work
+            (Phase 11), which depends on Phases 1 through 10 first.{" "}
             <Link href="/roadmap" className="text-link underline underline-offset-2 hover:text-accent-dp">
               See where the project stands today
             </Link>
@@ -72,7 +72,7 @@ export default function DownloadPage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-[1160px] px-6 py-16 sm:px-12 sm:py-24">
+      <section className="mx-auto max-w-290 px-6 py-16 sm:px-12 sm:py-24">
         <SectionHeading index="01" title="Planned platform support" />
         <div className="grid gap-6 sm:grid-cols-3">
           {PLATFORMS.map((p) => (
@@ -98,7 +98,7 @@ export default function DownloadPage() {
       </section>
 
       <section className="border-y border-line bg-panel">
-        <div className="mx-auto max-w-[1160px] px-6 py-16 sm:px-12 sm:py-24">
+        <div className="mx-auto max-w-290 px-6 py-16 sm:px-12 sm:py-24">
           <SectionHeading index="02" title="License and requirements" />
           <div className="grid gap-6 sm:grid-cols-2">
             <div
@@ -139,16 +139,17 @@ export default function DownloadPage() {
               <h3 className="text-lg font-semibold text-ink">System requirements</h3>
               <p className="mt-2 text-sm leading-6 text-text2">
                 The supported Windows version/architecture matrix, WebView
-                runtime dependency, and hardware minimums are Phase 10
-                deliverables and will be published here once they&apos;re
-                qualified with measured evidence — not before.
+                runtime dependency, and hardware minimums are Windows Release
+                Qualification (Phase 11) deliverables and will be published
+                here once they&apos;re qualified with measured evidence —
+                not before.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="mx-auto max-w-[1160px] px-6 py-16 sm:px-12 sm:py-24">
+      <section className="mx-auto max-w-290 px-6 py-16 sm:px-12 sm:py-24">
         <div className="cta-pattern relative overflow-hidden rounded-xl border border-line px-8 py-14 text-center">
           <div className="relative mx-auto inline-flex h-10 w-10 items-center justify-center rounded-lg bg-page text-ink">
             <TerminalIcon size={20} />
@@ -165,7 +166,7 @@ export default function DownloadPage() {
               href="https://github.com/lnorton89/golc/blob/master/docs/development.md"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-md bg-accent px-5 py-3 text-sm font-semibold text-on-accent transition-colors duration-[120ms] ease-out hover:bg-accent-dp"
+              className="inline-flex items-center gap-2 rounded-md bg-accent px-5 py-3 text-sm font-semibold text-on-accent transition-colors duration-120 ease-out hover:bg-accent-dp"
             >
               <DocIcon size={16} />
               Contributor walkthrough
@@ -174,7 +175,7 @@ export default function DownloadPage() {
               href="https://github.com/lnorton89/golc"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-md border border-line px-5 py-3 text-sm font-semibold text-ink transition-colors duration-[120ms] ease-out hover:border-accent hover:text-accent"
+              className="inline-flex items-center gap-2 rounded-md border border-line px-5 py-3 text-sm font-semibold text-ink transition-colors duration-120 ease-out hover:border-accent hover:text-accent"
             >
               <GitHubIcon size={16} />
               Watch the repo for releases

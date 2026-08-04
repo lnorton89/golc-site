@@ -65,8 +65,8 @@ const WORKFLOW = [
     Icon: ApiIcon,
   },
   {
-    title: "Bounded AI assistance, operator authority stays local",
-    body: "Hosted or local LLMs can draft fixtures or operate under an explicitly armed, time-bounded lease — always validated and audited, always subject to an immediate Revoke Automation.",
+    title: "Planned: bounded AI assistance, operator authority stays local",
+    body: "Not built yet. The design already reserves LLM access behind an explicitly armed, time-bounded lease — auditable, and killed instantly by Revoke Automation — once that phase starts.",
     Icon: ScriptIcon,
   },
 ];
@@ -74,12 +74,12 @@ const WORKFLOW = [
 const ARCHITECTURE = [
   {
     title: "Every surface behaves the same way",
-    body: "UI actions, TypeScript scripts, API clients, and LLM tools all route through the same typed domain commands — nothing gets a special, less-tested path.",
+    body: "UI actions, TypeScript scripts, and API clients all route through the same typed domain commands — nothing gets a special, less-tested path.",
     Icon: ApiIcon,
   },
   {
     title: "A stalled dependency can't touch your output",
-    body: "Playback timing and Art-Net output are isolated from everything else — a frozen UI, a slow script, or an unreachable LLM provider cannot delay or corrupt a frame.",
+    body: "Playback timing and Art-Net output are isolated from everything else — a frozen UI or a slow script cannot delay or corrupt a frame.",
     Icon: BeamIcon,
   },
   {
@@ -106,30 +106,29 @@ export default function Home() {
     <div>
       {/* Hero */}
       <section className="border-b border-line bg-panel">
-        <div className="mx-auto grid max-w-[1160px] items-center gap-12 px-6 py-20 sm:px-12 sm:py-28 lg:grid-cols-[1.15fr_1fr]">
+        <div className="mx-auto grid max-w-290 items-center gap-12 px-6 py-20 sm:px-12 sm:py-28 lg:grid-cols-[1.15fr_1fr]">
           <div>
             <h1 className="max-w-xl text-[44px] font-extrabold leading-[1.05] tracking-[-0.03em] text-ink sm:text-[64px]">
               Lighting control that behaves.
             </h1>
             <p className="mt-6 max-w-xl text-lg leading-8 text-text2 sm:text-xl">
-              Build reusable shows, adapt them to different rigs, and run
-              deterministic Art-Net playback from a focused desktop
-              workspace. GOLC combines modular fixtures, tempo-aware
+  Built in Go with a modern desktop UI for deterministic Art-Net
+              playback. GOLC combines modular fixtures — hand-authored or
+              imported from the Open Fixture Library — tempo-aware
               programming, keyboard and MIDI control, TypeScript automation,
-              a public API, and bounded AI assistance — without giving up
-              local operator authority.
+              and a public API — without giving up local operator authority.
             </p>
             <div className="mt-9 flex flex-wrap gap-4">
               <a
                 href="#workflow"
-                className="inline-flex items-center gap-2 rounded-md bg-accent px-5 py-3 text-sm font-semibold text-on-accent transition-colors duration-[120ms] ease-out hover:bg-accent-dp"
+                className="inline-flex items-center gap-2 rounded-md bg-accent px-5 py-3 text-sm font-semibold text-on-accent transition-colors duration-120 ease-out hover:bg-accent-dp"
               >
                 <TimelineIcon size={16} />
                 Explore the workflow
               </a>
               <Link
                 href="/docs"
-                className="inline-flex items-center gap-2 rounded-md border border-line px-5 py-3 text-sm font-semibold text-ink transition-colors duration-[120ms] ease-out hover:border-accent hover:text-accent"
+                className="inline-flex items-center gap-2 rounded-md border border-line px-5 py-3 text-sm font-semibold text-ink transition-colors duration-120 ease-out hover:border-accent hover:text-accent"
               >
                 <DocIcon size={16} />
                 Read the docs
@@ -138,7 +137,7 @@ export default function Home() {
                 href="https://github.com/lnorton89/golc"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-md border border-line px-5 py-3 text-sm font-semibold text-ink transition-colors duration-[120ms] ease-out hover:border-accent hover:text-accent"
+                className="inline-flex items-center gap-2 rounded-md border border-line px-5 py-3 text-sm font-semibold text-ink transition-colors duration-120 ease-out hover:border-accent hover:text-accent"
               >
                 <GitHubIcon size={16} />
                 View source
@@ -226,7 +225,7 @@ export default function Home() {
       </section>
 
       {/* Who it's for */}
-      <section className="mx-auto max-w-[1160px] px-6 py-16 sm:px-12 sm:py-24">
+      <section className="mx-auto max-w-290 px-6 py-16 sm:px-12 sm:py-24">
         <SectionHeading index="01" title="Who it's for" />
         <div className="grid gap-10 lg:grid-cols-[1.15fr_1fr]">
           <div className="max-w-2xl space-y-5 text-lg leading-8 text-text">
@@ -258,7 +257,7 @@ export default function Home() {
 
       {/* Workflow */}
       <section id="workflow" className="border-y border-line bg-panel">
-        <div className="mx-auto max-w-[1160px] px-6 py-16 sm:px-12 sm:py-24">
+        <div className="mx-auto max-w-290 px-6 py-16 sm:px-12 sm:py-24">
           <SectionHeading index="02" title="Author once, deploy repeatedly" />
           <p className="mb-8 max-w-2xl text-text2">
             The complete show workflow, front-loaded once and reused every
@@ -302,7 +301,7 @@ export default function Home() {
       </section>
 
       {/* Operator authority / states */}
-      <section className="mx-auto max-w-[1160px] px-6 py-16 sm:px-12 sm:py-24">
+      <section className="mx-auto max-w-290 px-6 py-16 sm:px-12 sm:py-24">
         <SectionHeading index="03" title="One command model, one set of states" />
         <p className="-mt-4 mb-8 max-w-2xl text-text2">
           Color is never the only signal — every state pairs with a text
@@ -316,7 +315,7 @@ export default function Home() {
 
       {/* Architecture principles, framed as user benefits */}
       <section className="border-y border-line bg-panel">
-        <div className="mx-auto max-w-[1160px] px-6 py-16 sm:px-12 sm:py-24">
+        <div className="mx-auto max-w-290 px-6 py-16 sm:px-12 sm:py-24">
           <SectionHeading index="04" title="Why it holds up under pressure" />
           <p className="mb-8 max-w-2xl text-text2">
             Every user-facing guarantee above comes from a small set of
@@ -353,7 +352,7 @@ export default function Home() {
       </section>
 
       {/* Open source / local-first positioning */}
-      <section className="mx-auto max-w-[1160px] px-6 py-16 sm:px-12 sm:py-24">
+      <section className="mx-auto max-w-290 px-6 py-16 sm:px-12 sm:py-24">
         <SectionHeading index="05" title="Open-source and local-first" />
         <div className="grid gap-6 sm:grid-cols-3">
           {[
@@ -421,7 +420,7 @@ export default function Home() {
       </section>
 
       {/* CTA */}
-      <section className="mx-auto max-w-[1160px] px-6 py-16 sm:px-12 sm:py-28">
+      <section className="mx-auto max-w-290 px-6 py-16 sm:px-12 sm:py-28">
         <div className="cta-pattern relative overflow-hidden rounded-xl border border-line px-8 py-14 text-center">
           <div className="relative mx-auto inline-flex h-10 w-10 items-center justify-center rounded-lg bg-page text-ink">
             <DocIcon size={20} />
@@ -436,7 +435,7 @@ export default function Home() {
           <div className="relative mt-8 flex flex-wrap justify-center gap-4">
             <Link
               href="/docs"
-              className="inline-flex items-center gap-2 rounded-md bg-accent px-5 py-3 text-sm font-semibold text-on-accent transition-colors duration-[120ms] ease-out hover:bg-accent-dp"
+              className="inline-flex items-center gap-2 rounded-md bg-accent px-5 py-3 text-sm font-semibold text-on-accent transition-colors duration-120 ease-out hover:bg-accent-dp"
             >
               <DocIcon size={16} />
               Read the docs
@@ -445,14 +444,16 @@ export default function Home() {
               href="https://github.com/lnorton89/golc"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-md border border-line px-5 py-3 text-sm font-semibold text-ink transition-colors duration-[120ms] ease-out hover:border-accent hover:text-accent"
+              className="inline-flex items-center gap-2 rounded-md border border-line px-5 py-3 text-sm font-semibold text-ink transition-colors duration-120 ease-out hover:border-accent hover:text-accent"
             >
               <GitHubIcon size={16} />
               View on GitHub
             </a>
           </div>
           <p className="relative mt-8 text-sm text-muted">
-            In active development — Phase 6 of 11, 7/8 plans complete.{" "}
+            v1.0 shipped — deterministic core, Wails app, external API, and
+            TypeScript SDK are done. Now finishing the front-door UI design
+            system before AI autonomy and Windows qualification.{" "}
             <Link href="/roadmap" className="inline-flex items-center gap-1 text-link underline underline-offset-2 hover:text-accent-dp">
               See the roadmap
               <ArrowRightIcon size={12} />

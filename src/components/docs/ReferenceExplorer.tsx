@@ -81,7 +81,7 @@ export default function ReferenceExplorer({ pages }: { pages: ReferencePage[] })
                 <button
                   type="button"
                   onClick={() => setSelectedSlug(page.slug)}
-                  className={`flex w-full items-start gap-3 rounded-lg px-3 py-3 text-left transition-colors duration-[120ms] ease-out ${
+                  className={`flex w-full items-start gap-3 rounded-lg px-3 py-3 text-left transition-colors duration-120 ease-out ${
                     isSelected ? "bg-panel" : "hover:bg-page"
                   }`}
                 >
@@ -145,7 +145,7 @@ export default function ReferenceExplorer({ pages }: { pages: ReferencePage[] })
                 </span>
                 <ChevronRightIcon
                   size={16}
-                  className={`mt-1 shrink-0 text-muted transition-transform duration-[120ms] ease-out ${
+                  className={`mt-1 shrink-0 text-muted transition-transform duration-120 ease-out ${
                     isOpen ? "rotate-90" : ""
                   }`}
                 />

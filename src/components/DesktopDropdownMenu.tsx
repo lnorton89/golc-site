@@ -75,14 +75,14 @@ export default function DesktopDropdownMenu({
         aria-controls={panelId}
         aria-current={triggerActive ? "page" : undefined}
         aria-expanded={open}
-        className={`flex cursor-pointer list-none items-center gap-1 rounded-sm text-sm transition-colors duration-[120ms] ease-out hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent [&::-webkit-details-marker]:hidden ${
+        className={`flex cursor-pointer list-none items-center gap-1 rounded-sm text-sm transition-colors duration-120 ease-out hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent [&::-webkit-details-marker]:hidden ${
           triggerActive ? "font-semibold text-link" : "text-text2"
         }`}
       >
         {label}
         <ChevronRightIcon
           size={11}
-          className="rotate-90 transition-transform duration-[120ms] ease-out group-open:-rotate-90"
+          className="rotate-90 transition-transform duration-120 ease-out group-open:-rotate-90"
         />
       </summary>
       <div
@@ -96,13 +96,13 @@ export default function DesktopDropdownMenu({
             href={item.href}
             aria-current={item.current ? "page" : undefined}
             onClick={() => closeMenu()}
-            className={`group/item card-hover block rounded-lg px-3 py-2.5 transition-colors duration-[120ms] ease-out hover:bg-page hover:text-link focus-visible:bg-page focus-visible:text-link focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-accent ${
+            className={`group/item card-hover block rounded-lg px-3 py-2.5 transition-colors duration-120 ease-out hover:bg-page hover:text-link focus-visible:bg-page focus-visible:text-link focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-accent ${
               item.current ? "bg-page text-link" : ""
             }`}
           >
             <span
               data-testid="desktop-dropdown-item-label"
-              className={`block text-sm font-medium transition-colors duration-[120ms] ease-out group-hover/item:text-link group-focus-visible/item:text-link ${
+              className={`block text-sm font-medium transition-colors duration-120 ease-out group-hover/item:text-link group-focus-visible/item:text-link ${
                 item.current ? "text-link" : "text-ink"
               }`}
             >

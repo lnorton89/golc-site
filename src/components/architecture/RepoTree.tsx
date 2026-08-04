@@ -37,7 +37,7 @@ function TreeItem({
       <button
         type="button"
         onClick={() => hasChildren && onToggle(path)}
-        className={`flex w-full items-start gap-2 rounded-md py-1.5 pr-2 text-left transition-colors duration-[120ms] ease-out ${
+        className={`flex w-full items-start gap-2 rounded-md py-1.5 pr-2 text-left transition-colors duration-120 ease-out ${
           hasChildren ? "hover:bg-page cursor-pointer" : "cursor-default"
         }`}
         style={{ paddingLeft: 10 + depth * 20 }}
@@ -45,7 +45,7 @@ function TreeItem({
         {hasChildren ? (
           <ChevronRightIcon
             size={12}
-            className={`mt-0.5 shrink-0 text-muted transition-transform duration-[120ms] ease-out ${
+            className={`mt-0.5 shrink-0 text-muted transition-transform duration-120 ease-out ${
               open ? "rotate-90" : ""
             }`}
           />
@@ -104,7 +104,7 @@ export default function RepoTree({ data }: { data: TreeNode[] }) {
         <button
           type="button"
           onClick={() => setExpanded(allOpen ? new Set() : new Set(allPaths))}
-          className="font-mono text-[10px] uppercase tracking-wider text-muted transition-colors duration-[120ms] ease-out hover:text-accent"
+          className="font-mono text-[10px] uppercase tracking-wider text-muted transition-colors duration-120 ease-out hover:text-accent"
         >
           {allOpen ? "Collapse all" : "Expand all"}
         </button>
